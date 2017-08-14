@@ -1,0 +1,9 @@
+D:\Projects C#\RectificationProcess\RectificationProcess\bin\Debug\RectificationProcess.exe.config
+D:\Projects C#\RectificationProcess\RectificationProcess\bin\Debug\RectificationProcess.exe
+D:\Projects C#\RectificationProcess\RectificationProcess\bin\Debug\RectificationProcess.pdb
+D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.csprojResolveAssemblyReference.cache
+D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.Properties.Resources.resources
+D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.csproj.GenerateResource.Cache
+D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.exe
+D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.pdb
+D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.Form1.resources

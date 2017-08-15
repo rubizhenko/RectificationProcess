@@ -8,18 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace RectificationProcess
 {
     public partial class Form1 : Form
     {
+        string[] tabsForDeflegmator = { "Tb2(Tb1)", "Tb2(Fb1)", "Tb2(Fv)", "Tb2(Tv)" };
         public Form1()
         {
             InitializeComponent();
             string progPath = Environment.CurrentDirectory;
             RectificationProcess process = new RectificationProcess();
-            process.StaticT2otFbinar1.;
+            process.StaticT2otFbinar1();
             process.StaticT2otFvod();
-            process.StaticT2otTbinar1();
+            //double k = process.StaticT2otTbinar1().Item1[0];
+
             process.StaticT2otTvod();
             process.StaticTp1opFb();
             process.StaticTp1opFd();
@@ -30,6 +33,8 @@ namespace RectificationProcess
             process.StaticTp2otFp();
             process.StaticTp2otFpara();
             process.StaticTp2otTp1();
+            process.AddTabsForDeflegCharts(tabControl1, tabsForDeflegmator);
+  
         }
         public class RectificationProcess
         {
@@ -87,6 +92,8 @@ namespace RectificationProcess
             
             double K1 = 0, K2 = 0, K3 = 0, K4 = 0, K5 = 0, K6 = 0, K7 = 0, K8 = 0, K9 = 0, K10 = 0, K11 = 0, K12 = 0, K13 = 0;
 
+            
+
             //Формули для розрахунку статичних характеристик дефлегматора
             public Tuple<double[], double> StaticT2otTbinar1()
             {
@@ -101,7 +108,7 @@ namespace RectificationProcess
                 Tbinar1 = 342;
                 return Tuple.Create(T_binar2_1, K1);
             }
-            public void StaticT2otFbinar1()
+            public Tuple<double[], double> StaticT2otFbinar1()
             {
                 Fbinar1 = 530;
                 for (int i = 1; i <= 9; i++)
@@ -112,8 +119,9 @@ namespace RectificationProcess
                 }
                 K2 = (T_binar2_2[1] - T_binar2_2[2]) / -2;
                 Fbinar1 = 540;
+                return Tuple.Create(T_binar2_2, K2);
             }
-            public void StaticT2otFvod()
+            public Tuple<double[], double> StaticT2otFvod()
             {
                 Fvoda = 640;
                 for (int i = 1; i <= 9; i++)
@@ -124,8 +132,9 @@ namespace RectificationProcess
                 }
                 K3 = (T_binar2_3[1] - T_binar2_3[2]) / -2;
                 Fvoda = 650;
+                return Tuple.Create(T_binar2_3, K3);
             }
-            public void StaticT2otTvod()
+            public Tuple<double[], double> StaticT2otTvod()
             {
                 Tvoda = 283;
                 for (int i = 1; i <= 9; i++)
@@ -136,10 +145,11 @@ namespace RectificationProcess
                 }
                 K4 = (T_binar2_4[1] - T_binar2_4[2]) / -2;
                 Tvoda = 293;
+                return Tuple.Create(T_binar2_4, K4);
             }
 
             //Формули для розрахунку статичних характеристик кип'ятильника
-            public void StaticTp2otFp()
+            public Tuple<double[], double> StaticTp2otFp()
             {
                 Frecur1 = 950;
                 for (int i = 1; i <= 9; i++)
@@ -151,8 +161,9 @@ namespace RectificationProcess
                 //Перевірити
                 K5 = (T_recur2_1[1] - T_recur2_1[2]) / -2;
                 Frecur1 = 960;
+                return Tuple.Create(T_recur2_1, K5);
             }
-            public void StaticTp2otTp1()
+            public Tuple<double[], double> StaticTp2otTp1()
             {
                 Trecur1 = 349;
                 for (int i = 1; i <= 9; i++)
@@ -163,8 +174,9 @@ namespace RectificationProcess
                 }
                 K6 = (T_recur2_2[1] - T_recur2_2[2]) / -2;
                 Trecur1 = 359;
+                return Tuple.Create(T_recur2_2, K6);
             }
-            public void StaticTp2otFpara()
+            public Tuple<double[], double> StaticTp2otFpara()
             {
                 Fpara = 131;
                 for (int i = 1; i <= 9; i++)
@@ -176,10 +188,11 @@ namespace RectificationProcess
                 //перевірити
                 K7 = (T_recur2_3[1] - T_recur2_3[2]) / -2;
                 Fpara = 141;
+                return Tuple.Create(T_recur2_3, K7);
             }
 
             //Формули для розрахунку статичних характеристик колони
-            public void StaticTp1opFd()
+            public Tuple<double[], double> StaticTp1opFd()
             {
                 Fdist = 1505;
                 for (int i = 1; i <= 9; i++)
@@ -190,8 +203,9 @@ namespace RectificationProcess
                 }
                 K8 = (T_recur1_1[1] - T_recur1_1[2]) / -5;
                 Fdist = 1530;
+                return Tuple.Create(T_recur1_1, K8);
             }
-            public void StaticTp1opTd()
+            public Tuple<double[], double> StaticTp1opTd()
             {
                 Tdist = 278;
                 for (int i = 1; i <= 9; i++)
@@ -202,8 +216,9 @@ namespace RectificationProcess
                 }
                 K9 = (T_recur1_2[1] - T_recur1_2[2]) / -3;
                 Tdist = 293;
+                return Tuple.Create(T_recur1_2, K9);
             }
-            public void StaticTp1opTp2()
+            public Tuple<double[], double> StaticTp1opTp2()
             {
                 Trecur2 = 378;
                 for (int i = 1; i <= 9; i++)
@@ -214,8 +229,9 @@ namespace RectificationProcess
                 }
                 K10 = (T_recur1_3[1] - T_recur1_3[2]) / -3;
                 Trecur2 = 383;
+                return Tuple.Create(T_recur1_3, K10);
             }
-            public void StaticTp1opFf()
+            public Tuple<double[], double> StaticTp1opFf()
             {
                 Fflegmy = 295;
                 for (int i = 1; i <= 9; i++)
@@ -226,8 +242,9 @@ namespace RectificationProcess
                 }
                 K11 = (T_recur1_4[1] - T_recur1_4[2]) / -5;
                 Fflegmy = 320;
+                return Tuple.Create(T_recur1_4, K11);
             }
-            public void StaticTp1opFb()
+            public Tuple<double[], double> StaticTp1opFb()
             {
                 Fbinar1 = 515;
                 for (int i = 1; i <= 9; i++)
@@ -238,8 +255,9 @@ namespace RectificationProcess
                 }
                 K12 = (T_recur1_5[1] - T_recur1_5[2]) / -5;
                 Fbinar1 = 540;
+                return Tuple.Create(T_recur1_5, K12);
             }
-            public void StaticTp1opTb()
+            public Tuple<double[], double> StaticTp1opTb()
             {
                 Tbinar1 = 327;
                 for (int i = 1; i <= 9; i++)
@@ -250,7 +268,37 @@ namespace RectificationProcess
                 }
                 K13 = (T_recur1_6[1] - T_recur1_6[2]) / -3;
                 Tbinar1 = 342;
+                return Tuple.Create(T_recur1_6, K13);
+            }
+            public void DrawStaticFunction(object chart, double XValueCenter, double[] YValues, string XTitle, string YTitle)
+            {
+                var myChart = chart as System.Windows.Forms.DataVisualization.Charting.Chart;
+                foreach (var series in myChart.Series)
+                {
+                    series.Points.Clear();
+                }
+
+            }
+            public void AddTabsForDeflegCharts(object tabControl, string[] tabsNames)
+            {
+                var myTabs = tabControl as TabControl;
+                myTabs.TabPages.Clear();
+                int tabNamesCount = tabsNames.Length;
+                while (tabNamesCount > 0)
+                {
+                    TabPage newTabPage = new TabPage(tabsNames[tabNamesCount - 1]);
+                    myTabs.TabPages.Add(newTabPage);
+                    tabNamesCount--;
+                }
+
             }
         }
-    }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Clear();
+            tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
+        }
+       
+        }
 }

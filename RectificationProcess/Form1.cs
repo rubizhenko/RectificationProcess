@@ -14,6 +14,9 @@ namespace RectificationProcess
     public partial class Form1 : Form
     {
         string[] tabsForDeflegmator = { "Tb2(Tb1)", "Tb2(Fb1)", "Tb2(Fv)", "Tb2(Tv)" };
+        string[] tabsForBoiler = { "Tr2(Fr1)", "Tr2(Tr1)", "Tr2(Fp)" };
+        string[] tabsForRectifCol = { "Tr1(Fdist)", "Tr1(Tdist)", "Tr1(Tr2)", "Tr1(Ffleg)", "Tr1(Fb)", "Tr1(Tb)" };
+
         public Form1()
         {
             InitializeComponent();
@@ -33,8 +36,9 @@ namespace RectificationProcess
             process.StaticTp2otFp();
             process.StaticTp2otFpara();
             process.StaticTp2otTp1();
-            process.AddTabsForDeflegCharts(tabControl1, tabsForDeflegmator);
-  
+            process.AddTabsForTabControl(tabControl1, tabsForDeflegmator);
+
+            process.DrawStaticFunction(chart1, 293, process.StaticTp1opTd().Item1, "Tdist, K", "Trecur1, K");
         }
         public class RectificationProcess
         {
@@ -277,9 +281,21 @@ namespace RectificationProcess
                 {
                     series.Points.Clear();
                 }
+                myChart.ChartAreas[0].AxisX.Title = XTitle;
+                myChart.ChartAreas[0].AxisY.Title = YTitle;
+                myChart.ChartAreas[0].AxisY.Minimum = YValues[0];
+                myChart.ChartAreas[0].AxisY.Maximum = YValues[YValues.Length-1];
 
+                int xStart = (int)(XValueCenter - XValueCenter * 0.05);
+                int xEnd = (int)(XValueCenter + XValueCenter * 0.05);
+                int xStep = (int)(xEnd - xStart) / 9;
+                for (int i = 0; i < 9; i++)
+                {
+                    myChart.Series[0].Points.AddXY(xStart, YValues[i]);
+                    xStart += xStep;
+                }
             }
-            public void AddTabsForDeflegCharts(object tabControl, string[] tabsNames)
+            public void AddTabsForTabControl(object tabControl, string[] tabsNames)
             {
                 var myTabs = tabControl as TabControl;
                 myTabs.TabPages.Clear();
@@ -298,6 +314,7 @@ namespace RectificationProcess
         {
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Clear();
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
+
         }
        
         }

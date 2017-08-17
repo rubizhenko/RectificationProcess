@@ -317,9 +317,9 @@ namespace RectificationProcess
                 myChart.ChartAreas[0].AxisY.Minimum = YValues.Min();
                 myChart.ChartAreas[0].AxisY.Maximum = YValues.Max();
 
-                int xStart = (int)(XValueCenter - XValueCenter * 0.05);
-                int xEnd = (int)(XValueCenter + XValueCenter * 0.05);
-                int xStep = (int)(xEnd - xStart) / 9;
+                int xStart = getRangeFromCenterValue(XValueCenter)[0];
+                int xEnd = getRangeFromCenterValue(XValueCenter)[1];
+                int xStep = getRangeFromCenterValue(XValueCenter)[2];
                 for (int i = 0; i < 9; i++)
                 {
                     myChart.Series[0].Points.AddXY(xStart, YValues[i]);
@@ -338,6 +338,17 @@ namespace RectificationProcess
                     tabNamesCount--;
                 }
 
+            }
+            public int[] getRangeFromCenterValue(double XValueCenter)
+            {
+                int[] result = new int[3];
+                int xStart = (int)(XValueCenter - XValueCenter * 0.05);
+                int xEnd = (int)(XValueCenter + XValueCenter * 0.05);
+                int xStep = (int)(xEnd - xStart) / 9;
+                result[0] = xStart;
+                result[1] = xEnd;
+                result[2] = xStep;
+                return result;
             }
         }
 

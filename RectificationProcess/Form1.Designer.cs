@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -44,6 +45,9 @@
             this.дефлегматорToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.кипятильникToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ректифікаційнаКолонаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelX = new System.Windows.Forms.Label();
+            this.labelY = new System.Windows.Forms.Label();
+            this.labelK = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -57,7 +61,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 38);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(752, 475);
+            this.tabControl1.Size = new System.Drawing.Size(766, 475);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -67,25 +71,26 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(744, 449);
+            this.tabPage1.Size = new System.Drawing.Size(758, 449);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            this.chart1.Location = new System.Drawing.Point(6, 6);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Location = new System.Drawing.Point(3, 3);
+            this.chart1.Margin = new System.Windows.Forms.Padding(0);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.MarkerBorderWidth = 3;
-            series3.MarkerColor = System.Drawing.Color.Red;
-            series3.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
-            this.chart1.Size = new System.Drawing.Size(732, 437);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.MarkerBorderWidth = 3;
+            series1.MarkerColor = System.Drawing.Color.Red;
+            series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(752, 443);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -176,11 +181,46 @@
             this.ректифікаційнаКолонаToolStripMenuItem1.Size = new System.Drawing.Size(202, 22);
             this.ректифікаційнаКолонаToolStripMenuItem1.Text = "Ректифікаційна колона";
             // 
+            // labelX
+            // 
+            this.labelX.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelX.Location = new System.Drawing.Point(784, 60);
+            this.labelX.Name = "labelX";
+            this.labelX.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.labelX.Size = new System.Drawing.Size(110, 254);
+            this.labelX.TabIndex = 2;
+            this.labelX.Text = "label1";
+            // 
+            // labelY
+            // 
+            this.labelY.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelY.Location = new System.Drawing.Point(900, 60);
+            this.labelY.Name = "labelY";
+            this.labelY.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.labelY.Size = new System.Drawing.Size(110, 254);
+            this.labelY.TabIndex = 2;
+            this.labelY.Text = "label1";
+            // 
+            // labelK
+            // 
+            this.labelK.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelK.Location = new System.Drawing.Point(784, 326);
+            this.labelK.Name = "labelK";
+            this.labelK.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.labelK.Size = new System.Drawing.Size(226, 97);
+            this.labelK.TabIndex = 2;
+            this.labelK.Text = "label1";
+            this.labelK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1096, 587);
+            this.Controls.Add(this.labelK);
+            this.Controls.Add(this.labelY);
+            this.Controls.Add(this.labelX);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -212,6 +252,9 @@
         private System.Windows.Forms.ToolStripMenuItem дефлегматорToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem кипятильникToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ректифікаційнаКолонаToolStripMenuItem1;
+        private System.Windows.Forms.Label labelX;
+        private System.Windows.Forms.Label labelY;
+        private System.Windows.Forms.Label labelK;
     }
 }
 

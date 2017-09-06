@@ -7,3 +7,4 @@ D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\Rectification
 D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.exe
 D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.pdb
 D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.Form1.resources
+D:\Projects C#\RectificationProcess\RectificationProcess\obj\Debug\RectificationProcess.csproj.CoreCompileInputs.cache

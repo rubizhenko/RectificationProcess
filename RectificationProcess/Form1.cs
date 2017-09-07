@@ -16,6 +16,20 @@ namespace RectificationProcess
         string[] tabsForDeflegmator = { "Tb2(Tb1)", "Tb2(Fb1)", "Tb2(Fv)", "Tb2(Tv)" };
         string[] tabsForBoiler = { "Tr2(Fr1)", "Tr2(Tr1)", "Tr2(Fp)" };
         string[] tabsForRectifCol = { "Tr1(Fdist)", "Tr1(Tdist)", "Tr1(Tr2)", "Tr1(Ffleg)", "Tr1(Fb)", "Tr1(Tb)" };
+        double[] staticT2otTbinar1 = new double[9];
+        double[] staticT2otFbinar1 = new double[9];
+        double[] staticT2otFvod = new double[9];
+        double[] staticT2otTvod = new double[9];
+        double[] staticTp2otFp = new double[9];
+        double[] staticTp2otTp1 = new double[9];
+        double[] staticTp2otFpara = new double[9];
+        double[] staticTp1opFd = new double[9];
+        double[] staticTp1opTd = new double[9];
+        double[] staticTp1opTp2 = new double[9];
+        double[] staticTp1opFf = new double[9];
+        double[] staticTp1opFb = new double[9];
+        double[] staticTp1opTb = new double[9];
+        double K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12, K13;
         RectificationProcess process = new RectificationProcess();
         
         
@@ -23,9 +37,36 @@ namespace RectificationProcess
         {
             InitializeComponent();
             string progPath = Environment.CurrentDirectory;
-       
 
-
+            for (int i = 0; i < 9; i++)
+            {
+                staticT2otTbinar1[i] = process.StaticT2otTbinar1().Item1[i];
+                staticT2otFbinar1[i] = process.StaticT2otFbinar1().Item1[i];
+                staticT2otFvod[i] = process.StaticT2otFvod().Item1[i];
+                staticT2otTvod[i] = process.StaticT2otTvod().Item1[i];
+                staticTp2otFp[i] = process.StaticTp2otFp().Item1[i];
+                staticTp2otTp1[i] = process.StaticTp2otTp1().Item1[i];
+                staticTp2otFpara[i] = process.StaticTp2otFpara().Item1[i];
+                staticTp1opFd[i] = process.StaticTp1opFd().Item1[i];
+                staticTp1opTd[i] = process.StaticTp1opTd().Item1[i];
+                staticTp1opTp2[i] = process.StaticTp1opTp2().Item1[i];
+                staticTp1opFf[i] = process.StaticTp1opFf().Item1[i];
+                staticTp1opFb[i] = process.StaticTp1opFb().Item1[i];
+                staticTp1opTb[i] = process.StaticTp1opTb().Item1[i];
+            }
+            K1 = process.StaticT2otTbinar1().Item2;
+            K2 = process.StaticT2otFbinar1().Item2;
+            K3 = process.StaticT2otFvod().Item2;
+            K4 = process.StaticT2otTvod().Item2;
+            K5 = process.StaticTp2otFp().Item2;
+            K6 = process.StaticTp2otTp1().Item2;
+            K7 = process.StaticTp2otFpara().Item2;
+            K8 = process.StaticTp1opFd().Item2;
+            K9 = process.StaticTp1opTd().Item2;
+            K10 = process.StaticTp1opTp2().Item2;
+            K11 = process.StaticTp1opFf().Item2;
+            K12 = process.StaticTp1opFb().Item2;
+            K13 = process.StaticTp1opTb().Item2;
 
         }
         public class RectificationProcess
@@ -113,9 +154,6 @@ namespace RectificationProcess
             public double Trecur21 { get => Trecur2; set => Trecur2 = value; }
             public double Fpara1 { get => Fpara; set => Fpara = value; }
             public double Fkondpara1 { get => Fkondpara; set => Fkondpara = value; }
-
-
-
 
             //Формули для розрахунку статичних характеристик дефлегматора
             public Tuple<double[], double> StaticT2otTbinar1()
@@ -358,8 +396,6 @@ namespace RectificationProcess
                 {
                     label.Text = "K = " + value.ToString("N");
                 }
-                
-                
             }
             public void printResult(object formLabel, string title, double[] value)
             {
@@ -382,94 +418,94 @@ namespace RectificationProcess
                 {
                     //deflegmator tabs
                     case "Tb2(Tb1)":
-                        process.DrawStaticFunction(chart1, process.Tbinar11, process.StaticT2otTbinar1().Item1, "Tbinar1, K", "Tbinar2, K");
+                        process.DrawStaticFunction(chart1, process.Tbinar11, staticT2otTbinar1, "Tbinar1, K", "Tbinar2, K");
                         process.printResult(labelX, "Tb1, K", process.Tbinar11);
-                        process.printResult(labelY, "Tb2, K", process.StaticT2otTbinar1().Item1);
-                        process.printResult(labelK, "", process.StaticT2otTbinar1().Item2);
+                        process.printResult(labelY, "Tb2, K", staticT2otTbinar1);
+                        process.printResult(labelK, "", K1);
                         break;
                     case "Tb2(Fb1)":
-                        process.DrawStaticFunction(chart1, process.Fbinar11, process.StaticT2otFbinar1().Item1, "Fbinar1, m^3/c", "Tbinar2, K");
+                        process.DrawStaticFunction(chart1, process.Fbinar11, staticT2otFbinar1, "Fbinar1, m^3/c", "Tbinar2, K");
                         process.printResult(labelX, "Fb1, m^3/c", process.Fbinar11);
-                        process.printResult(labelY, "Tb2, K", process.StaticT2otFbinar1().Item1);
-                        process.printResult(labelK, "", process.StaticT2otFbinar1().Item2);
+                        process.printResult(labelY, "Tb2, K", staticT2otFbinar1);
+                        process.printResult(labelK, "", K2);
                         break;
                     case "Tb2(Fv)":
-                        process.DrawStaticFunction(chart1, process.Fvoda1, process.StaticT2otFvod().Item1, "Fvoda, m^3/c", "Tbinar2, K");
+                        process.DrawStaticFunction(chart1, process.Fvoda1, staticT2otFvod, "Fvoda, m^3/c", "Tbinar2, K");
                         process.printResult(labelX, "Fv, m^3/c", process.Fvoda1);
-                        process.printResult(labelY, "Tb2, K", process.StaticT2otFvod().Item1);
-                        process.printResult(labelK, "", process.StaticT2otFvod().Item2);
+                        process.printResult(labelY, "Tb2, K", staticT2otFvod);
+                        process.printResult(labelK, "", K3);
                         break;
                     case "Tb2(Tv)":
-                        process.DrawStaticFunction(chart1, process.Tvoda1, process.StaticT2otTvod().Item1, "Tvoda, K", "Tbinar2, K");
+                        process.DrawStaticFunction(chart1, process.Tvoda1, staticT2otTvod, "Tvoda, K", "Tbinar2, K");
                         process.printResult(labelX, "Tv, K", process.Tvoda1);
-                        process.printResult(labelY, "Tb2, K", process.StaticT2otTvod().Item1);
-                        process.printResult(labelK, "", process.StaticT2otTvod().Item2);
+                        process.printResult(labelY, "Tb2, K", staticT2otTvod);
+                        process.printResult(labelK, "", K4);
                         break;
 
                     //boiler tabs
                     case "Tr2(Fr1)":
-                        process.DrawStaticFunction(chart1, process.Frecur11, process.StaticTp2otFp().Item1, "Frecur1, m^3/c", "Trecur2, K");
+                        process.DrawStaticFunction(chart1, process.Frecur11, staticTp2otFp, "Frecur1, m^3/c", "Trecur2, K");
                         process.printResult(labelX, "Fr1, m^3/c", process.Frecur11);
-                        process.printResult(labelY, "Tr2, K", process.StaticTp2otFp().Item1);
-                        process.printResult(labelK, "", process.StaticTp2otFp().Item2);
+                        process.printResult(labelY, "Tr2, K", staticTp2otFp);
+                        process.printResult(labelK, "", K5);
                         break;
                     case "Tr2(Tr1)":
-                        process.DrawStaticFunction(chart1, process.Trecur11, process.StaticTp2otTp1().Item1, "Trecur1, K", "Trecur2, K");
+                        process.DrawStaticFunction(chart1, process.Trecur11, staticTp2otTp1, "Trecur1, K", "Trecur2, K");
                         process.printResult(labelX, "Tr1, K", process.Trecur11);
-                        process.printResult(labelY, "Tr2, K", process.StaticTp2otTp1().Item1);
-                        process.printResult(labelK, "", process.StaticTp2otTp1().Item2);
+                        process.printResult(labelY, "Tr2, K", staticTp2otTp1);
+                        process.printResult(labelK, "", K6);
                         break;
                     case "Tr2(Fp)":
-                        process.DrawStaticFunction(chart1, process.Fpara1, process.StaticTp2otFp().Item1, "Fpara, m^3/c", "Trecur2, K");
+                        process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
                         process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
-                        process.printResult(labelY, "Tr2, K", process.StaticTp2otFp().Item1);
-                        process.printResult(labelK, "", process.StaticTp2otFp().Item2);
+                        process.printResult(labelY, "Tr2, K", staticTp2otFp);
+                        process.printResult(labelK, "", K7);
                         break;
 
                     //rectification column tabs
                     case "Tr1(Fdist)":
-                        process.DrawStaticFunction(chart1, process.Fdist1, process.StaticTp1opFd().Item1, "Fdist, m^3/c", "Trecur1, K");
+                        process.DrawStaticFunction(chart1, process.Fdist1, staticTp1opFd, "Fdist, m^3/c", "Trecur1, K");
                         process.printResult(labelX, "Fd, m^3/c", process.Fdist1);
-                        process.printResult(labelY, "Tr1, K", process.StaticTp1opFd().Item1);
-                        process.printResult(labelK, "", process.StaticTp1opFd().Item2);
+                        process.printResult(labelY, "Tr1, K", staticTp1opFd);
+                        process.printResult(labelK, "", K8);
                         break;
                     case "Tr1(Tdist)":
-                        process.DrawStaticFunction(chart1, process.Tdist1, process.StaticTp1opTd().Item1, "Tdist, K", "Trecur1, K");
+                        process.DrawStaticFunction(chart1, process.Tdist1, staticTp1opTd, "Tdist, K", "Trecur1, K");
                         process.printResult(labelX, "Td, K", process.Tdist1);
-                        process.printResult(labelY, "Tr1, K", process.StaticTp1opTd().Item1);
-                        process.printResult(labelK, "", process.StaticTp1opTd().Item2);
+                        process.printResult(labelY, "Tr1, K", staticTp1opTd);
+                        process.printResult(labelK, "", K9);
                         break;
                     case "Tr1(Tr2)":
-                        process.DrawStaticFunction(chart1, process.Trecur21, process.StaticTp1opTp2().Item1, "Trecur2, K", "Trecur1, K");
+                        process.DrawStaticFunction(chart1, process.Trecur21, staticTp1opTp2, "Trecur2, K", "Trecur1, K");
                         process.printResult(labelX, "Tr2, K", process.Trecur21);
-                        process.printResult(labelY, "Tr1, K", process.StaticTp1opTp2().Item1);
-                        process.printResult(labelK, "", process.StaticTp1opTp2().Item2);
+                        process.printResult(labelY, "Tr1, K", staticTp1opTp2);
+                        process.printResult(labelK, "", K10);
                         break;
                     case "Tr1(Ffleg)":
-                        process.DrawStaticFunction(chart1, process.Fflegmy1, process.StaticTp1opFf().Item1, "Fflegmy, m^3/c", "Trecur1, K");
+                        process.DrawStaticFunction(chart1, process.Fflegmy1, staticTp1opFf, "Fflegmy, m^3/c", "Trecur1, K");
                         process.printResult(labelX, "Tfl, m^3/c", process.Fflegmy1);
-                        process.printResult(labelY, "Tr1, K", process.StaticTp1opFf().Item1);
-                        process.printResult(labelK, "", process.StaticTp1opFf().Item2);
+                        process.printResult(labelY, "Tr1, K", staticTp1opFf);
+                        process.printResult(labelK, "", K11);
                         break;
                     case "Tr1(Fb)":
-                        process.DrawStaticFunction(chart1, process.Fbinar11, process.StaticTp1opFb().Item1, "Fbinar, m^3/c", "Trecur1, K");
+                        process.DrawStaticFunction(chart1, process.Fbinar11, staticTp1opFb, "Fbinar, m^3/c", "Trecur1, K");
                         process.printResult(labelX, "Fb, m^3/c", process.Fbinar11);
-                        process.printResult(labelY, "Tr1, K", process.StaticTp1opFb().Item1);
-                        process.printResult(labelK, "", process.StaticTp1opFb().Item2);
+                        process.printResult(labelY, "Tr1, K", staticTp1opFb);
+                        process.printResult(labelK, "", K12);
                         break;
                     case "Tr1(Tb)":
-                        process.DrawStaticFunction(chart1, process.Tbinar11, process.StaticTp1opTb().Item1, "Tbinar, K", "Trecur1, K");
+                        process.DrawStaticFunction(chart1, process.Tbinar11, staticTp1opTb, "Tbinar, K", "Trecur1, K");
                         process.printResult(labelX, "Tb, K", process.Tbinar11);
-                        process.printResult(labelY, "Tr1, K", process.StaticTp1opTb().Item1);
-                        process.printResult(labelK, "", process.StaticTp1opTb().Item2);
+                        process.printResult(labelY, "Tr1, K", staticTp1opTb);
+                        process.printResult(labelK, "", K13);
                         break;
 
                     //default chart for deflegmator
                     default:
-                        process.DrawStaticFunction(chart1, process.Tbinar11, process.StaticT2otTbinar1().Item1, "Tbinar1, K", "Tbinar2, K");
+                        process.DrawStaticFunction(chart1, process.Tbinar11, staticT2otTbinar1, "Tbinar1, K", "Tbinar2, K");
                         process.printResult(labelX, "Tb, K", process.Tbinar11);
-                        process.printResult(labelY, "Tb2, K", process.StaticT2otTbinar1().Item1);
-                        process.printResult(labelK, "", process.StaticT2otTbinar1().Item2);
+                        process.printResult(labelY, "Tb2, K", staticT2otTbinar1);
+                        process.printResult(labelK, "", K1);
                         break;
                 }
                 tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
@@ -480,30 +516,30 @@ namespace RectificationProcess
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {
             process.AddTabsForTabControl(tabControl1, tabsForDeflegmator);
-            process.DrawStaticFunction(chart1, process.Tvoda1, process.StaticT2otTvod().Item1, "Tvoda, K", "Tbinar2, K");
+            process.DrawStaticFunction(chart1, process.Tvoda1, staticT2otTvod, "Tvoda, K", "Tbinar2, K");
             process.printResult(labelX, "Tv, K", process.Tvoda1);
-            process.printResult(labelY, "Tb2, K", process.StaticT2otTvod().Item1);
-            process.printResult(labelK, "", process.StaticT2otTvod().Item2);
+            process.printResult(labelY, "Tb2, K", staticT2otTvod);
+            process.printResult(labelK, "", K4);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
 
         private void кипятильникToolStripMenuItem_Click(object sender, EventArgs e)
         {
             process.AddTabsForTabControl(tabControl1, tabsForBoiler);
-            process.DrawStaticFunction(chart1, process.Fpara1, process.StaticTp2otFp().Item1, "Fpara, m^3/c", "Trecur2, K");
+            process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
             process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
-            process.printResult(labelY, "Tr2, K", process.StaticTp2otFp().Item1);
-            process.printResult(labelK, "", process.StaticTp2otFp().Item2);
+            process.printResult(labelY, "Tr2, K", staticTp2otFp);
+            process.printResult(labelK, "", K5);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
 
         private void ректифікаційнаКолонаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             process.AddTabsForTabControl(tabControl1, tabsForRectifCol);
-            process.DrawStaticFunction(chart1, process.Tbinar11, process.StaticTp1opTb().Item1, "Tbinar, K", "Trecur1, K");
+            process.DrawStaticFunction(chart1, process.Tbinar11, staticTp1opTb, "Tbinar, K", "Trecur1, K");
             process.printResult(labelX, "Tb, K", process.Tbinar11);
-            process.printResult(labelY, "Tr1, K", process.StaticTp1opTb().Item1);
-            process.printResult(labelK, "", process.StaticTp1opTb().Item2);
+            process.printResult(labelY, "Tr1, K", staticTp1opTb);
+            process.printResult(labelK, "", K13);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
     }

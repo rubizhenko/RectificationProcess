@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace RectificationProcess
 {
+    using ComportMath;
     public partial class Form1 : Form
     {
         string[] tabsForDeflegmator = { "Tb2(Tb1)", "Tb2(Fb1)", "Tb2(Fv)", "Tb2(Tv)" };
@@ -30,6 +31,9 @@ namespace RectificationProcess
         double[] staticTp1opFb = new double[9];
         double[] staticTp1opTb = new double[9];
         double K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12, K13;
+
+        
+
         RectificationProcess process = new RectificationProcess();
         
         
@@ -37,7 +41,7 @@ namespace RectificationProcess
         {
             InitializeComponent();
             string progPath = Environment.CurrentDirectory;
-
+            
             for (int i = 0; i < 9; i++)
             {
                 staticT2otTbinar1[i] = process.StaticT2otTbinar1().Item1[i];
@@ -71,6 +75,7 @@ namespace RectificationProcess
         }
         public class RectificationProcess
         {
+            
             //Параметри дистиляту
             private double Fdist = 1530, Cdist = 3.670, Tdist = 293;
             //Параметри бінарної суміші
@@ -354,6 +359,7 @@ namespace RectificationProcess
                      xStart += xStep;
                 }
             }
+           
             public void AddTabsForTabControl(object tabControl, string[] tabsNames)
             {
                 var myTabs = tabControl as TabControl;
@@ -407,6 +413,7 @@ namespace RectificationProcess
                 }
 
             }
+            
         }
         
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -542,5 +549,29 @@ namespace RectificationProcess
             process.printResult(labelK, "", K13);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
+        private void дефлегматорToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            foreach (var series in chart1.Series)
+            {
+                series.Points.Clear();
+            }
+            chart1.ChartAreas[0].AxisX.Title = "t, сек.";
+            chart1.ChartAreas[0].AxisY.Title = "h(t)";
+            //Залежність температури суміші на вході від температури суміші на виході
+            double W1(double s)
+            {
+                return 0.98 / (6.944 * s * s + 1.0 * s);
+            }
+            Laplace.InitStehfest(14);
+            for (int i = 0; i < 400; i++)
+            {
+                double invCalc = Laplace.InverseTransform(W1, i*0.1);
+                chart1.Series[0].Points.AddXY(i, invCalc);
+            }
+
+
+        }
+
+
     }
 }

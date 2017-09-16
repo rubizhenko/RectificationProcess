@@ -109,5 +109,25 @@ namespace ComportMath
                 V[i] = sign * V[i];
             }
         }
+        public static void drawStepResponse(FunctionDelegate W, object chart, int time)
+        {
+            var plot = chart as System.Windows.Forms.DataVisualization.Charting.Chart;
+            plot.ChartAreas[0].AxisY.Minimum = Double.NaN;
+            plot.ChartAreas[0].AxisY.Maximum = Double.NaN;
+            foreach (var series in plot.Series)
+            {
+                series.Points.Clear();
+                series.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.None;
+            }
+            plot.ChartAreas[0].AxisX.Title = "t, сек.";
+            plot.ChartAreas[0].AxisY.Title = "h(t)";
+            int _time = (int)time;
+            for (double i = 0; i < _time; i+=0.1)
+            {
+                double invCalc = Laplace.InverseTransform(W, i);
+                plot.Series[0].Points.AddXY(i, invCalc);
+            }
+
+        }
     }
 }

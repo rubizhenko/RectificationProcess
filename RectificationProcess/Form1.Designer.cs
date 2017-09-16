@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -78,18 +77,18 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Location = new System.Drawing.Point(3, 3);
             this.chart1.Margin = new System.Windows.Forms.Padding(0);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.MarkerBorderWidth = 3;
-            series1.MarkerColor = System.Drawing.Color.Red;
-            series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.MarkerBorderWidth = 3;
+            series2.MarkerColor = System.Drawing.Color.Red;
+            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(752, 443);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -175,6 +174,7 @@
             this.кипятильникToolStripMenuItem1.Name = "кипятильникToolStripMenuItem1";
             this.кипятильникToolStripMenuItem1.Size = new System.Drawing.Size(202, 22);
             this.кипятильникToolStripMenuItem1.Text = "Кип\'ятильник";
+            this.кипятильникToolStripMenuItem1.Click += new System.EventHandler(this.кипятильникToolStripMenuItem1_Click);
             // 
             // ректифікаційнаКолонаToolStripMenuItem1
             // 
@@ -184,6 +184,7 @@
             // 
             // labelX
             // 
+            this.labelX.BackColor = System.Drawing.SystemColors.Info;
             this.labelX.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelX.Location = new System.Drawing.Point(784, 60);
             this.labelX.Name = "labelX";
@@ -194,6 +195,7 @@
             // 
             // labelY
             // 
+            this.labelY.BackColor = System.Drawing.SystemColors.Info;
             this.labelY.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelY.Location = new System.Drawing.Point(900, 60);
             this.labelY.Name = "labelY";
@@ -204,6 +206,7 @@
             // 
             // labelK
             // 
+            this.labelK.BackColor = System.Drawing.SystemColors.Info;
             this.labelK.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelK.Location = new System.Drawing.Point(784, 326);
             this.labelK.Name = "labelK";
@@ -217,7 +220,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1096, 587);
             this.Controls.Add(this.labelK);
             this.Controls.Add(this.labelY);

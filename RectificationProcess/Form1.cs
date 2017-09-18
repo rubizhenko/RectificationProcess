@@ -349,6 +349,7 @@ namespace RectificationProcess
                 foreach (var series in myChart.Series)
                 {
                     series.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+                    series.BorderWidth = 2;
                     series.Points.Clear();
                 }
                 myChart.ChartAreas[0].AxisX.Title = XTitle;
@@ -533,21 +534,21 @@ namespace RectificationProcess
                             {
                                 return 0.98 / (6.944 * s * s + 1.0 * s);
                             }
-                            Laplace.drawStepResponse(W1, chart1, 100);
+                            Laplace.drawStepResponse(W1, chart1);
                             break;
                         case "Tb2(Fb1)":
                             double W2(double s)
                             {
                                 return 0.043 / (6.9 * s * s + 1.0 * s);
                             }
-                            Laplace.drawStepResponse(W2, chart1, 100);
+                            Laplace.drawStepResponse(W2, chart1);
                             break;
                         case "Tb2(Fv)":
                             double W3(double s)
                             {
                                 return -0.013 / (7.077 * s * s * s + 6.716 * s * s + 1 * s);
                             }
-                            Laplace.drawStepResponse(W3, chart1, 100);
+                            Laplace.drawStepResponse(W3, chart1);
                             break;
 
                         //boiler tabs
@@ -556,21 +557,21 @@ namespace RectificationProcess
                             {
                                 return -2.27 / (7.08 * s * s + 1 * s);
                             }
-                            Laplace.drawStepResponse(W5, chart1, 100);
+                            Laplace.drawStepResponse(W5, chart1);
                             break;
                         case "Tr2(Tr1)":
                             double W4(double s)
                             {
                                 return 1 / (7.08 * s * s + 1 * s);
                             }
-                            Laplace.drawStepResponse(W4, chart1, 100);
+                            Laplace.drawStepResponse(W4, chart1);
                             break;
                         case "Tr2(Fp)":
                             double W6(double s)
                             {
                                 return 3.024 / (0.413 * s * s * s + 1.153 * s * s + 1 * s);
                             }
-                            Laplace.drawStepResponse(W6, chart1, 10);
+                            Laplace.drawStepResponse(W6, chart1);
                             break;
 
                         //rectification column tabs
@@ -595,7 +596,7 @@ namespace RectificationProcess
 
                         //default chart for deflegmator
                         default:
-                            Laplace.drawStepResponse(W3, chart1, 200);
+                            Laplace.drawStepResponse(W3, chart1);
                             break;
                     }
                 }
@@ -648,7 +649,7 @@ namespace RectificationProcess
             {
                 return -0.013 / (7.077 * s * s * s + 6.716 * s * s + 1 * s);
             }
-            Laplace.drawStepResponse(W3, chart1, 100);
+            Laplace.drawStepResponse(W3, chart1);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
         private void кипятильникToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -660,7 +661,7 @@ namespace RectificationProcess
             {
                 return 3.024 / (0.413 * s * s * s + 1.153 * s * s + 1 * s);
             }
-            Laplace.drawStepResponse(W6, chart1, 10);
+            Laplace.drawStepResponse(W6, chart1);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
 

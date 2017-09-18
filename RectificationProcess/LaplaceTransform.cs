@@ -118,9 +118,11 @@ namespace ComportMath
             {
                 series.Points.Clear();
                 series.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.None;
+                series.BorderWidth = 3;
             }
             plot.ChartAreas[0].AxisX.Title = "t, сек.";
             plot.ChartAreas[0].AxisY.Title = "h(t)";
+            plot.ChartAreas[0].AxisX.Minimum = 0;
             int _time = (int)time;
             for (double i = 0; i < _time; i+=0.1)
             {
@@ -128,6 +130,40 @@ namespace ComportMath
                 plot.Series[0].Points.AddXY(i, invCalc);
             }
 
+        }
+        public static void drawStepResponse(FunctionDelegate W, object chart)
+        {
+            var plot = chart as System.Windows.Forms.DataVisualization.Charting.Chart;
+            plot.ChartAreas[0].AxisY.Minimum = Double.NaN;
+            plot.ChartAreas[0].AxisY.Maximum = Double.NaN;
+            foreach (var series in plot.Series)
+            {
+                series.Points.Clear();
+                series.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.None;
+                series.BorderWidth = 3;
+            }
+            plot.ChartAreas[0].AxisX.Title = "t, сек.";
+            plot.ChartAreas[0].AxisX.Minimum = 0;
+            plot.ChartAreas[0].AxisY.Title = "h(t)";
+            int steps = 0;
+            double time = 0;
+            double invCalc = -1;
+            double prevInvCalc = 0;
+            do
+            {
+                prevInvCalc = invCalc;
+                invCalc = Laplace.InverseTransform(W, time);
+                plot.Series[0].Points.AddXY(time-0.1, invCalc);
+                if (Math.Abs(prevInvCalc - invCalc) <= 0.000001)
+                {
+                    steps++;
+                }
+                else
+                {
+                    time += 0.1;
+                }
+                
+            } while (steps <= time * 1.15);
         }
     }
 }

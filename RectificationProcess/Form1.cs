@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 
 namespace RectificationProcess
@@ -33,16 +34,19 @@ namespace RectificationProcess
         double[] staticTp1opFb = new double[9];
         double[] staticTp1opTb = new double[9];
         double K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12, K13;
+        double newTime = 0.0;
 
         
 
         bool staticFuncs = false;
         bool dynamicFuncs = false;
+        bool timeChanged = false;
 
         RectificationProcess process = new RectificationProcess();
         
         public Form1()
         {
+            
             InitializeComponent();
             string progPath = Environment.CurrentDirectory;
             
@@ -351,7 +355,9 @@ namespace RectificationProcess
                     series.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
                     series.BorderWidth = 2;
                     series.Points.Clear();
+
                 }
+                myChart.ChartAreas[0].AxisX.Minimum = Double.NaN;
                 myChart.ChartAreas[0].AxisX.Title = XTitle;
                 myChart.ChartAreas[0].AxisY.Title = YTitle;
                 myChart.ChartAreas[0].AxisY.Minimum = YValues.Min();
@@ -427,188 +433,267 @@ namespace RectificationProcess
             if (tabControl1.SelectedTab!=null)
             {
                 tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Clear();
-                if (staticFuncs)
-                {
-                    switch (tabControl1.SelectedTab.Text)
-                    {
-                        //deflegmator tabs
-                        case "Tb2(Tb1)":
-                            process.DrawStaticFunction(chart1, process.Tbinar11, staticT2otTbinar1, "Tbinar1, K", "Tbinar2, K");
-                            process.printResult(labelX, "Tb1, K", process.Tbinar11);
-                            process.printResult(labelY, "Tb2, K", staticT2otTbinar1);
-                            process.printResult(labelK, "", K1);
-                            break;
-                        case "Tb2(Fb1)":
-                            process.DrawStaticFunction(chart1, process.Fbinar11, staticT2otFbinar1, "Fbinar1, m^3/c", "Tbinar2, K");
-                            process.printResult(labelX, "Fb1, m^3/c", process.Fbinar11);
-                            process.printResult(labelY, "Tb2, K", staticT2otFbinar1);
-                            process.printResult(labelK, "", K2);
-                            break;
-                        case "Tb2(Fv)":
-                            process.DrawStaticFunction(chart1, process.Fvoda1, staticT2otFvod, "Fvoda, m^3/c", "Tbinar2, K");
-                            process.printResult(labelX, "Fv, m^3/c", process.Fvoda1);
-                            process.printResult(labelY, "Tb2, K", staticT2otFvod);
-                            process.printResult(labelK, "", K3);
-                            break;
-                        case "Tb2(Tv)":
-                            process.DrawStaticFunction(chart1, process.Tvoda1, staticT2otTvod, "Tvoda, K", "Tbinar2, K");
-                            process.printResult(labelX, "Tv, K", process.Tvoda1);
-                            process.printResult(labelY, "Tb2, K", staticT2otTvod);
-                            process.printResult(labelK, "", K4);
-                            break;
-
-                        //boiler tabs
-                        case "Tr2(Fr1)":
-                            process.DrawStaticFunction(chart1, process.Frecur11, staticTp2otFp, "Frecur1, m^3/c", "Trecur2, K");
-                            process.printResult(labelX, "Fr1, m^3/c", process.Frecur11);
-                            process.printResult(labelY, "Tr2, K", staticTp2otFp);
-                            process.printResult(labelK, "", K5);
-                            break;
-                        case "Tr2(Tr1)":
-                            process.DrawStaticFunction(chart1, process.Trecur11, staticTp2otTp1, "Trecur1, K", "Trecur2, K");
-                            process.printResult(labelX, "Tr1, K", process.Trecur11);
-                            process.printResult(labelY, "Tr2, K", staticTp2otTp1);
-                            process.printResult(labelK, "", K6);
-                            break;
-                        case "Tr2(Fp)":
-                            process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
-                            process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
-                            process.printResult(labelY, "Tr2, K", staticTp2otFp);
-                            process.printResult(labelK, "", K7);
-                            break;
-
-                        //rectification column tabs
-                        case "Tr1(Fdist)":
-                            process.DrawStaticFunction(chart1, process.Fdist1, staticTp1opFd, "Fdist, m^3/c", "Trecur1, K");
-                            process.printResult(labelX, "Fd, m^3/c", process.Fdist1);
-                            process.printResult(labelY, "Tr1, K", staticTp1opFd);
-                            process.printResult(labelK, "", K8);
-                            break;
-                        case "Tr1(Tdist)":
-                            process.DrawStaticFunction(chart1, process.Tdist1, staticTp1opTd, "Tdist, K", "Trecur1, K");
-                            process.printResult(labelX, "Td, K", process.Tdist1);
-                            process.printResult(labelY, "Tr1, K", staticTp1opTd);
-                            process.printResult(labelK, "", K9);
-                            break;
-                        case "Tr1(Tr2)":
-                            process.DrawStaticFunction(chart1, process.Trecur21, staticTp1opTp2, "Trecur2, K", "Trecur1, K");
-                            process.printResult(labelX, "Tr2, K", process.Trecur21);
-                            process.printResult(labelY, "Tr1, K", staticTp1opTp2);
-                            process.printResult(labelK, "", K10);
-                            break;
-                        case "Tr1(Ffleg)":
-                            process.DrawStaticFunction(chart1, process.Fflegmy1, staticTp1opFf, "Fflegmy, m^3/c", "Trecur1, K");
-                            process.printResult(labelX, "Tfl, m^3/c", process.Fflegmy1);
-                            process.printResult(labelY, "Tr1, K", staticTp1opFf);
-                            process.printResult(labelK, "", K11);
-                            break;
-                        case "Tr1(Fb)":
-                            process.DrawStaticFunction(chart1, process.Fbinar11, staticTp1opFb, "Fbinar, m^3/c", "Trecur1, K");
-                            process.printResult(labelX, "Fb, m^3/c", process.Fbinar11);
-                            process.printResult(labelY, "Tr1, K", staticTp1opFb);
-                            process.printResult(labelK, "", K12);
-                            break;
-                        case "Tr1(Tb)":
-                            process.DrawStaticFunction(chart1, process.Tbinar11, staticTp1opTb, "Tbinar, K", "Trecur1, K");
-                            process.printResult(labelX, "Tb, K", process.Tbinar11);
-                            process.printResult(labelY, "Tr1, K", staticTp1opTb);
-                            process.printResult(labelK, "", K13);
-                            break;
-
-                        //default chart for deflegmator
-                        default:
-                            process.DrawStaticFunction(chart1, process.Tbinar11, staticT2otTbinar1, "Tbinar1, K", "Tbinar2, K");
-                            process.printResult(labelX, "Tb, K", process.Tbinar11);
-                            process.printResult(labelY, "Tb2, K", staticT2otTbinar1);
-                            process.printResult(labelK, "", K1);
-                            break;
-                    }
-                }
-                if (dynamicFuncs)
-                {
-                    switch (tabControl1.SelectedTab.Text)
-                    {
-                        //deflegmator tabs
-                        case "Tb2(Tb1)":
-                            double W1(double s)
-                            {
-                                return 0.98 / (6.944 * s * s + 1.0 * s);
-                            }
-                            Laplace.drawStepResponse(W1, chart1);
-                            break;
-                        case "Tb2(Fb1)":
-                            double W2(double s)
-                            {
-                                return 0.043 / (6.9 * s * s + 1.0 * s);
-                            }
-                            Laplace.drawStepResponse(W2, chart1);
-                            break;
-                        case "Tb2(Fv)":
-                            double W3(double s)
-                            {
-                                return -0.013 / (7.077 * s * s * s + 6.716 * s * s + 1 * s);
-                            }
-                            Laplace.drawStepResponse(W3, chart1);
-                            break;
-
-                        //boiler tabs
-                        case "Tr2(Fr1)":
-                            double W5(double s)
-                            {
-                                return -2.27 / (7.08 * s * s + 1 * s);
-                            }
-                            Laplace.drawStepResponse(W5, chart1);
-                            break;
-                        case "Tr2(Tr1)":
-                            double W4(double s)
-                            {
-                                return 1 / (7.08 * s * s + 1 * s);
-                            }
-                            Laplace.drawStepResponse(W4, chart1);
-                            break;
-                        case "Tr2(Fp)":
-                            double W6(double s)
-                            {
-                                return 3.024 / (0.413 * s * s * s + 1.153 * s * s + 1 * s);
-                            }
-                            Laplace.drawStepResponse(W6, chart1);
-                            break;
-
-                        //rectification column tabs
-                        case "Tr1(Fdist)":
-                           
-                            break;
-                        case "Tr1(Tdist)":
-                            
-                            break;
-                        case "Tr1(Tr2)":
-                            
-                            break;
-                        case "Tr1(Ffleg)":
-                            
-                            break;
-                        case "Tr1(Fb)":
-                            
-                            break;
-                        case "Tr1(Tb)":
-                            
-                            break;
-
-                        //default chart for deflegmator
-                        default:
-                            Laplace.drawStepResponse(W3, chart1);
-                            break;
-                    }
-                }
+                detectRelation();
                 tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
             }
-            
+
+        }
+        private void timeEdit_TextChanged(object sender, EventArgs e)
+        {
+           
+            if (Regex.IsMatch(timeEdit.Text, @"[^0-9.,]"))
+            {
+                timeEdit.Text = timeEdit.Text.Replace(".", ",");
+                MessageBox.Show("Тільки цифри і десятковий дільник кома чи крапка!");
+                timeEdit.Text = Regex.Replace(timeEdit.Text, @"[^0-9,]", String.Empty);
+            }
+            double editedTime;
+            if (Double.TryParse(timeEdit.Text, out editedTime))
+            {
+                timeChanged = true;
+                newTime = editedTime;
+                detectRelation();
+                timeChanged = false;
+            }
+        }
+
+        private void detectRelation()
+        {
+            if (staticFuncs)
+            {
+                switch (tabControl1.SelectedTab.Text)
+                {
+                    //deflegmator tabs
+                    case "Tb2(Tb1)":
+                        process.DrawStaticFunction(chart1, process.Tbinar11, staticT2otTbinar1, "Tbinar1, K", "Tbinar2, K");
+                        process.printResult(labelX, "Tb1, K", process.Tbinar11);
+                        process.printResult(labelY, "Tb2, K", staticT2otTbinar1);
+                        process.printResult(labelK, "", K1);
+                        break;
+                    case "Tb2(Fb1)":
+                        process.DrawStaticFunction(chart1, process.Fbinar11, staticT2otFbinar1, "Fbinar1, m^3/c", "Tbinar2, K");
+                        process.printResult(labelX, "Fb1, m^3/c", process.Fbinar11);
+                        process.printResult(labelY, "Tb2, K", staticT2otFbinar1);
+                        process.printResult(labelK, "", K2);
+                        break;
+                    case "Tb2(Fv)":
+                        process.DrawStaticFunction(chart1, process.Fvoda1, staticT2otFvod, "Fvoda, m^3/c", "Tbinar2, K");
+                        process.printResult(labelX, "Fv, m^3/c", process.Fvoda1);
+                        process.printResult(labelY, "Tb2, K", staticT2otFvod);
+                        process.printResult(labelK, "", K3);
+                        break;
+                    case "Tb2(Tv)":
+                        process.DrawStaticFunction(chart1, process.Tvoda1, staticT2otTvod, "Tvoda, K", "Tbinar2, K");
+                        process.printResult(labelX, "Tv, K", process.Tvoda1);
+                        process.printResult(labelY, "Tb2, K", staticT2otTvod);
+                        process.printResult(labelK, "", K4);
+                        break;
+
+                    //boiler tabs
+                    case "Tr2(Fr1)":
+                        process.DrawStaticFunction(chart1, process.Frecur11, staticTp2otFp, "Frecur1, m^3/c", "Trecur2, K");
+                        process.printResult(labelX, "Fr1, m^3/c", process.Frecur11);
+                        process.printResult(labelY, "Tr2, K", staticTp2otFp);
+                        process.printResult(labelK, "", K5);
+                        break;
+                    case "Tr2(Tr1)":
+                        process.DrawStaticFunction(chart1, process.Trecur11, staticTp2otTp1, "Trecur1, K", "Trecur2, K");
+                        process.printResult(labelX, "Tr1, K", process.Trecur11);
+                        process.printResult(labelY, "Tr2, K", staticTp2otTp1);
+                        process.printResult(labelK, "", K6);
+                        break;
+                    case "Tr2(Fp)":
+                        process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
+                        process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
+                        process.printResult(labelY, "Tr2, K", staticTp2otFp);
+                        process.printResult(labelK, "", K7);
+                        break;
+
+                    //rectification column tabs
+                    case "Tr1(Fdist)":
+                        process.DrawStaticFunction(chart1, process.Fdist1, staticTp1opFd, "Fdist, m^3/c", "Trecur1, K");
+                        process.printResult(labelX, "Fd, m^3/c", process.Fdist1);
+                        process.printResult(labelY, "Tr1, K", staticTp1opFd);
+                        process.printResult(labelK, "", K8);
+                        break;
+                    case "Tr1(Tdist)":
+                        process.DrawStaticFunction(chart1, process.Tdist1, staticTp1opTd, "Tdist, K", "Trecur1, K");
+                        process.printResult(labelX, "Td, K", process.Tdist1);
+                        process.printResult(labelY, "Tr1, K", staticTp1opTd);
+                        process.printResult(labelK, "", K9);
+                        break;
+                    case "Tr1(Tr2)":
+                        process.DrawStaticFunction(chart1, process.Trecur21, staticTp1opTp2, "Trecur2, K", "Trecur1, K");
+                        process.printResult(labelX, "Tr2, K", process.Trecur21);
+                        process.printResult(labelY, "Tr1, K", staticTp1opTp2);
+                        process.printResult(labelK, "", K10);
+                        break;
+                    case "Tr1(Ffleg)":
+                        process.DrawStaticFunction(chart1, process.Fflegmy1, staticTp1opFf, "Fflegmy, m^3/c", "Trecur1, K");
+                        process.printResult(labelX, "Tfl, m^3/c", process.Fflegmy1);
+                        process.printResult(labelY, "Tr1, K", staticTp1opFf);
+                        process.printResult(labelK, "", K11);
+                        break;
+                    case "Tr1(Fb)":
+                        process.DrawStaticFunction(chart1, process.Fbinar11, staticTp1opFb, "Fbinar, m^3/c", "Trecur1, K");
+                        process.printResult(labelX, "Fb, m^3/c", process.Fbinar11);
+                        process.printResult(labelY, "Tr1, K", staticTp1opFb);
+                        process.printResult(labelK, "", K12);
+                        break;
+                    case "Tr1(Tb)":
+                        process.DrawStaticFunction(chart1, process.Tbinar11, staticTp1opTb, "Tbinar, K", "Trecur1, K");
+                        process.printResult(labelX, "Tb, K", process.Tbinar11);
+                        process.printResult(labelY, "Tr1, K", staticTp1opTb);
+                        process.printResult(labelK, "", K13);
+                        break;
+
+                    //default chart for deflegmator
+                    default:
+                        process.DrawStaticFunction(chart1, process.Tbinar11, staticT2otTbinar1, "Tbinar1, K", "Tbinar2, K");
+                        process.printResult(labelX, "Tb, K", process.Tbinar11);
+                        process.printResult(labelY, "Tb2, K", staticT2otTbinar1);
+                        process.printResult(labelK, "", K1);
+                        break;
+                }
+            }
+            if (dynamicFuncs)
+            {
+                switch (tabControl1.SelectedTab.Text)
+                {
+                    //deflegmator tabs
+                    case "Tb2(Tb1)":
+                        double W1(double s)
+                        {
+                            return 0.98 / (6.944 * s * s + 1.0 * s);
+                        }
+                        if (timeChanged)
+                        {
+                            Laplace.drawStepResponse(W1, chart1, (int)newTime);
+                        }
+                        else
+                        {
+                            Laplace.drawStepResponse(W1, chart1);
+                        }
+                        chart1.ChartAreas[0].RecalculateAxesScale();
+                        timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
+                        break;
+                    case "Tb2(Fb1)":
+                        double W2(double s)
+                        {
+                            return 0.043 / (6.9 * s * s + 1.0 * s);
+                        }
+                        if (timeChanged)
+                        {
+                            Laplace.drawStepResponse(W2, chart1, (int)newTime);
+                        }
+                        else
+                        {
+                            Laplace.drawStepResponse(W2, chart1);
+                        }
+                        chart1.ChartAreas[0].RecalculateAxesScale();
+                        timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
+                        break;
+                    case "Tb2(Fv)":
+                        double W3(double s)
+                        {
+                            return -0.013 / (7.077 * s * s * s + 6.716 * s * s + 1 * s);
+                        }
+                        if (timeChanged)
+                        {
+                            Laplace.drawStepResponse(W3, chart1, (int)newTime);
+                        }
+                        else
+                        {
+                            Laplace.drawStepResponse(W3, chart1);
+                        }
+                        chart1.ChartAreas[0].RecalculateAxesScale();
+                        timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
+                        break;
+
+                    //boiler tabs
+                    case "Tr2(Fr1)":
+                        double W5(double s)
+                        {
+                            return -2.27 / (7.08 * s * s + 1 * s);
+                        }
+                        if (timeChanged)
+                        {
+                            Laplace.drawStepResponse(W5, chart1, (int)newTime);
+                        }
+                        else
+                        {
+                            Laplace.drawStepResponse(W5, chart1);
+                        }
+                        chart1.ChartAreas[0].RecalculateAxesScale();
+                        timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
+                        break;
+                    case "Tr2(Tr1)":
+                        double W4(double s)
+                        {
+                            return 1 / (7.08 * s * s + 1 * s);
+                        }
+                        if (timeChanged)
+                        {
+                            Laplace.drawStepResponse(W4, chart1, (int)newTime);
+                        }
+                        else
+                        {
+                            Laplace.drawStepResponse(W4, chart1);
+                        }
+                        chart1.ChartAreas[0].RecalculateAxesScale();
+                        timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
+                        break;
+                    case "Tr2(Fp)":
+                        double W6(double s)
+                        {
+                            return 3.024 / (0.413 * s * s * s + 1.153 * s * s + 1 * s);
+                        }
+                        if (timeChanged)
+                        {
+                            Laplace.drawStepResponse(W6, chart1, (int)newTime);
+                        }
+                        else
+                        {
+                            Laplace.drawStepResponse(W6, chart1);
+                        }
+                        chart1.ChartAreas[0].RecalculateAxesScale();
+                        timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
+                        break;
+
+                    //rectification column tabs
+                    case "Tr1(Fdist)":
+
+                        break;
+                    case "Tr1(Tdist)":
+
+                        break;
+                    case "Tr1(Tr2)":
+
+                        break;
+                    case "Tr1(Ffleg)":
+
+                        break;
+                    case "Tr1(Fb)":
+
+                        break;
+                    case "Tr1(Tb)":
+
+                        break;
+
+                    //default chart for deflegmator
+                    default:
+                        Laplace.drawStepResponse(W3, chart1);
+                        timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
+                        break;
+                }
+            }
         }
 
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {
             staticFuncs = true;
             dynamicFuncs = false;
+            timeEdit.Visible = false;
             process.AddTabsForTabControl(tabControl1, tabsForDeflegmator);
             process.DrawStaticFunction(chart1, process.Tvoda1, staticT2otTvod, "Tvoda, K", "Tbinar2, K");
             process.printResult(labelX, "Tv, K", process.Tvoda1);
@@ -621,6 +706,7 @@ namespace RectificationProcess
         {
             staticFuncs = true;
             dynamicFuncs = false;
+            timeEdit.Visible = false;
             process.AddTabsForTabControl(tabControl1, tabsForBoiler);
             process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
             process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
@@ -633,6 +719,7 @@ namespace RectificationProcess
         {
             staticFuncs = true;
             dynamicFuncs = false;
+            timeEdit.Visible = false;
             process.AddTabsForTabControl(tabControl1, tabsForRectifCol);
             process.DrawStaticFunction(chart1, process.Tbinar11, staticTp1opTb, "Tbinar, K", "Trecur1, K");
             process.printResult(labelX, "Tb, K", process.Tbinar11);
@@ -644,24 +731,30 @@ namespace RectificationProcess
         {
             staticFuncs = false;
             dynamicFuncs = true;
+            timeEdit.Visible = true;
             process.AddTabsForTabControl(tabControl1, tabsForDynamicDeflegmator);
             double W3(double s)
             {
                 return -0.013 / (7.077 * s * s * s + 6.716 * s * s + 1 * s);
             }
             Laplace.drawStepResponse(W3, chart1);
+            chart1.ChartAreas[0].RecalculateAxesScale();
+            timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
         private void кипятильникToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             staticFuncs = false;
             dynamicFuncs = true;
+            timeEdit.Visible = true;
             process.AddTabsForTabControl(tabControl1, tabsForDynamicBoiler);
             double W6(double s)
             {
                 return 3.024 / (0.413 * s * s * s + 1.153 * s * s + 1 * s);
             }
             Laplace.drawStepResponse(W6, chart1);
+            chart1.ChartAreas[0].RecalculateAxesScale();
+            timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
 

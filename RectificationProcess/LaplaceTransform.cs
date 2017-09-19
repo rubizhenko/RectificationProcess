@@ -57,27 +57,6 @@ namespace ComportMath
             return x;
         }
 
-        //public static double Integrate(FunctionDelegate f, double Min, double Max)
-        //{
-        //    return Integrate(f, Min, Max, 100);
-        //}
-
-        //public static double Integrate(FunctionDelegate f, double XMin, double XMax, int N)
-        //{
-        //    double dx = (XMax - XMin) / (double)N / 2.0;
-        //    double y = (f(XMin) - f(XMax))/2.0;
-        //    double x = XMin;
-        //    double limit = XMax - 1e-10;
-        //    while (x < limit)
-        //    {
-        //        x += dx;
-        //        y += 2.0*f(x);
-        //        x += dx;
-        //        y += f(x);
-        //    }
-        //    return 2.0 * y * dx / 3.0;
-        //}
-
         public static void InitStehfest()
         {
             InitStehfest(DefaultStehfestN);
@@ -111,6 +90,7 @@ namespace ComportMath
         }
         public static void drawStepResponse(FunctionDelegate W, object chart, int time)
         {
+
             var plot = chart as System.Windows.Forms.DataVisualization.Charting.Chart;
             plot.ChartAreas[0].AxisY.Minimum = Double.NaN;
             plot.ChartAreas[0].AxisY.Maximum = Double.NaN;

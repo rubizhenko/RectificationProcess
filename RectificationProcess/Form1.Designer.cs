@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -48,10 +48,13 @@
             this.labelY = new System.Windows.Forms.Label();
             this.labelK = new System.Windows.Forms.Label();
             this.timeEdit = new System.Windows.Forms.TextBox();
+            this.dynDataGridView = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dynDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -78,19 +81,19 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea9.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea9);
             this.chart1.Location = new System.Drawing.Point(3, 3);
             this.chart1.Margin = new System.Windows.Forms.Padding(0);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.MarkerBorderWidth = 3;
-            series2.MarkerColor = System.Drawing.Color.Red;
-            series2.MarkerSize = 6;
-            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.MarkerBorderWidth = 3;
+            series9.MarkerColor = System.Drawing.Color.Red;
+            series9.MarkerSize = 6;
+            series9.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series9.Name = "Series1";
+            this.chart1.Series.Add(series9);
             this.chart1.Size = new System.Drawing.Size(752, 443);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -186,7 +189,7 @@
             // 
             // labelX
             // 
-            this.labelX.BackColor = System.Drawing.SystemColors.Info;
+            this.labelX.BackColor = System.Drawing.SystemColors.Window;
             this.labelX.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelX.Location = new System.Drawing.Point(784, 60);
             this.labelX.Name = "labelX";
@@ -197,7 +200,7 @@
             // 
             // labelY
             // 
-            this.labelY.BackColor = System.Drawing.SystemColors.Info;
+            this.labelY.BackColor = System.Drawing.SystemColors.Window;
             this.labelY.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelY.Location = new System.Drawing.Point(900, 60);
             this.labelY.Name = "labelY";
@@ -208,7 +211,7 @@
             // 
             // labelK
             // 
-            this.labelK.BackColor = System.Drawing.SystemColors.Info;
+            this.labelK.BackColor = System.Drawing.SystemColors.Window;
             this.labelK.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelK.Location = new System.Drawing.Point(784, 326);
             this.labelK.Name = "labelK";
@@ -221,16 +224,41 @@
             // timeEdit
             // 
             this.timeEdit.Location = new System.Drawing.Point(716, 515);
+            this.timeEdit.MaxLength = 3;
             this.timeEdit.Name = "timeEdit";
             this.timeEdit.Size = new System.Drawing.Size(58, 20);
             this.timeEdit.TabIndex = 1;
             this.timeEdit.TextChanged += new System.EventHandler(this.timeEdit_TextChanged);
+            // 
+            // dynDataGridView
+            // 
+            this.dynDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dynDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dynDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dynDataGridView.GridColor = System.Drawing.SystemColors.Control;
+            this.dynDataGridView.Location = new System.Drawing.Point(784, 60);
+            this.dynDataGridView.Name = "dynDataGridView";
+            this.dynDataGridView.Size = new System.Drawing.Size(285, 450);
+            this.dynDataGridView.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(574, 519);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(136, 16);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Час спостереження";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 587);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dynDataGridView);
             this.Controls.Add(this.timeEdit);
             this.Controls.Add(this.labelK);
             this.Controls.Add(this.labelY);
@@ -245,6 +273,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dynDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +299,8 @@
         private System.Windows.Forms.Label labelY;
         private System.Windows.Forms.Label labelK;
         private System.Windows.Forms.TextBox timeEdit;
+        private System.Windows.Forms.DataGridView dynDataGridView;
+        private System.Windows.Forms.Label label1;
     }
 }
 

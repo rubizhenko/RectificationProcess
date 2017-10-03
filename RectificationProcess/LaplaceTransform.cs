@@ -88,10 +88,10 @@ namespace ComportMath
                 V[i] = sign * V[i];
             }
         }
-        public static void drawStepResponse(FunctionDelegate W, object chart, int time)
+        public static void drawStepResponse(FunctionDelegate W, object chart, object table, int time)
         {
-
             var plot = chart as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var dataView = table as System.Windows.Forms.DataGridView;
             plot.ChartAreas[0].AxisY.Minimum = Double.NaN;
             plot.ChartAreas[0].AxisY.Maximum = Double.NaN;
             foreach (var series in plot.Series)
@@ -103,17 +103,24 @@ namespace ComportMath
             plot.ChartAreas[0].AxisX.Title = "t, сек.";
             plot.ChartAreas[0].AxisY.Title = "h(t)";
             plot.ChartAreas[0].AxisX.Minimum = 0;
+            dataView.Rows.Clear();
             int _time = (int)time;
-            for (double i = 0; i < _time; i+=0.1)
+            for (double i = 0.00001; i < _time; i+= 0.1)
             {
                 double invCalc = Laplace.InverseTransform(W, i);
                 plot.Series[0].Points.AddXY(i, invCalc);
+                if (i.ToString("N2") == Math.Truncate(i).ToString("N2"))
+                {
+                    dataView.Rows.Add(i.ToString("N2"), invCalc.ToString("N4"));
+                }
+
             }
 
         }
-        public static void drawStepResponse(FunctionDelegate W, object chart)
+        public static void drawStepResponse(FunctionDelegate W, object chart, object table)
         {
             var plot = chart as System.Windows.Forms.DataVisualization.Charting.Chart;
+            var dataView = table as System.Windows.Forms.DataGridView;
             plot.ChartAreas[0].AxisY.Minimum = Double.NaN;
             plot.ChartAreas[0].AxisY.Maximum = Double.NaN;
             foreach (var series in plot.Series)
@@ -126,14 +133,19 @@ namespace ComportMath
             plot.ChartAreas[0].AxisX.Minimum = 0;
             plot.ChartAreas[0].AxisY.Title = "h(t)";
             int steps = 0;
-            double time = 0;
+            double time = 0.00001;
             double invCalc = -1;
             double prevInvCalc = 0;
+            dataView.Rows.Clear();
             do
             {
                 prevInvCalc = invCalc;
                 invCalc = Laplace.InverseTransform(W, time);
                 plot.Series[0].Points.AddXY(time-0.1, invCalc);
+                if (time.ToString("N2") == Math.Truncate(time).ToString("N2"))
+                {
+                    dataView.Rows.Add(time.ToString("N2"), invCalc.ToString("N4"));
+                }
                 if (Math.Abs(prevInvCalc - invCalc) <= 0.000001)
                 {
                     steps++;

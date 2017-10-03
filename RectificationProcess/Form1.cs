@@ -568,11 +568,11 @@ namespace RectificationProcess
                         }
                         if (timeChanged)
                         {
-                            Laplace.drawStepResponse(W1, chart1, (int)newTime);
+                            Laplace.drawStepResponse(W1, chart1, dynDataGridView, (int)newTime);
                         }
                         else
                         {
-                            Laplace.drawStepResponse(W1, chart1);
+                            Laplace.drawStepResponse(W1, chart1, dynDataGridView);
                         }
                         chart1.ChartAreas[0].RecalculateAxesScale();
                         timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
@@ -584,11 +584,11 @@ namespace RectificationProcess
                         }
                         if (timeChanged)
                         {
-                            Laplace.drawStepResponse(W2, chart1, (int)newTime);
+                            Laplace.drawStepResponse(W2, chart1, dynDataGridView, (int)newTime);
                         }
                         else
                         {
-                            Laplace.drawStepResponse(W2, chart1);
+                            Laplace.drawStepResponse(W2, chart1, dynDataGridView);
                         }
                         chart1.ChartAreas[0].RecalculateAxesScale();
                         timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
@@ -600,11 +600,11 @@ namespace RectificationProcess
                         }
                         if (timeChanged)
                         {
-                            Laplace.drawStepResponse(W3, chart1, (int)newTime);
+                            Laplace.drawStepResponse(W3, chart1, dynDataGridView, (int)newTime);
                         }
                         else
                         {
-                            Laplace.drawStepResponse(W3, chart1);
+                            Laplace.drawStepResponse(W3, chart1, dynDataGridView);
                         }
                         chart1.ChartAreas[0].RecalculateAxesScale();
                         timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
@@ -618,11 +618,11 @@ namespace RectificationProcess
                         }
                         if (timeChanged)
                         {
-                            Laplace.drawStepResponse(W5, chart1, (int)newTime);
+                            Laplace.drawStepResponse(W5, chart1, dynDataGridView, (int)newTime);
                         }
                         else
                         {
-                            Laplace.drawStepResponse(W5, chart1);
+                            Laplace.drawStepResponse(W5, chart1, dynDataGridView);
                         }
                         chart1.ChartAreas[0].RecalculateAxesScale();
                         timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
@@ -634,11 +634,11 @@ namespace RectificationProcess
                         }
                         if (timeChanged)
                         {
-                            Laplace.drawStepResponse(W4, chart1, (int)newTime);
+                            Laplace.drawStepResponse(W4, chart1, dynDataGridView, (int)newTime);
                         }
                         else
                         {
-                            Laplace.drawStepResponse(W4, chart1);
+                            Laplace.drawStepResponse(W4, chart1, dynDataGridView);
                         }
                         chart1.ChartAreas[0].RecalculateAxesScale();
                         timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
@@ -650,11 +650,11 @@ namespace RectificationProcess
                         }
                         if (timeChanged)
                         {
-                            Laplace.drawStepResponse(W6, chart1, (int)newTime);
+                            Laplace.drawStepResponse(W6, chart1, dynDataGridView, (int)newTime);
                         }
                         else
                         {
-                            Laplace.drawStepResponse(W6, chart1);
+                            Laplace.drawStepResponse(W6, chart1, dynDataGridView);
                         }
                         chart1.ChartAreas[0].RecalculateAxesScale();
                         timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
@@ -682,7 +682,7 @@ namespace RectificationProcess
 
                     //default chart for deflegmator
                     default:
-                        Laplace.drawStepResponse(W3, chart1);
+                        Laplace.drawStepResponse(W3, chart1, dynDataGridView);
                         timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
                         break;
                 }
@@ -691,9 +691,7 @@ namespace RectificationProcess
 
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            staticFuncs = true;
-            dynamicFuncs = false;
-            timeEdit.Visible = false;
+            showStatic();
             process.AddTabsForTabControl(tabControl1, tabsForDeflegmator);
             process.DrawStaticFunction(chart1, process.Tvoda1, staticT2otTvod, "Tvoda, K", "Tbinar2, K");
             process.printResult(labelX, "Tv, K", process.Tvoda1);
@@ -704,9 +702,7 @@ namespace RectificationProcess
 
         private void кипятильникToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            staticFuncs = true;
-            dynamicFuncs = false;
-            timeEdit.Visible = false;
+            showStatic();
             process.AddTabsForTabControl(tabControl1, tabsForBoiler);
             process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
             process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
@@ -717,9 +713,7 @@ namespace RectificationProcess
 
         private void ректифікаційнаКолонаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            staticFuncs = true;
-            dynamicFuncs = false;
-            timeEdit.Visible = false;
+            showStatic();
             process.AddTabsForTabControl(tabControl1, tabsForRectifCol);
             process.DrawStaticFunction(chart1, process.Tbinar11, staticTp1opTb, "Tbinar, K", "Trecur1, K");
             process.printResult(labelX, "Tb, K", process.Tbinar11);
@@ -729,33 +723,55 @@ namespace RectificationProcess
         }
         private void дефлегматорToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            staticFuncs = false;
-            dynamicFuncs = true;
-            timeEdit.Visible = true;
+            showDynamic();
             process.AddTabsForTabControl(tabControl1, tabsForDynamicDeflegmator);
             double W3(double s)
             {
                 return -0.013 / (7.077 * s * s * s + 6.716 * s * s + 1 * s);
             }
-            Laplace.drawStepResponse(W3, chart1);
+            Laplace.drawStepResponse(W3, chart1, dynDataGridView);
             chart1.ChartAreas[0].RecalculateAxesScale();
             timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
         private void кипятильникToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            staticFuncs = false;
-            dynamicFuncs = true;
-            timeEdit.Visible = true;
+            showDynamic();
             process.AddTabsForTabControl(tabControl1, tabsForDynamicBoiler);
             double W6(double s)
             {
                 return 3.024 / (0.413 * s * s * s + 1.153 * s * s + 1 * s);
             }
-            Laplace.drawStepResponse(W6, chart1);
+            Laplace.drawStepResponse(W6, chart1, dynDataGridView);
             chart1.ChartAreas[0].RecalculateAxesScale();
             timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
+        }
+        private void showStatic()
+        {
+            staticFuncs = true;
+            dynamicFuncs = false;
+            timeEdit.Visible = false;
+            dynDataGridView.Visible = false;
+            label1.Visible = false;
+        }
+        private void showDynamic()
+        {
+            staticFuncs = false;
+            dynamicFuncs = true;
+            timeEdit.Visible = true;
+            setupDataGridView();
+            dynDataGridView.Visible = true;
+            label1.Visible = true;
+            
+        }
+        private void setupDataGridView()
+        {
+            dynDataGridView.ColumnCount = 2;
+            dynDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dynDataGridView.Columns[1].Name = "h(t)";
+            dynDataGridView.Columns[0].Name = "t, сек.";
+
         }
 
 

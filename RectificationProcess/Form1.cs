@@ -80,6 +80,52 @@ namespace RectificationProcess
             K12 = process.StaticTp1opFb().Item2;
             K13 = process.StaticTp1opTb().Item2;
             Laplace.InitStehfest(14);
+            showProcess();
+
+            FdistEdit.Text = process.Fdist1.ToString();
+            CdistEdit.Text = process.Cdist1.ToString();
+            TdistEdit.Text = process.Tdist1.ToString();
+
+            Fbinar1Edit.Text = process.Fbinar11.ToString();
+            Cbinar1Edit.Text = process.Cbinar11.ToString();
+            Tbinar1Edit.Text = process.Tbinar11.ToString();
+
+            FvodaEdit.Text = process.Fvoda1.ToString();
+            TvodaEdit.Text = process.Tvoda1.ToString();
+            CvodaEdit.Text = process.Cvoda1.ToString();
+
+            FkondVodaEdit.Text = process.Fkondvoda1.ToString();
+            TkondVodaEdit.Text = process.Tkondvoda1.ToString();
+            CkondVodaEdit.Text = process.Ckondvoda1.ToString();
+
+            Fbinar2Edit.Text = process.Fbinar21.ToString();
+            Tbinar2Edit.Text = process.Tbinar21.ToString();
+            Cbinar2Edit.Text = process.Cbinar21.ToString();
+
+            CflegmyEdit.Text = process.Cflegmy1.ToString();
+            TflegmyEdit.Text = process.Tflegmy1.ToString();
+            FflegmyEdit.Text = process.Fflegmy1.ToString();
+
+            FcubEdit.Text = process.Fcub1.ToString();
+            TcubEdit.Text = process.Tcub1.ToString();
+            CcubEdit.Text = process.Ccub1.ToString();
+
+            Frecur1Edit.Text = process.Frecur11.ToString();
+            Trecur1Edit.Text = process.Trecur11.ToString();
+            Crecur1Edit.Text = process.Crecur11.ToString();
+
+            Crecur2Edit.Text = process.Crecur21.ToString();
+            Trecur2Edit.Text = process.Trecur21.ToString();
+            Frecur2Edit.Text = process.Frecur21.ToString();
+
+            FparaEdit.Text = process.Fpara1.ToString();
+            PparaEdit.Text = process.Ppara1.ToString();
+            IparaEdit.Text = process.Ipara1.ToString();
+
+            FkondparaEdit.Text = process.Fkondpara1.ToString();
+            TkondparaEdit.Text = process.Tkondpara1.ToString();
+            CkondparaEdit.Text = process.Ckondpara1.ToString();
+
         }
         public class RectificationProcess
         {
@@ -166,7 +212,11 @@ namespace RectificationProcess
             public double Crecur21 { get => Crecur2; set => Crecur2 = value; }
             public double Trecur21 { get => Trecur2; set => Trecur2 = value; }
             public double Fpara1 { get => Fpara; set => Fpara = value; }
+            public double Ppara1 { get => Ppara; set => Ppara = value; }
+            public double Ipara1 { get => Ipara; set => Ipara = value; }
             public double Fkondpara1 { get => Fkondpara; set => Fkondpara = value; }
+            public double Tkondpara1 { get => Tkondpara; set => Tkondpara = value; }
+            public double Ckondpara1 { get => Ckondpara; set => Ckondpara = value; }
 
             //Формули для розрахунку статичних характеристик дефлегматора
             public Tuple<double[], double> StaticT2otTbinar1()
@@ -427,7 +477,9 @@ namespace RectificationProcess
 
             }    
         }
+
         
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab!=null)
@@ -440,13 +492,7 @@ namespace RectificationProcess
         }
         private void timeEdit_TextChanged(object sender, EventArgs e)
         {
-           
-            if (Regex.IsMatch(timeEdit.Text, @"[^0-9.,]"))
-            {
-                timeEdit.Text = timeEdit.Text.Replace(".", ",");
-                MessageBox.Show("Тільки цифри і десятковий дільник кома чи крапка!");
-                timeEdit.Text = Regex.Replace(timeEdit.Text, @"[^0-9,]", String.Empty);
-            }
+            preventTextInput();
             double editedTime;
             if (Double.TryParse(timeEdit.Text, out editedTime))
             {
@@ -454,6 +500,16 @@ namespace RectificationProcess
                 newTime = editedTime;
                 detectRelation();
                 timeChanged = false;
+            }
+        }
+
+        private void preventTextInput()
+        {
+            if (Regex.IsMatch(timeEdit.Text, @"[^0-9.,]"))
+            {
+                timeEdit.Text = timeEdit.Text.Replace(".", ",");
+                MessageBox.Show("Тільки цифри і десятковий дільник кома чи крапка!");
+                timeEdit.Text = Regex.Replace(timeEdit.Text, @"[^0-9,]", String.Empty);
             }
         }
 
@@ -747,23 +803,56 @@ namespace RectificationProcess
             timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
+        private void процесToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showProcess();
+        }
         private void showStatic()
         {
+            processPicture.Visible = false;
             staticFuncs = true;
             dynamicFuncs = false;
             timeEdit.Visible = false;
             dynDataGridView.Visible = false;
             label1.Visible = false;
+            tabControl1.Visible = true;
+            labelK.Visible = true;
+            labelX.Visible = true;
+            labelY.Visible = true;
         }
         private void showDynamic()
         {
+            processPicture.Visible = false;
             staticFuncs = false;
             dynamicFuncs = true;
             timeEdit.Visible = true;
             setupDataGridView();
             dynDataGridView.Visible = true;
             label1.Visible = true;
-            
+            tabControl1.Visible = true;
+            labelK.Visible = false;
+            labelX.Visible = false;
+            labelY.Visible = false;
+
+        }
+        private void showProcess()
+        {
+            dynDataGridView.Visible = false;
+            label1.Visible = false;
+            timeEdit.Visible = false;
+            processPicture.Visible = true;
+            tabControl1.Visible = false;
+            labelK.Visible = false;
+            labelX.Visible = false;
+            labelY.Visible = false;
+            Point processLocation = new Point();
+            processLocation.X = 10;
+            processLocation.Y = 25;
+            processPicture.Width = Width-100;
+            processPicture.Height = Height-100;
+            processPicture.Location = processLocation;
+            processPicture.MaximumSize = new Size(1200, 800);
+
         }
         private void setupDataGridView()
         {

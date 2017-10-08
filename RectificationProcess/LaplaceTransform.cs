@@ -134,7 +134,7 @@ namespace ComportMath
             plot.ChartAreas[0].AxisY.Title = "h(t)";
             int steps = 0;
             double time = 0.00001;
-            double invCalc = -1;
+            double invCalc = -1.0;
             double prevInvCalc = 0;
             dataView.Rows.Clear();
             do

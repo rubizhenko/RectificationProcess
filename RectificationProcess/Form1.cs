@@ -492,7 +492,7 @@ namespace RectificationProcess
         }
         private void timeEdit_TextChanged(object sender, EventArgs e)
         {
-            preventTextInput();
+            preventTextInput(timeEdit);
             double editedTime;
             if (Double.TryParse(timeEdit.Text, out editedTime))
             {
@@ -502,14 +502,279 @@ namespace RectificationProcess
                 timeChanged = false;
             }
         }
+ 
 
-        private void preventTextInput()
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        { 
+            //TODO: Fix Scale 
+            //float newRatio = (float)(Width-300) / processPanel.Width;
+            //SizeF scale = new SizeF(newRatio, newRatio);
+            //processPanel.Scale(scale);
+        }
+
+        private void Fbinar1Edit_TextChanged(object sender, EventArgs e)
         {
-            if (Regex.IsMatch(timeEdit.Text, @"[^0-9.,]"))
+            preventTextInput(Fbinar1Edit);
+            if (Fbinar1Edit.Text.Length != 0)
             {
-                timeEdit.Text = timeEdit.Text.Replace(".", ",");
+                process.Fbinar11 = Convert.ToDouble(Fbinar1Edit.Text);
+            }
+            
+        }
+
+        private void Tbinar1Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Tbinar1Edit);
+            if (Tbinar1Edit.Text.Length != 0)
+            {
+                process.Tbinar11 = Convert.ToDouble(Tbinar1Edit.Text);
+            }
+        }
+
+        private void Cbinar1Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Cbinar1Edit);
+            if (Cbinar1Edit.Text.Length != 0)
+            {
+                process.Cbinar11 = Convert.ToDouble(Cbinar1Edit.Text);
+            }
+
+        }
+
+        private void FdistEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(FdistEdit);
+            if (FdistEdit.Text.Length != 0)
+            {
+                process.Fdist1 = Convert.ToDouble(FdistEdit.Text);
+            }
+        }
+
+        private void TdistEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(TdistEdit);
+            if (TdistEdit.Text.Length != 0)
+            {
+                process.Tdist1 = Convert.ToDouble(TdistEdit.Text);
+            }
+        }
+
+        private void CdistEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(CdistEdit);
+            if (CdistEdit.Text.Length != 0)
+            {
+                process.Cdist1 = Convert.ToDouble(CdistEdit.Text);
+            }
+        }
+
+        private void FkondVodaEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(FkondVodaEdit);
+            if (FkondVodaEdit.Text.Length != 0)
+            {
+                process.Fkondvoda1 = Convert.ToDouble(FkondVodaEdit.Text);
+            }
+        }
+
+        private void CkondVodaEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(CkondVodaEdit);
+            if (CkondVodaEdit.Text.Length != 0)
+            {
+                process.Ckondvoda1 = Convert.ToDouble(CkondVodaEdit.Text);
+            }
+        }
+
+        private void FflegmyEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(FflegmyEdit);
+            if (FflegmyEdit.Text.Length != 0)
+            {
+                process.Fflegmy1 = Convert.ToDouble(FflegmyEdit.Text);
+            }
+        }
+
+        private void TflegmyEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(TflegmyEdit);
+            if (TflegmyEdit.Text.Length != 0)
+            {
+                process.Tflegmy1 = Convert.ToDouble(TflegmyEdit.Text);
+            }
+        }
+
+        private void CflegmyEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(CflegmyEdit);
+            if (CflegmyEdit.Text.Length != 0)
+            {
+                process.Cflegmy1 = Convert.ToDouble(CflegmyEdit.Text);
+            }
+        }
+
+        private void Frecur2Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Frecur2Edit);
+            if (Frecur2Edit.Text.Length != 0)
+            {
+                process.Frecur21 = Convert.ToDouble(Frecur2Edit.Text);
+            }
+        }
+
+        private void Trecur2Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Trecur2Edit);
+            if (Trecur2Edit.Text.Length != 0)
+            {
+                process.Trecur21 = Convert.ToDouble(Trecur2Edit.Text);
+            }
+        }
+
+        private void Crecur2Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Crecur2Edit);
+            if (Crecur2Edit.Text.Length != 0)
+            {
+                process.Crecur21 = Convert.ToDouble(Crecur2Edit.Text);
+            }
+        }
+
+        private void FkondparaEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(FkondparaEdit);
+            if (FkondparaEdit.Text.Length != 0)
+            {
+                process.Fkondpara1 = Convert.ToDouble(FkondparaEdit.Text);
+            }
+        }
+
+        private void TkondparaEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(TkondparaEdit);
+            if (TkondparaEdit.Text.Length != 0)
+            {
+                process.Tkondpara1 = Convert.ToDouble(TkondparaEdit.Text);
+            }
+        }
+
+        private void FcubEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(FcubEdit);
+            if (FcubEdit.Text.Length != 0)
+            {
+                process.Fcub1 = Convert.ToDouble(FcubEdit.Text);
+            }
+        }
+
+        private void TcubEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(TcubEdit);
+            if (TcubEdit.Text.Length != 0)
+            {
+                process.Tcub1 = Convert.ToDouble(TcubEdit.Text);
+            }
+        }
+
+        private void Frecur1Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Frecur1Edit);
+            if (Frecur1Edit.Text.Length != 0)
+            {
+                process.Frecur11 = Convert.ToDouble(Frecur1Edit.Text);
+            }
+        }
+
+        private void Trecur1Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Trecur1Edit);
+            if (Trecur1Edit.Text.Length != 0)
+            {
+                process.Trecur11 = Convert.ToDouble(Trecur1Edit.Text);
+            }
+        }
+
+        private void Crecur1Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Crecur1Edit);
+            if (Crecur1Edit.Text.Length != 0)
+            {
+                process.Crecur11 = Convert.ToDouble(Crecur1Edit.Text);
+            }
+        }
+
+        private void FparaEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(FparaEdit);
+            if (FparaEdit.Text.Length != 0)
+            {
+                process.Fpara1 = Convert.ToDouble(FparaEdit.Text);
+            }
+        }
+
+        private void Fbinar2Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Fbinar2Edit);
+            if (Fbinar2Edit.Text.Length != 0)
+            {
+                process.Fbinar21 = Convert.ToDouble(Fbinar2Edit.Text);
+            }
+
+        }
+
+        private void Tbinar2Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Tbinar2Edit);
+            if (Tbinar2Edit.Text.Length != 0)
+            {
+                process.Tbinar21 = Convert.ToDouble(Tbinar2Edit.Text);
+            }
+        }
+
+        private void Cbinar2Edit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(Cbinar2Edit);
+            if (Cbinar2Edit.Text.Length != 0)
+            {
+                process.Cbinar21 = Convert.ToDouble(Cbinar2Edit.Text);
+            }
+        }
+
+        private void FvodaEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(FvodaEdit);
+            if (FvodaEdit.Text.Length != 0)
+            {
+                process.Fvoda1 = Convert.ToDouble(FvodaEdit.Text);
+            }
+        }
+
+        private void TvodaEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(TvodaEdit);
+            if (TvodaEdit.Text.Length != 0)
+            {
+                process.Tvoda1 = Convert.ToDouble(TvodaEdit.Text);
+            }
+        }
+
+        private void CcubEdit_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(CcubEdit);
+            if (CcubEdit.Text.Length != 0)
+            {
+                process.Ccub1 = Convert.ToDouble(CcubEdit.Text);
+            }
+        }
+
+        private void preventTextInput(object input)
+        {
+            var textInput = input as System.Windows.Forms.TextBox;
+            if (Regex.IsMatch(textInput.Text, @"[^0-9.,]"))
+            {
+                textInput.Text = textInput.Text.Replace(".", ",");
                 MessageBox.Show("Тільки цифри і десятковий дільник кома чи крапка!");
-                timeEdit.Text = Regex.Replace(timeEdit.Text, @"[^0-9,]", String.Empty);
+                textInput.Text = Regex.Replace(textInput.Text, @"[^0-9,]", String.Empty);
             }
         }
 
@@ -808,8 +1073,7 @@ namespace RectificationProcess
             showProcess();
         }
         private void showStatic()
-        {
-            processPicture.Visible = false;
+        { 
             staticFuncs = true;
             dynamicFuncs = false;
             timeEdit.Visible = false;
@@ -819,10 +1083,10 @@ namespace RectificationProcess
             labelK.Visible = true;
             labelX.Visible = true;
             labelY.Visible = true;
+            processPanel.Visible = false;
         }
         private void showDynamic()
         {
-            processPicture.Visible = false;
             staticFuncs = false;
             dynamicFuncs = true;
             timeEdit.Visible = true;
@@ -833,6 +1097,7 @@ namespace RectificationProcess
             labelK.Visible = false;
             labelX.Visible = false;
             labelY.Visible = false;
+            processPanel.Visible = false;
 
         }
         private void showProcess()
@@ -840,19 +1105,11 @@ namespace RectificationProcess
             dynDataGridView.Visible = false;
             label1.Visible = false;
             timeEdit.Visible = false;
-            processPicture.Visible = true;
             tabControl1.Visible = false;
             labelK.Visible = false;
             labelX.Visible = false;
             labelY.Visible = false;
-            Point processLocation = new Point();
-            processLocation.X = 10;
-            processLocation.Y = 25;
-            processPicture.Width = Width-100;
-            processPicture.Height = Height-100;
-            processPicture.Location = processLocation;
-            processPicture.MaximumSize = new Size(1200, 800);
-
+            processPanel.Visible = true;
         }
         private void setupDataGridView()
         {

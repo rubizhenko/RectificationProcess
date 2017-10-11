@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -52,7 +51,6 @@
             this.timeEdit = new System.Windows.Forms.TextBox();
             this.dynDataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.processPicture = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.FdistEdit = new System.Windows.Forms.TextBox();
             this.CdistEdit = new System.Windows.Forms.TextBox();
@@ -87,11 +85,14 @@
             this.FkondparaEdit = new System.Windows.Forms.TextBox();
             this.CkondparaEdit = new System.Windows.Forms.TextBox();
             this.TkondparaEdit = new System.Windows.Forms.TextBox();
+            this.processPanel = new System.Windows.Forms.Panel();
+            this.processPicture = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dynDataGridView)).BeginInit();
+            this.processPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -292,291 +293,330 @@
             this.label1.Text = "Час спостереження";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // processPicture
-            // 
-            this.processPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.processPicture.Image = ((System.Drawing.Image)(resources.GetObject("processPicture.Image")));
-            this.processPicture.Location = new System.Drawing.Point(12, 519);
-            this.processPicture.Margin = new System.Windows.Forms.Padding(10);
-            this.processPicture.Name = "processPicture";
-            this.processPicture.Size = new System.Drawing.Size(321, 201);
-            this.processPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.processPicture.TabIndex = 5;
-            this.processPicture.TabStop = false;
-            // 
             // FdistEdit
             // 
-            this.FdistEdit.Location = new System.Drawing.Point(346, 519);
+            this.FdistEdit.Location = new System.Drawing.Point(43, 309);
             this.FdistEdit.Name = "FdistEdit";
-            this.FdistEdit.Size = new System.Drawing.Size(80, 20);
+            this.FdistEdit.Size = new System.Drawing.Size(50, 20);
             this.FdistEdit.TabIndex = 6;
+            this.FdistEdit.TextChanged += new System.EventHandler(this.FdistEdit_TextChanged);
             // 
             // CdistEdit
             // 
-            this.CdistEdit.Location = new System.Drawing.Point(432, 519);
+            this.CdistEdit.Location = new System.Drawing.Point(207, 309);
             this.CdistEdit.Name = "CdistEdit";
-            this.CdistEdit.Size = new System.Drawing.Size(80, 20);
+            this.CdistEdit.Size = new System.Drawing.Size(50, 20);
             this.CdistEdit.TabIndex = 6;
+            this.CdistEdit.TextChanged += new System.EventHandler(this.CdistEdit_TextChanged);
             // 
             // TdistEdit
             // 
-            this.TdistEdit.Location = new System.Drawing.Point(518, 519);
+            this.TdistEdit.Location = new System.Drawing.Point(126, 309);
             this.TdistEdit.Name = "TdistEdit";
-            this.TdistEdit.Size = new System.Drawing.Size(80, 20);
+            this.TdistEdit.Size = new System.Drawing.Size(50, 20);
             this.TdistEdit.TabIndex = 6;
+            this.TdistEdit.TextChanged += new System.EventHandler(this.TdistEdit_TextChanged);
             // 
             // Fbinar1Edit
             // 
-            this.Fbinar1Edit.Location = new System.Drawing.Point(346, 545);
+            this.Fbinar1Edit.Location = new System.Drawing.Point(375, 68);
             this.Fbinar1Edit.Name = "Fbinar1Edit";
-            this.Fbinar1Edit.Size = new System.Drawing.Size(80, 20);
+            this.Fbinar1Edit.Size = new System.Drawing.Size(50, 20);
             this.Fbinar1Edit.TabIndex = 6;
+            this.Fbinar1Edit.TextChanged += new System.EventHandler(this.Fbinar1Edit_TextChanged);
             // 
             // Cbinar1Edit
             // 
-            this.Cbinar1Edit.Location = new System.Drawing.Point(432, 545);
+            this.Cbinar1Edit.Location = new System.Drawing.Point(583, 68);
             this.Cbinar1Edit.Name = "Cbinar1Edit";
-            this.Cbinar1Edit.Size = new System.Drawing.Size(80, 20);
+            this.Cbinar1Edit.Size = new System.Drawing.Size(50, 20);
             this.Cbinar1Edit.TabIndex = 6;
+            this.Cbinar1Edit.TextChanged += new System.EventHandler(this.Cbinar1Edit_TextChanged);
             // 
             // Tbinar1Edit
             // 
-            this.Tbinar1Edit.Location = new System.Drawing.Point(518, 545);
+            this.Tbinar1Edit.Location = new System.Drawing.Point(481, 68);
             this.Tbinar1Edit.Name = "Tbinar1Edit";
-            this.Tbinar1Edit.Size = new System.Drawing.Size(80, 20);
+            this.Tbinar1Edit.Size = new System.Drawing.Size(50, 20);
             this.Tbinar1Edit.TabIndex = 6;
+            this.Tbinar1Edit.TextChanged += new System.EventHandler(this.Tbinar1Edit_TextChanged);
             // 
             // FvodaEdit
             // 
-            this.FvodaEdit.Location = new System.Drawing.Point(346, 571);
+            this.FvodaEdit.Location = new System.Drawing.Point(780, 199);
             this.FvodaEdit.Name = "FvodaEdit";
-            this.FvodaEdit.Size = new System.Drawing.Size(80, 20);
+            this.FvodaEdit.Size = new System.Drawing.Size(50, 20);
             this.FvodaEdit.TabIndex = 6;
+            this.FvodaEdit.TextChanged += new System.EventHandler(this.FvodaEdit_TextChanged);
             // 
             // CvodaEdit
             // 
-            this.CvodaEdit.Location = new System.Drawing.Point(432, 571);
+            this.CvodaEdit.Location = new System.Drawing.Point(930, 199);
             this.CvodaEdit.Name = "CvodaEdit";
-            this.CvodaEdit.Size = new System.Drawing.Size(80, 20);
+            this.CvodaEdit.ReadOnly = true;
+            this.CvodaEdit.Size = new System.Drawing.Size(50, 20);
             this.CvodaEdit.TabIndex = 6;
             // 
             // TvodaEdit
             // 
-            this.TvodaEdit.Location = new System.Drawing.Point(518, 571);
+            this.TvodaEdit.Location = new System.Drawing.Point(854, 199);
             this.TvodaEdit.Name = "TvodaEdit";
-            this.TvodaEdit.Size = new System.Drawing.Size(80, 20);
+            this.TvodaEdit.Size = new System.Drawing.Size(50, 20);
             this.TvodaEdit.TabIndex = 6;
+            this.TvodaEdit.TextChanged += new System.EventHandler(this.TvodaEdit_TextChanged);
             // 
             // FkondVodaEdit
             // 
-            this.FkondVodaEdit.Location = new System.Drawing.Point(346, 597);
+            this.FkondVodaEdit.Location = new System.Drawing.Point(470, 156);
             this.FkondVodaEdit.Name = "FkondVodaEdit";
-            this.FkondVodaEdit.Size = new System.Drawing.Size(80, 20);
+            this.FkondVodaEdit.Size = new System.Drawing.Size(50, 20);
             this.FkondVodaEdit.TabIndex = 6;
+            this.FkondVodaEdit.TextChanged += new System.EventHandler(this.FkondVodaEdit_TextChanged);
             // 
             // TkondVodaEdit
             // 
-            this.TkondVodaEdit.Location = new System.Drawing.Point(432, 597);
+            this.TkondVodaEdit.Location = new System.Drawing.Point(621, 156);
             this.TkondVodaEdit.Name = "TkondVodaEdit";
-            this.TkondVodaEdit.Size = new System.Drawing.Size(80, 20);
+            this.TkondVodaEdit.ReadOnly = true;
+            this.TkondVodaEdit.Size = new System.Drawing.Size(50, 20);
             this.TkondVodaEdit.TabIndex = 6;
             // 
             // CkondVodaEdit
             // 
-            this.CkondVodaEdit.Location = new System.Drawing.Point(518, 597);
+            this.CkondVodaEdit.Location = new System.Drawing.Point(545, 156);
             this.CkondVodaEdit.Name = "CkondVodaEdit";
-            this.CkondVodaEdit.Size = new System.Drawing.Size(80, 20);
+            this.CkondVodaEdit.Size = new System.Drawing.Size(50, 20);
             this.CkondVodaEdit.TabIndex = 6;
+            this.CkondVodaEdit.TextChanged += new System.EventHandler(this.CkondVodaEdit_TextChanged);
             // 
             // Fbinar2Edit
             // 
-            this.Fbinar2Edit.Location = new System.Drawing.Point(346, 623);
+            this.Fbinar2Edit.Location = new System.Drawing.Point(755, 258);
             this.Fbinar2Edit.Name = "Fbinar2Edit";
-            this.Fbinar2Edit.Size = new System.Drawing.Size(80, 20);
+            this.Fbinar2Edit.Size = new System.Drawing.Size(50, 20);
             this.Fbinar2Edit.TabIndex = 6;
+            this.Fbinar2Edit.TextChanged += new System.EventHandler(this.Fbinar2Edit_TextChanged);
             // 
             // Cbinar2Edit
             // 
-            this.Cbinar2Edit.Location = new System.Drawing.Point(432, 623);
+            this.Cbinar2Edit.Location = new System.Drawing.Point(936, 258);
             this.Cbinar2Edit.Name = "Cbinar2Edit";
-            this.Cbinar2Edit.Size = new System.Drawing.Size(80, 20);
+            this.Cbinar2Edit.Size = new System.Drawing.Size(50, 20);
             this.Cbinar2Edit.TabIndex = 6;
+            this.Cbinar2Edit.TextChanged += new System.EventHandler(this.Cbinar2Edit_TextChanged);
             // 
             // Tbinar2Edit
             // 
-            this.Tbinar2Edit.Location = new System.Drawing.Point(518, 623);
+            this.Tbinar2Edit.Location = new System.Drawing.Point(845, 258);
             this.Tbinar2Edit.Name = "Tbinar2Edit";
-            this.Tbinar2Edit.Size = new System.Drawing.Size(80, 20);
+            this.Tbinar2Edit.Size = new System.Drawing.Size(50, 20);
             this.Tbinar2Edit.TabIndex = 6;
+            this.Tbinar2Edit.TextChanged += new System.EventHandler(this.Tbinar2Edit_TextChanged);
             // 
             // CflegmyEdit
             // 
-            this.CflegmyEdit.Location = new System.Drawing.Point(346, 649);
+            this.CflegmyEdit.Location = new System.Drawing.Point(654, 286);
             this.CflegmyEdit.Name = "CflegmyEdit";
-            this.CflegmyEdit.Size = new System.Drawing.Size(80, 20);
+            this.CflegmyEdit.Size = new System.Drawing.Size(50, 20);
             this.CflegmyEdit.TabIndex = 6;
+            this.CflegmyEdit.TextChanged += new System.EventHandler(this.CflegmyEdit_TextChanged);
             // 
             // TflegmyEdit
             // 
-            this.TflegmyEdit.Location = new System.Drawing.Point(432, 649);
+            this.TflegmyEdit.Location = new System.Drawing.Point(532, 286);
             this.TflegmyEdit.Name = "TflegmyEdit";
-            this.TflegmyEdit.Size = new System.Drawing.Size(80, 20);
+            this.TflegmyEdit.Size = new System.Drawing.Size(50, 20);
             this.TflegmyEdit.TabIndex = 6;
+            this.TflegmyEdit.TextChanged += new System.EventHandler(this.TflegmyEdit_TextChanged);
             // 
             // FflegmyEdit
             // 
-            this.FflegmyEdit.Location = new System.Drawing.Point(518, 649);
+            this.FflegmyEdit.Location = new System.Drawing.Point(401, 286);
             this.FflegmyEdit.Name = "FflegmyEdit";
-            this.FflegmyEdit.Size = new System.Drawing.Size(80, 20);
+            this.FflegmyEdit.Size = new System.Drawing.Size(50, 20);
             this.FflegmyEdit.TabIndex = 6;
+            this.FflegmyEdit.TextChanged += new System.EventHandler(this.FflegmyEdit_TextChanged);
             // 
             // FcubEdit
             // 
-            this.FcubEdit.Location = new System.Drawing.Point(346, 675);
+            this.FcubEdit.Location = new System.Drawing.Point(390, 567);
             this.FcubEdit.Name = "FcubEdit";
-            this.FcubEdit.Size = new System.Drawing.Size(80, 20);
+            this.FcubEdit.Size = new System.Drawing.Size(50, 20);
             this.FcubEdit.TabIndex = 6;
+            this.FcubEdit.TextChanged += new System.EventHandler(this.FcubEdit_TextChanged);
             // 
             // CcubEdit
             // 
-            this.CcubEdit.Location = new System.Drawing.Point(432, 675);
+            this.CcubEdit.Location = new System.Drawing.Point(633, 567);
             this.CcubEdit.Name = "CcubEdit";
-            this.CcubEdit.Size = new System.Drawing.Size(80, 20);
+            this.CcubEdit.Size = new System.Drawing.Size(50, 20);
             this.CcubEdit.TabIndex = 6;
+            this.CcubEdit.TextChanged += new System.EventHandler(this.CcubEdit_TextChanged);
             // 
             // TcubEdit
             // 
-            this.TcubEdit.Location = new System.Drawing.Point(518, 675);
+            this.TcubEdit.Location = new System.Drawing.Point(505, 567);
             this.TcubEdit.Name = "TcubEdit";
-            this.TcubEdit.Size = new System.Drawing.Size(80, 20);
+            this.TcubEdit.Size = new System.Drawing.Size(50, 20);
             this.TcubEdit.TabIndex = 6;
+            this.TcubEdit.TextChanged += new System.EventHandler(this.TcubEdit_TextChanged);
             // 
             // Frecur1Edit
             // 
-            this.Frecur1Edit.Location = new System.Drawing.Point(630, 545);
+            this.Frecur1Edit.Location = new System.Drawing.Point(750, 514);
             this.Frecur1Edit.Name = "Frecur1Edit";
-            this.Frecur1Edit.Size = new System.Drawing.Size(80, 20);
+            this.Frecur1Edit.Size = new System.Drawing.Size(50, 20);
             this.Frecur1Edit.TabIndex = 6;
+            this.Frecur1Edit.TextChanged += new System.EventHandler(this.Frecur1Edit_TextChanged);
             // 
             // Crecur1Edit
             // 
-            this.Crecur1Edit.Location = new System.Drawing.Point(716, 545);
+            this.Crecur1Edit.Location = new System.Drawing.Point(929, 514);
             this.Crecur1Edit.Name = "Crecur1Edit";
-            this.Crecur1Edit.Size = new System.Drawing.Size(80, 20);
+            this.Crecur1Edit.Size = new System.Drawing.Size(50, 20);
             this.Crecur1Edit.TabIndex = 6;
+            this.Crecur1Edit.TextChanged += new System.EventHandler(this.Crecur1Edit_TextChanged);
             // 
             // Trecur1Edit
             // 
-            this.Trecur1Edit.Location = new System.Drawing.Point(802, 545);
+            this.Trecur1Edit.Location = new System.Drawing.Point(845, 514);
             this.Trecur1Edit.Name = "Trecur1Edit";
-            this.Trecur1Edit.Size = new System.Drawing.Size(80, 20);
+            this.Trecur1Edit.Size = new System.Drawing.Size(50, 20);
             this.Trecur1Edit.TabIndex = 6;
+            this.Trecur1Edit.TextChanged += new System.EventHandler(this.Trecur1Edit_TextChanged);
             // 
             // Frecur2Edit
             // 
-            this.Frecur2Edit.Location = new System.Drawing.Point(630, 571);
+            this.Frecur2Edit.Location = new System.Drawing.Point(399, 373);
             this.Frecur2Edit.Name = "Frecur2Edit";
-            this.Frecur2Edit.Size = new System.Drawing.Size(80, 20);
+            this.Frecur2Edit.Size = new System.Drawing.Size(50, 20);
             this.Frecur2Edit.TabIndex = 6;
+            this.Frecur2Edit.TextChanged += new System.EventHandler(this.Frecur2Edit_TextChanged);
             // 
             // Crecur2Edit
             // 
-            this.Crecur2Edit.Location = new System.Drawing.Point(716, 571);
+            this.Crecur2Edit.Location = new System.Drawing.Point(637, 373);
             this.Crecur2Edit.Name = "Crecur2Edit";
-            this.Crecur2Edit.Size = new System.Drawing.Size(80, 20);
+            this.Crecur2Edit.Size = new System.Drawing.Size(50, 20);
             this.Crecur2Edit.TabIndex = 6;
+            this.Crecur2Edit.TextChanged += new System.EventHandler(this.Crecur2Edit_TextChanged);
             // 
             // Trecur2Edit
             // 
-            this.Trecur2Edit.Location = new System.Drawing.Point(802, 571);
+            this.Trecur2Edit.Location = new System.Drawing.Point(532, 373);
             this.Trecur2Edit.Name = "Trecur2Edit";
-            this.Trecur2Edit.Size = new System.Drawing.Size(80, 20);
+            this.Trecur2Edit.Size = new System.Drawing.Size(50, 20);
             this.Trecur2Edit.TabIndex = 6;
+            this.Trecur2Edit.TextChanged += new System.EventHandler(this.Trecur2Edit_TextChanged);
             // 
             // FparaEdit
             // 
-            this.FparaEdit.Location = new System.Drawing.Point(630, 597);
+            this.FparaEdit.Location = new System.Drawing.Point(779, 436);
             this.FparaEdit.Name = "FparaEdit";
-            this.FparaEdit.Size = new System.Drawing.Size(80, 20);
+            this.FparaEdit.Size = new System.Drawing.Size(50, 20);
             this.FparaEdit.TabIndex = 6;
+            this.FparaEdit.TextChanged += new System.EventHandler(this.FparaEdit_TextChanged);
             // 
             // PparaEdit
             // 
-            this.PparaEdit.Location = new System.Drawing.Point(716, 597);
+            this.PparaEdit.Location = new System.Drawing.Point(854, 436);
             this.PparaEdit.Name = "PparaEdit";
-            this.PparaEdit.Size = new System.Drawing.Size(80, 20);
+            this.PparaEdit.ReadOnly = true;
+            this.PparaEdit.Size = new System.Drawing.Size(50, 20);
             this.PparaEdit.TabIndex = 6;
             // 
             // IparaEdit
             // 
-            this.IparaEdit.Location = new System.Drawing.Point(802, 597);
+            this.IparaEdit.Location = new System.Drawing.Point(929, 436);
             this.IparaEdit.Name = "IparaEdit";
-            this.IparaEdit.Size = new System.Drawing.Size(80, 20);
+            this.IparaEdit.ReadOnly = true;
+            this.IparaEdit.Size = new System.Drawing.Size(50, 20);
             this.IparaEdit.TabIndex = 6;
             // 
             // FkondparaEdit
             // 
-            this.FkondparaEdit.Location = new System.Drawing.Point(630, 623);
+            this.FkondparaEdit.Location = new System.Drawing.Point(465, 482);
             this.FkondparaEdit.Name = "FkondparaEdit";
-            this.FkondparaEdit.Size = new System.Drawing.Size(80, 20);
+            this.FkondparaEdit.Size = new System.Drawing.Size(50, 20);
             this.FkondparaEdit.TabIndex = 6;
+            this.FkondparaEdit.TextChanged += new System.EventHandler(this.FkondparaEdit_TextChanged);
             // 
             // CkondparaEdit
             // 
-            this.CkondparaEdit.Location = new System.Drawing.Point(716, 623);
+            this.CkondparaEdit.Location = new System.Drawing.Point(621, 482);
             this.CkondparaEdit.Name = "CkondparaEdit";
-            this.CkondparaEdit.Size = new System.Drawing.Size(80, 20);
+            this.CkondparaEdit.ReadOnly = true;
+            this.CkondparaEdit.Size = new System.Drawing.Size(50, 20);
             this.CkondparaEdit.TabIndex = 6;
             // 
             // TkondparaEdit
             // 
-            this.TkondparaEdit.Location = new System.Drawing.Point(802, 623);
+            this.TkondparaEdit.Location = new System.Drawing.Point(540, 482);
             this.TkondparaEdit.Name = "TkondparaEdit";
-            this.TkondparaEdit.Size = new System.Drawing.Size(80, 20);
+            this.TkondparaEdit.Size = new System.Drawing.Size(50, 20);
             this.TkondparaEdit.TabIndex = 6;
+            this.TkondparaEdit.TextChanged += new System.EventHandler(this.TkondparaEdit_TextChanged);
+            // 
+            // processPanel
+            // 
+            this.processPanel.Controls.Add(this.TcubEdit);
+            this.processPanel.Controls.Add(this.TdistEdit);
+            this.processPanel.Controls.Add(this.CcubEdit);
+            this.processPanel.Controls.Add(this.FdistEdit);
+            this.processPanel.Controls.Add(this.TkondparaEdit);
+            this.processPanel.Controls.Add(this.CdistEdit);
+            this.processPanel.Controls.Add(this.CkondparaEdit);
+            this.processPanel.Controls.Add(this.Trecur1Edit);
+            this.processPanel.Controls.Add(this.FkondparaEdit);
+            this.processPanel.Controls.Add(this.Fbinar1Edit);
+            this.processPanel.Controls.Add(this.IparaEdit);
+            this.processPanel.Controls.Add(this.Cbinar1Edit);
+            this.processPanel.Controls.Add(this.PparaEdit);
+            this.processPanel.Controls.Add(this.Tbinar1Edit);
+            this.processPanel.Controls.Add(this.FparaEdit);
+            this.processPanel.Controls.Add(this.FvodaEdit);
+            this.processPanel.Controls.Add(this.Trecur2Edit);
+            this.processPanel.Controls.Add(this.CvodaEdit);
+            this.processPanel.Controls.Add(this.Crecur2Edit);
+            this.processPanel.Controls.Add(this.TvodaEdit);
+            this.processPanel.Controls.Add(this.Frecur2Edit);
+            this.processPanel.Controls.Add(this.FkondVodaEdit);
+            this.processPanel.Controls.Add(this.TkondVodaEdit);
+            this.processPanel.Controls.Add(this.Crecur1Edit);
+            this.processPanel.Controls.Add(this.CkondVodaEdit);
+            this.processPanel.Controls.Add(this.Frecur1Edit);
+            this.processPanel.Controls.Add(this.Fbinar2Edit);
+            this.processPanel.Controls.Add(this.FcubEdit);
+            this.processPanel.Controls.Add(this.Cbinar2Edit);
+            this.processPanel.Controls.Add(this.FflegmyEdit);
+            this.processPanel.Controls.Add(this.Tbinar2Edit);
+            this.processPanel.Controls.Add(this.TflegmyEdit);
+            this.processPanel.Controls.Add(this.CflegmyEdit);
+            this.processPanel.Controls.Add(this.processPicture);
+            this.processPanel.Location = new System.Drawing.Point(10, 27);
+            this.processPanel.Name = "processPanel";
+            this.processPanel.Size = new System.Drawing.Size(1000, 630);
+            this.processPanel.TabIndex = 7;
+            // 
+            // processPicture
+            // 
+            this.processPicture.Image = global::RectificationProcess.Properties.Resources.Process;
+            this.processPicture.Location = new System.Drawing.Point(9, 7);
+            this.processPicture.Margin = new System.Windows.Forms.Padding(10);
+            this.processPicture.Name = "processPicture";
+            this.processPicture.Size = new System.Drawing.Size(981, 599);
+            this.processPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.processPicture.TabIndex = 5;
+            this.processPicture.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1075, 744);
-            this.Controls.Add(this.TdistEdit);
-            this.Controls.Add(this.CdistEdit);
-            this.Controls.Add(this.TcubEdit);
-            this.Controls.Add(this.CcubEdit);
-            this.Controls.Add(this.TkondparaEdit);
-            this.Controls.Add(this.CkondparaEdit);
-            this.Controls.Add(this.FkondparaEdit);
-            this.Controls.Add(this.IparaEdit);
-            this.Controls.Add(this.PparaEdit);
-            this.Controls.Add(this.FparaEdit);
-            this.Controls.Add(this.Trecur2Edit);
-            this.Controls.Add(this.Crecur2Edit);
-            this.Controls.Add(this.Frecur2Edit);
-            this.Controls.Add(this.Trecur1Edit);
-            this.Controls.Add(this.Crecur1Edit);
-            this.Controls.Add(this.Frecur1Edit);
-            this.Controls.Add(this.FcubEdit);
-            this.Controls.Add(this.FflegmyEdit);
-            this.Controls.Add(this.TflegmyEdit);
-            this.Controls.Add(this.CflegmyEdit);
-            this.Controls.Add(this.Tbinar2Edit);
-            this.Controls.Add(this.Cbinar2Edit);
-            this.Controls.Add(this.Fbinar2Edit);
-            this.Controls.Add(this.CkondVodaEdit);
-            this.Controls.Add(this.TkondVodaEdit);
-            this.Controls.Add(this.FkondVodaEdit);
-            this.Controls.Add(this.TvodaEdit);
-            this.Controls.Add(this.CvodaEdit);
-            this.Controls.Add(this.FvodaEdit);
-            this.Controls.Add(this.Tbinar1Edit);
-            this.Controls.Add(this.Cbinar1Edit);
-            this.Controls.Add(this.Fbinar1Edit);
-            this.Controls.Add(this.FdistEdit);
-            this.Controls.Add(this.processPicture);
+            this.ClientSize = new System.Drawing.Size(1075, 741);
+            this.Controls.Add(this.processPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dynDataGridView);
             this.Controls.Add(this.timeEdit);
@@ -589,12 +629,15 @@
             this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "Form1";
             this.Text = "Процес ректифікації";
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dynDataGridView)).EndInit();
+            this.processPanel.ResumeLayout(false);
+            this.processPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -658,6 +701,7 @@
         private System.Windows.Forms.TextBox FkondparaEdit;
         private System.Windows.Forms.TextBox CkondparaEdit;
         private System.Windows.Forms.TextBox TkondparaEdit;
+        private System.Windows.Forms.Panel processPanel;
     }
 }
 

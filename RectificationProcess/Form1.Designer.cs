@@ -227,6 +227,7 @@
             this.ректифікаційнаКолонаToolStripMenuItem1.Name = "ректифікаційнаКолонаToolStripMenuItem1";
             this.ректифікаційнаКолонаToolStripMenuItem1.Size = new System.Drawing.Size(202, 22);
             this.ректифікаційнаКолонаToolStripMenuItem1.Text = "Ректифікаційна колона";
+            this.ректифікаційнаКолонаToolStripMenuItem1.Click += new System.EventHandler(this.ректифікаційнаКолонаToolStripMenuItem1_Click);
             // 
             // labelX
             // 

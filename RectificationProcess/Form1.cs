@@ -43,6 +43,7 @@ namespace RectificationProcess
         bool dynamicFuncs = false;
         bool timeChanged = false;
 
+
         RectificationProcess process = new RectificationProcess();
         
         public Form1()
@@ -219,180 +220,191 @@ namespace RectificationProcess
             public double Tkondpara1 { get => Tkondpara; set => Tkondpara = value; }
             public double Ckondpara1 { get => Ckondpara; set => Ckondpara = value; }
 
+            public double Tr2Fp(double Fp)
+            {
+                double Tr2 = 0;
+                double A = Frecur1 * Crecur1 * Trecur1 - Frecur1 * q1 - k1 * s1 * ((-0.8 * Fp * Ppara * Ipara + k1 * s1 * Trecur2) / (k1 * s1 - Fp * Ppara * Ckondpara));
+                double B = -Frecur1 * Crecur1 + k1 * s1 - k1 * s1 * (k1 * s1 / (k1 * s1 - Fp * Ppara * Ckondpara));
+                Tr2 = A / B;
+                return Tr2;
+            }
             #region Формули для розрахунку статичних характеристик дефлегматора
             public Tuple<double[], double> StaticT2otTbinar1()
-            {
-                Tbinar1 = 332;
+            { 
+                double Tb = getRangeFromCenterValue(Tbinar1)[0];
+                double inc = getRangeFromCenterValue(Tbinar1)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Tbinar1 = Tbinar1 + 2;
-                    T_binar2_1[i - 1] = (0.8 * Fbinar1 * Tbinar1 * Cbinar1 + Fvoda * Tvoda * Cvoda - Fkondvoda * Ckondvoda * Tkondvoda + 0.8 * Fbinar1 * Tbinar1 * Cbinar1 * q) / (Fbinar1 * Cbinar1);
+                { 
+                    T_binar2_1[i - 1] = (0.8 * Fbinar1 * Tb * Cbinar1 + Fvoda * Tvoda * Cvoda - Fkondvoda * Ckondvoda * Tkondvoda + 0.8 * Fbinar1 * Tb * Cbinar1 * q) / (Fbinar1 * Cbinar1);
                     T_binar2_1[i - 1] = Math.Round(T_binar2_1[i - 1], 2);
+                    Tb += inc;
                 }
-                K1 = (T_binar2_1[1] - T_binar2_1[2]) / -2;
-                Tbinar1 = 342;
+                K1 = (T_binar2_1[1] - T_binar2_1[2]) / -inc; 
                 return Tuple.Create(T_binar2_1, K1);
             }
             public Tuple<double[], double> StaticT2otFbinar1()
-            {
-                Fbinar1 = 530;
+            { 
+                double Fb = getRangeFromCenterValue(Fbinar1)[0];
+                double inc = getRangeFromCenterValue(Fbinar1)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Fbinar1 = Fbinar1 + 2;
-                    T_binar2_2[i - 1] = (0.8 * Fbinar1 * Tbinar1 * Cbinar1 + Fvoda * Tvoda * Cvoda - Fkondvoda * Ckondvoda * Tkondvoda + 0.8 * Fbinar1 * Tbinar1 * Cbinar1 * q) / (Fbinar1 * Cbinar1);
+                { 
+                    T_binar2_2[i - 1] = (0.8 * Fb * Tbinar1 * Cbinar1 + Fvoda * Tvoda * Cvoda - Fkondvoda * Ckondvoda * Tkondvoda + 0.8 * Fb * Tbinar1 * Cbinar1 * q) / (Fb * Cbinar1);
                     T_binar2_2[i - 1] = Math.Round(T_binar2_2[i - 1], 2);
+                    Fb += inc;
                 }
-                K2 = (T_binar2_2[1] - T_binar2_2[2]) / -2;
-                Fbinar1 = 540;
+                K2 = (T_binar2_2[1] - T_binar2_2[2]) / -inc; 
                 return Tuple.Create(T_binar2_2, K2);
             }
             public Tuple<double[], double> StaticT2otFvod()
             {
-                Fvoda = 640;
+                double Fv = getRangeFromCenterValue(Fvoda)[0];
+                double inc = getRangeFromCenterValue(Fvoda)[2];
                 for (int i = 1; i <= 9; i++)
                 {
-                    Fvoda = Fvoda + 2;
-                    T_binar2_3[i - 1] = (Fbinar1 * Tbinar1 * Cbinar1 + k * s * ((Fvoda * Tvoda * Cvoda) / (Fvoda * Cvoda + k * s)) - 0.2 * (Fbinar1 * Tbinar1 * Cbinar1 * q + Fbinar1 * Tbinar1 * Cbinar1) + Fbinar1 * Tbinar1 * Cbinar1 * q) / (Fbinar1 * Cbinar1 + k * s - k * s * ((k * s) / (Fvoda * Cvoda + k * s)));
+                    T_binar2_3[i - 1] = (Fbinar1 * Tbinar1 * Cbinar1 + k * s * ((Fv * Tvoda * Cvoda) / (Fv * Cvoda + k * s)) - 0.2 * (Fbinar1 * Tbinar1 * Cbinar1 * q + Fbinar1 * Tbinar1 * Cbinar1) + Fbinar1 * Tbinar1 * Cbinar1 * q) / (Fbinar1 * Cbinar1 + k * s - k * s * ((k * s) / (Fv * Cvoda + k * s)));
                     T_binar2_3[i - 1] = Math.Round(T_binar2_3[i - 1], 2);
+                    Fv += inc;
                 }
-                K3 = (T_binar2_3[1] - T_binar2_3[2]) / -2;
-                Fvoda = 650;
+                K3 = (T_binar2_3[1] - T_binar2_3[2]) / -inc; 
                 return Tuple.Create(T_binar2_3, K3);
             }
             public Tuple<double[], double> StaticT2otTvod()
             {
-                Tvoda = 283;
+                double Tv = getRangeFromCenterValue(Tvoda)[0];
+                double inc = getRangeFromCenterValue(Tvoda)[2];
                 for (int i = 1; i <= 9; i++)
                 {
-                    Tvoda = Tvoda + 2;
-                    T_binar2_4[i - 1] = (Fbinar1 * Tbinar1 * Cbinar1 + k * s * ((Fvoda * Tvoda * Cvoda) / (Fvoda * Cvoda + k * s)) - 0.2 * (Fbinar1 * Tbinar1 * Cbinar1 * q + Fbinar1 * Tbinar1 * Cbinar1) + Fbinar1 * Tbinar1 * Cbinar1 * q) / (Fbinar1 * Cbinar1 + k * s - k * s * ((k * s) / (Fvoda * Cvoda + k * s)));
+                   
+                    T_binar2_4[i - 1] = (Fbinar1 * Tbinar1 * Cbinar1 + k * s * ((Fvoda * Tv * Cvoda) / (Fvoda * Cvoda + k * s)) - 0.2 * (Fbinar1 * Tbinar1 * Cbinar1 * q + Fbinar1 * Tbinar1 * Cbinar1) + Fbinar1 * Tbinar1 * Cbinar1 * q) / (Fbinar1 * Cbinar1 + k * s - k * s * ((k * s) / (Fvoda * Cvoda + k * s)));
                     T_binar2_4[i - 1] = Math.Round(T_binar2_4[i - 1], 2);
+                    Tv += inc;
                 }
-                K4 = (T_binar2_4[1] - T_binar2_4[2]) / -2;
-                Tvoda = 293;
+                K4 = (T_binar2_4[1] - T_binar2_4[2]) / -inc; 
                 return Tuple.Create(T_binar2_4, K4);
             }
             #endregion
             #region Формули для розрахунку статичних характеристик кип'ятильника
             public Tuple<double[], double> StaticTp2otFp()
             {
-                Frecur1 = 950;
+                double Fr1 = getRangeFromCenterValue(Frecur1)[0];
+                double inc = getRangeFromCenterValue(Frecur1)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Frecur1 = Frecur1 + 2;
-                    T_recur2_1[i - 1] = (Frecur1 * Crecur1 * Trecur1 + 0.8 * (Fpara1 * Ipara * Ppara) - Fpara1 * Ppara * Tkondpara * Ckondpara - Frecur1 * q1) / (Frecur1 * Crecur1);
+                { 
+                    T_recur2_1[i - 1] = (Fr1 * Crecur1 * Trecur1 + 0.8 * (Fpara1 * Ipara * Ppara) - Fpara1 * Ppara * Tkondpara * Ckondpara - Fr1 * q1) / (Fr1 * Crecur1);
                     T_recur2_1[i - 1] = Math.Round(T_recur2_1[i - 1], 2);
+                    Fr1 += inc;
                 }
                 //Перевірити
-                K5 = (T_recur2_1[1] - T_recur2_1[2]) / -2;
-                Frecur1 = 960;
+                K5 = (T_recur2_1[1] - T_recur2_1[2]) / -inc; 
                 return Tuple.Create(T_recur2_1, K5);
             }
             public Tuple<double[], double> StaticTp2otTp1()
             {
-                Trecur1 = 349;
+                double Tr1 = getRangeFromCenterValue(Trecur1)[0];
+                double inc = getRangeFromCenterValue(Trecur1)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Trecur1 += 2;
-                    T_recur2_2[i - 1] = (Frecur1 * Crecur1 * Trecur1 + 0.8 * (Fpara1 * Ipara * Ppara) - Fpara1 * Ppara * Tkondpara * Ckondpara - Frecur1 * q1) / (Frecur1 * Crecur1);
+                { 
+                    T_recur2_2[i - 1] = (Frecur1 * Crecur1 * Tr1 + 0.8 * (Fpara1 * Ipara * Ppara) - Fpara1 * Ppara * Tkondpara * Ckondpara - Frecur1 * q1) / (Frecur1 * Crecur1);
                     T_recur2_2[i - 1] = Math.Round(T_recur2_2[i - 1], 2);
+                    Tr1 += inc;
                 }
-                K6 = (T_recur2_2[1] - T_recur2_2[2]) / -2;
-                Trecur1 = 359;
+                K6 = (T_recur2_2[1] - T_recur2_2[2]) / -inc; 
                 return Tuple.Create(T_recur2_2, K6);
             }
             public Tuple<double[], double> StaticTp2otFpara()
             {
-                Fpara1 = 131;
+                double Fp = getRangeFromCenterValue(Fpara1)[0];
+                double inc = getRangeFromCenterValue(Fpara1)[2];
                 for (int i = 1; i <= 9; i++)
                 {
-                    Fpara1 += 2;
-                    T_recur2_3[i - 1] = (-(Frecur1 * Crecur1 * Trecur1 - Frecur1 * q1 - k1 * s1 * (-0.8 * Fpara1 * Ipara * Ppara / (k1 * s1 - Fpara1 * Ppara * Ckondpara))) / (-Frecur1 * Crecur1 + k1 * s1 - k1 * s1 * (k1 * s1 / (k1 * s1 - Fpara1 * Ppara * Ckondpara))));
+                    
+                    T_recur2_3[i - 1] = (-(Frecur1 * Crecur1 * Trecur1 - Frecur1 * q1 - k1 * s1 * (-0.8 * Fp * Ipara * Ppara / (k1 * s1 - Fp * Ppara * Ckondpara))) / (-Frecur1 * Crecur1 + k1 * s1 - k1 * s1 * (k1 * s1 / (k1 * s1 - Fp * Ppara * Ckondpara))));
                     T_recur2_3[i - 1] = Math.Round(T_recur2_3[i - 1], 2);
+                    Fp += inc;
                 }
                 //перевірити
-                K7 = (T_recur2_3[1] - T_recur2_3[2]) / -2;
-                Fpara1 = 141;
+                K7 = (T_recur2_3[1] - T_recur2_3[2]) / -inc; 
                 return Tuple.Create(T_recur2_3, K7);
             }
             #endregion
             #region Формули для розрахунку статичних характеристик колони
             public Tuple<double[], double> StaticTp1opFd()
             {
-                Fdist = 1505;
+                double Fd = getRangeFromCenterValue(Fdist)[0];
+                double inc = getRangeFromCenterValue(Fdist)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Fdist = Fdist + 5;
-                    T_recur1_1[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
+                { 
+                    T_recur1_1[i - 1] = (Fd * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fd * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
                     T_recur1_1[i - 1] = Math.Round(T_recur1_1[i - 1], 2);
+                    Fd += inc;
                 }
-                K8 = (T_recur1_1[1] - T_recur1_1[2]) / -5;
-                Fdist = 1530;
+                K8 = (T_recur1_1[1] - T_recur1_1[2]) / -inc; 
                 return Tuple.Create(T_recur1_1, K8);
             }
             public Tuple<double[], double> StaticTp1opTd()
             {
-                Tdist = 278;
+                double Td = getRangeFromCenterValue(Tdist)[0];
+                double inc = getRangeFromCenterValue(Tdist)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Tdist = Tdist + 3;
-                    T_recur1_2[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
+                { 
+                    T_recur1_2[i - 1] = (Fdist * Cdist * Td + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Td + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
                     T_recur1_2[i - 1] = Math.Round(T_recur1_2[i - 1], 2);
+                    Td += inc;
                 }
-                K9 = (T_recur1_2[1] - T_recur1_2[2]) / -3;
-                Tdist = 293;
+                K9 = (T_recur1_2[1] - T_recur1_2[2]) / -inc; 
                 return Tuple.Create(T_recur1_2, K9);
             }
             public Tuple<double[], double> StaticTp1opTp2()
             {
-                Trecur2 = 378;
+                double Tr2 = getRangeFromCenterValue(Trecur2)[0];
+                double inc = getRangeFromCenterValue(Trecur2)[2];
+               
                 for (int i = 1; i <= 9; i++)
-                {
-                    Trecur2 = Trecur2 + 3;
-                    T_recur1_3[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
+                { 
+                    T_recur1_3[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Tr2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Tr2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
                     T_recur1_3[i - 1] = Math.Round(T_recur1_3[i - 1], 2);
+                    Tr2 += inc;
                 }
-                K10 = (T_recur1_3[1] - T_recur1_3[2]) / -3;
-                Trecur2 = 383;
+                K10 = (T_recur1_3[1] - T_recur1_3[2]) / -inc; 
                 return Tuple.Create(T_recur1_3, K10);
             }
             public Tuple<double[], double> StaticTp1opFf()
-            {
-                Fflegmy = 295;
+            { 
+                double Ff = getRangeFromCenterValue(Fflegmy)[0];
+                double inc = getRangeFromCenterValue(Fflegmy)[2];
                 for (int i = 1; i <= 9; i++)
                 {
-                    Fflegmy = Fflegmy + 5;
-                    T_recur1_4[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
+                    T_recur1_4[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Ff * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Ff * Cflegmy - k2 * s2)));
                     T_recur1_4[i - 1] = Math.Round(T_recur1_4[i - 1], 2);
+                    Ff += inc;
                 }
-                K11 = (T_recur1_4[1] - T_recur1_4[2]) / -5;
-                Fflegmy = 320;
+                K11 = (T_recur1_4[1] - T_recur1_4[2]) / -inc;
                 return Tuple.Create(T_recur1_4, K11);
             }
             public Tuple<double[], double> StaticTp1opFb()
-            {
-                Fbinar1 = 515;
+            { 
+                double Fb1 = getRangeFromCenterValue(Fbinar1)[0];
+                double inc = getRangeFromCenterValue(Fbinar1)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Fbinar1 = Fbinar1 + 5;
-                    T_recur1_5[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
+                { 
+                    T_recur1_5[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fb1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
                     T_recur1_5[i - 1] = Math.Round(T_recur1_5[i - 1], 2);
+                    Fb1 += inc;
                 }
-                K12 = (T_recur1_5[1] - T_recur1_5[2]) / -5;
-                Fbinar1 = 540;
+                K12 = (T_recur1_5[1] - T_recur1_5[2]) / -inc; 
                 return Tuple.Create(T_recur1_5, K12);
             }
             public Tuple<double[], double> StaticTp1opTb()
-            {
-                Tbinar1 = 327;
+            { 
+                double Tb1 = getRangeFromCenterValue(Tbinar1)[0];
+                double inc = getRangeFromCenterValue(Tbinar1)[2];
                 for (int i = 1; i <= 9; i++)
-                {
-                    Tbinar1 = Tbinar1 + 3;
-                    T_recur1_6[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
+                { 
+                    T_recur1_6[i - 1] = (Fdist * Cdist * Tdist + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fdist * Cdist * Tdist + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tb1 * Cbinar1 / (Fflegmy * Cflegmy - k2 * s2))) / (Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Fflegmy * Cflegmy - k2 * s2)));
                     T_recur1_6[i - 1] = Math.Round(T_recur1_6[i - 1], 2);
+                    Tb1 += inc;
                 }
-                K13 = (T_recur1_6[1] - T_recur1_6[2]) / -3;
-                Tbinar1 = 342;
+                K13 = (T_recur1_6[1] - T_recur1_6[2]) / -inc;
                 return Tuple.Create(T_recur1_6, K13);
             }
             #endregion
@@ -442,7 +454,7 @@ namespace RectificationProcess
                 int[] result = new int[3];
                 int xStart = (int)(XValueCenter - XValueCenter * 0.05);
                 int xEnd = (int)(XValueCenter + XValueCenter * 0.05);
-                int xStep = (int)(xEnd - xStart) / 9;
+                int xStep = (int)Math.Round((xEnd - xStart) / 9.0);
                 result[0] = xStart;
                 result[1] = xEnd;
                 result[2] = xStep;
@@ -450,7 +462,7 @@ namespace RectificationProcess
             }
             public void printResult(object formLabel, string title, double value)
             {
-                var label = formLabel as System.Windows.Forms.Label;
+                var label = formLabel as Label;
                 if (title!="")
                 {
                     label.Text = title;
@@ -469,7 +481,7 @@ namespace RectificationProcess
             }
             public void printResult(object formLabel, string title, double[] value)
             {
-                var label = formLabel as System.Windows.Forms.Label;
+                var label = formLabel as Label;
                 label.Text = title;
                 for (int i = 0; i < 9; i++)
                 {
@@ -941,6 +953,7 @@ namespace RectificationProcess
                     else
                     {
                         Laplace.drawStepResponse(W9, chart1, dynDataGridView);
+
                     }
                     chart1.ChartAreas[0].RecalculateAxesScale();
                     timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
@@ -952,6 +965,7 @@ namespace RectificationProcess
                     break;
             }
         }
+ 
 
         private void DrawStaticFunction()
         {
@@ -997,9 +1011,9 @@ namespace RectificationProcess
                     process.printResult(labelK, "", K6);
                     break;
                 case "Tr2(Fp)":
-                    process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
+                    process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFpara, "Fpara, m^3/c", "Trecur2, K");
                     process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
-                    process.printResult(labelY, "Tr2, K", staticTp2otFp);
+                    process.printResult(labelY, "Tr2, K", staticTp2otFpara);
                     process.printResult(labelK, "", K7);
                     break;
 
@@ -1051,6 +1065,29 @@ namespace RectificationProcess
             }
         }
 
+        private void імітаціяToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            showImitation();
+        }
+        int N = -1;
+        Random rnd = new Random();
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            chartBoiler.Series[0].Points.AddXY(N, process.Tr2Fp(process.Fpara1) + rnd.Next(-10, 10));
+            ++N;
+            if (N <= 10)
+            {
+                chartBoiler.ChartAreas[0].AxisX.Minimum = 0;
+                chartBoiler.ChartAreas[0].AxisX.Maximum = 10;
+            }
+            else
+            {
+                chartBoiler.ChartAreas[0].AxisX.Minimum = N-10;
+                chartBoiler.ChartAreas[0].AxisX.Maximum = N;
+            }
+        }
+
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showStatic();
@@ -1066,10 +1103,10 @@ namespace RectificationProcess
         {
             showStatic();
             process.AddTabsForTabControl(tabControl1, tabsForBoiler);
-            process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFp, "Fpara, m^3/c", "Trecur2, K");
+            process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFpara, "Fpara, m^3/c", "Trecur2, K");
             process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
-            process.printResult(labelY, "Tr2, K", staticTp2otFp);
-            process.printResult(labelK, "", K5);
+            process.printResult(labelY, "Tr2, K", staticTp2otFpara);
+            process.printResult(labelK, "", K7);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
 
@@ -1126,6 +1163,20 @@ namespace RectificationProcess
         {
             showProcess();
         }
+        
+        private void showImitation()
+        {
+            timeEdit.Visible = false;
+            dynDataGridView.Visible = false;
+            label1.Visible = false;
+            tabControl1.Visible = false;
+            labelK.Visible = false;
+            labelX.Visible = false;
+            labelY.Visible = false;
+            processPanel.Visible = false;
+            ImitationTabs.Visible = true;
+            timer1.Enabled = true;
+        }
         private void showStatic()
         { 
             staticFuncs = true;
@@ -1138,6 +1189,7 @@ namespace RectificationProcess
             labelX.Visible = true;
             labelY.Visible = true;
             processPanel.Visible = false;
+            ImitationTabs.Visible = false;
         }
         private void showDynamic()
         {
@@ -1152,7 +1204,7 @@ namespace RectificationProcess
             labelX.Visible = false;
             labelY.Visible = false;
             processPanel.Visible = false;
-
+            ImitationTabs.Visible = false;
         }
         private void showProcess()
         {
@@ -1164,6 +1216,7 @@ namespace RectificationProcess
             labelX.Visible = false;
             labelY.Visible = false;
             processPanel.Visible = true;
+            ImitationTabs.Visible = false;
         }
         private void setupDataGridView()
         {

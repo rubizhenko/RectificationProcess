@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -45,6 +49,7 @@
             this.дефлегматорToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.кипятильникToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ректифікаційнаКолонаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.імітаціяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelX = new System.Windows.Forms.Label();
             this.labelY = new System.Windows.Forms.Label();
             this.labelK = new System.Windows.Forms.Label();
@@ -87,6 +92,13 @@
             this.TkondparaEdit = new System.Windows.Forms.TextBox();
             this.processPanel = new System.Windows.Forms.Panel();
             this.processPicture = new System.Windows.Forms.PictureBox();
+            this.ImitationTabs = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.chartBoiler = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -94,6 +106,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dynDataGridView)).BeginInit();
             this.processPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processPicture)).BeginInit();
+            this.ImitationTabs.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartBoiler)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -153,7 +169,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.процесToolStripMenuItem,
             this.статичніХарактеристикиToolStripMenuItem,
-            this.динамічніХарактеристикиToolStripMenuItem});
+            this.динамічніХарактеристикиToolStripMenuItem,
+            this.імітаціяToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1075, 24);
@@ -228,6 +245,13 @@
             this.ректифікаційнаКолонаToolStripMenuItem1.Size = new System.Drawing.Size(202, 22);
             this.ректифікаційнаКолонаToolStripMenuItem1.Text = "Ректифікаційна колона";
             this.ректифікаційнаКолонаToolStripMenuItem1.Click += new System.EventHandler(this.ректифікаційнаКолонаToolStripMenuItem1_Click);
+            // 
+            // імітаціяToolStripMenuItem
+            // 
+            this.імітаціяToolStripMenuItem.Name = "імітаціяToolStripMenuItem";
+            this.імітаціяToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.імітаціяToolStripMenuItem.Text = "Імітація";
+            this.імітаціяToolStripMenuItem.Click += new System.EventHandler(this.імітаціяToolStripMenuItem_Click_1);
             // 
             // labelX
             // 
@@ -610,6 +634,94 @@
             this.processPicture.TabIndex = 5;
             this.processPicture.TabStop = false;
             // 
+            // ImitationTabs
+            // 
+            this.ImitationTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImitationTabs.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.ImitationTabs.Controls.Add(this.tabPage3);
+            this.ImitationTabs.Controls.Add(this.tabPage4);
+            this.ImitationTabs.Controls.Add(this.tabPage5);
+            this.ImitationTabs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ImitationTabs.Location = new System.Drawing.Point(10, 27);
+            this.ImitationTabs.Name = "ImitationTabs";
+            this.ImitationTabs.SelectedIndex = 0;
+            this.ImitationTabs.Size = new System.Drawing.Size(1053, 702);
+            this.ImitationTabs.TabIndex = 7;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage3.Controls.Add(this.pictureBox1);
+            this.tabPage3.Controls.Add(this.chartBoiler);
+            this.tabPage3.Location = new System.Drawing.Point(4, 28);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1045, 670);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "Кип\'ятильник";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(584, 11);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(455, 417);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // chartBoiler
+            // 
+            chartArea2.AxisX.Title = "t, сек.";
+            chartArea2.AxisY.Title = "Tr2, K";
+            chartArea2.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea2.Name = "ChartArea1";
+            this.chartBoiler.ChartAreas.Add(chartArea2);
+            legend1.Name = "Legend1";
+            this.chartBoiler.Legends.Add(legend1);
+            this.chartBoiler.Location = new System.Drawing.Point(8, 11);
+            this.chartBoiler.Name = "chartBoiler";
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.LegendText = "Tr2(t)";
+            series2.MarkerColor = System.Drawing.Color.Red;
+            series2.MarkerSize = 7;
+            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series2.Name = "Series1";
+            series2.YValuesPerPoint = 2;
+            this.chartBoiler.Series.Add(series2);
+            this.chartBoiler.Size = new System.Drawing.Size(570, 417);
+            this.chartBoiler.TabIndex = 0;
+            this.chartBoiler.Text = "chart2";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage4.Location = new System.Drawing.Point(4, 28);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1045, 670);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Дефлегматор";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 28);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(1045, 670);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "Ректифікаційна колона";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -617,6 +729,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(1075, 741);
+            this.Controls.Add(this.ImitationTabs);
             this.Controls.Add(this.processPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dynDataGridView);
@@ -640,6 +753,10 @@
             this.processPanel.ResumeLayout(false);
             this.processPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processPicture)).EndInit();
+            this.ImitationTabs.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartBoiler)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -703,6 +820,14 @@
         private System.Windows.Forms.TextBox CkondparaEdit;
         private System.Windows.Forms.TextBox TkondparaEdit;
         private System.Windows.Forms.Panel processPanel;
+        private System.Windows.Forms.ToolStripMenuItem імітаціяToolStripMenuItem;
+        private System.Windows.Forms.TabControl ImitationTabs;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartBoiler;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -220,11 +220,11 @@ namespace RectificationProcess
             public double Tkondpara1 { get => Tkondpara; set => Tkondpara = value; }
             public double Ckondpara1 { get => Ckondpara; set => Ckondpara = value; }
 
-            public double Tr2Fp(double Fp)
+            public double Tr2Fp(double Fp, double Fr1, double Tr1)
             {
                 double Tr2 = 0;
-                double A = -(Frecur1 * Crecur1 * Trecur1 - Frecur1 * q1 - k1 * s1 * (-0.8 * Fp * Ipara * Ppara / (k1 * s1 - Fp * Ppara * Ckondpara)));
-                double B = -Frecur1 * Crecur1 + k1 * s1 - k1 * s1 * (k1 * s1 / (k1 * s1 - Fp * Ppara * Ckondpara));
+                double A = -(Fr1 * Crecur1 * Tr1 - Fr1 * q1 - k1 * s1 * (-0.8 * Fp * Ipara * Ppara / (k1 * s1 - Fp * Ppara * Ckondpara)));
+                double B = -Fr1 * Crecur1 + k1 * s1 - k1 * s1 * (k1 * s1 / (k1 * s1 - Fp * Ppara * Ckondpara));
                 Tr2 = A / B;
                 return Tr2;
             }
@@ -979,14 +979,14 @@ namespace RectificationProcess
                     process.printResult(labelK, "", K1);
                     break;
                 case "Tb2(Fb1)":
-                    process.DrawStaticFunction(chart1, process.Fbinar11, staticT2otFbinar1, "Fbinar1, m^3/c", "Tbinar2, K");
-                    process.printResult(labelX, "Fb1, m^3/c", process.Fbinar11);
+                    process.DrawStaticFunction(chart1, process.Fbinar11, staticT2otFbinar1, "Fbinar1, m^3/год", "Tbinar2, K");
+                    process.printResult(labelX, "Fb1, m^3/год", process.Fbinar11);
                     process.printResult(labelY, "Tb2, K", staticT2otFbinar1);
                     process.printResult(labelK, "", K2);
                     break;
                 case "Tb2(Fv)":
-                    process.DrawStaticFunction(chart1, process.Fvoda1, staticT2otFvod, "Fvoda, m^3/c", "Tbinar2, K");
-                    process.printResult(labelX, "Fv, m^3/c", process.Fvoda1);
+                    process.DrawStaticFunction(chart1, process.Fvoda1, staticT2otFvod, "Fvoda, m^3/год", "Tbinar2, K");
+                    process.printResult(labelX, "Fv, m^3/год", process.Fvoda1);
                     process.printResult(labelY, "Tb2, K", staticT2otFvod);
                     process.printResult(labelK, "", K3);
                     break;
@@ -999,8 +999,8 @@ namespace RectificationProcess
 
                 //boiler tabs
                 case "Tr2(Fr1)":
-                    process.DrawStaticFunction(chart1, process.Frecur11, staticTp2otFp, "Frecur1, m^3/c", "Trecur2, K");
-                    process.printResult(labelX, "Fr1, m^3/c", process.Frecur11);
+                    process.DrawStaticFunction(chart1, process.Frecur11, staticTp2otFp, "Frecur1, m^3/год", "Trecur2, K");
+                    process.printResult(labelX, "Fr1, m^3/год", process.Frecur11);
                     process.printResult(labelY, "Tr2, K", staticTp2otFp);
                     process.printResult(labelK, "", K5);
                     break;
@@ -1011,16 +1011,16 @@ namespace RectificationProcess
                     process.printResult(labelK, "", K6);
                     break;
                 case "Tr2(Fp)":
-                    process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFpara, "Fpara, m^3/c", "Trecur2, K");
-                    process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
+                    process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFpara, "Fpara, m^3/год", "Trecur2, K");
+                    process.printResult(labelX, "Fp, m^3/год", process.Fpara1);
                     process.printResult(labelY, "Tr2, K", staticTp2otFpara);
                     process.printResult(labelK, "", K7);
                     break;
 
                 //rectification column tabs
                 case "Tr1(Fdist)":
-                    process.DrawStaticFunction(chart1, process.Fdist1, staticTp1opFd, "Fdist, m^3/c", "Trecur1, K");
-                    process.printResult(labelX, "Fd, m^3/c", process.Fdist1);
+                    process.DrawStaticFunction(chart1, process.Fdist1, staticTp1opFd, "Fdist, m^3/год", "Trecur1, K");
+                    process.printResult(labelX, "Fd, m^3/год", process.Fdist1);
                     process.printResult(labelY, "Tr1, K", staticTp1opFd);
                     process.printResult(labelK, "", K8);
                     break;
@@ -1037,14 +1037,14 @@ namespace RectificationProcess
                     process.printResult(labelK, "", K10);
                     break;
                 case "Tr1(Ffleg)":
-                    process.DrawStaticFunction(chart1, process.Fflegmy1, staticTp1opFf, "Fflegmy, m^3/c", "Trecur1, K");
-                    process.printResult(labelX, "Tfl, m^3/c", process.Fflegmy1);
+                    process.DrawStaticFunction(chart1, process.Fflegmy1, staticTp1opFf, "Fflegmy, m^3/год", "Trecur1, K");
+                    process.printResult(labelX, "Tfl, m^3/год", process.Fflegmy1);
                     process.printResult(labelY, "Tr1, K", staticTp1opFf);
                     process.printResult(labelK, "", K11);
                     break;
                 case "Tr1(Fb)":
-                    process.DrawStaticFunction(chart1, process.Fbinar11, staticTp1opFb, "Fbinar, m^3/c", "Trecur1, K");
-                    process.printResult(labelX, "Fb, m^3/c", process.Fbinar11);
+                    process.DrawStaticFunction(chart1, process.Fbinar11, staticTp1opFb, "Fbinar, m^3/год", "Trecur1, K");
+                    process.printResult(labelX, "Fb, m^3/год", process.Fbinar11);
                     process.printResult(labelY, "Tr1, K", staticTp1opFb);
                     process.printResult(labelK, "", K12);
                     break;
@@ -1067,78 +1067,148 @@ namespace RectificationProcess
 
         private void імітаціяToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            showImitation();
-            //double Tr2Fp = process.Tr2Fp(process.Fpara1);
-            //chartBoiler.ChartAreas[0].AxisY.Minimum = Math.Floor(Tr2Fp - 0.1 * Tr2Fp);
-            //chartBoiler.ChartAreas[0].AxisY.Maximum = Math.Floor(Tr2Fp + 0.1 * Tr2Fp);
-            chartBoiler.ChartAreas[0].AxisY.Minimum = 200;
-            chartBoiler.ChartAreas[0].AxisY.Maximum = 500;
-
+            showImitation(); 
+            chartTr2.ChartAreas[0].AxisY.Minimum = 200;
+            chartTr2.ChartAreas[0].AxisY.Maximum = 500;
+            chartFpara.ChartAreas[0].AxisY.Minimum = 100;
+            chartFpara.ChartAreas[0].AxisY.Maximum = 180;
+            chartFr1.ChartAreas[0].AxisY.Minimum = 940;
+            chartFr1.ChartAreas[0].AxisY.Maximum = 980;
+            chartTr1.ChartAreas[0].AxisY.Minimum = 320;
+            chartTr1.ChartAreas[0].AxisY.Maximum = 400;
             radioButton2.Checked = true;
         }
         int N = -1;
         Random rnd = new Random();
-        double Fpara = 0;
+        double FparaImit = 0;
+        double Fr1Imit = 0;
+        double Tr1Imit = 0;
         double percent = 1;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
-            { 
-                if (percent >= 0.85)
-                {
-                    percent -= 0.03;
-                    Fpara = process.Fpara1 * percent + process.Fpara1 * percent * (rnd.Next(-2, 2) / 100.0);
-                }
-                else
-                {
-                    percent = 0.85;
-                }
-            }
-            if (radioButton2.Checked)
+            percent = getWorkMode(percent);
+            switch(rnd.Next(0, 3))
             {
-                if (percent > 1.0)
-                {
-                    percent -=0.03;
-                }
-                if(percent < 1.0)
-                {
-                    percent += 0.03;
-                }
-                Fpara = process.Fpara1*percent + process.Fpara1 * percent * (rnd.Next(-2, 2) / 100.0);
+                case 0:
+                    FparaImit = process.Fpara1 * percent + process.Fpara1 * percent * (rnd.Next(-2, 2) / 100.0);
+                    Fr1Imit = process.Frecur11;
+                    Tr1Imit = process.Trecur11;
+                    FparaLabel.BackColor = Color.LightCoral;
+                    Fr1Label.BackColor = Color.Transparent;
+                    Tr1Label.BackColor = Color.Transparent;
+                    break;
+                case 1:
+                    FparaImit = process.Fpara1 * percent;
+                    Fr1Imit = process.Frecur11 + process.Frecur11 * (rnd.Next(-1, 1) / 200.0);
+                    Tr1Imit = process.Trecur11;
+                    FparaLabel.BackColor = Color.Transparent;
+                    Fr1Label.BackColor = Color.LightCoral;
+                    Tr1Label.BackColor = Color.Transparent;
+                    break;
+                case 2:
+                    FparaImit = process.Fpara1 * percent;
+                    Fr1Imit = process.Frecur11;
+                    Tr1Imit = process.Trecur11 + process.Trecur11 * (rnd.Next(-2, 2) / 100.0);
+                    FparaLabel.BackColor = Color.Transparent;
+                    Fr1Label.BackColor = Color.Transparent;
+                    Tr1Label.BackColor = Color.LightCoral;
+                    break;
+                default:
+                    FparaImit = process.Fpara1 * percent + process.Fpara1 * percent * (rnd.Next(-2, 2) / 100.0);
+                    Fr1Imit = process.Frecur11;
+                    Tr1Imit = process.Trecur11;
+                    FparaLabel.BackColor = Color.LightCoral;
+                    Fr1Label.BackColor = Color.Transparent;
+                    Tr1Label.BackColor = Color.Transparent;
+                    break;
             }
-            if (radioButton3.Checked)
-            {
-                if (percent <= 1.15)
-                {
-                    percent += 0.03;
-                    Fpara = process.Fpara1 * percent + process.Fpara1 * percent * (rnd.Next(-2, 2) / 100.0);
-                }
-                else
-                {
-                    percent = 1.15;
-                }
+            
+            
+            double mainParamValue = process.Tr2Fp(FparaImit, Fr1Imit, Tr1Imit);
+            chartTr2.Series[0].Points.AddXY(N, mainParamValue);
+            chartFpara.Series[0].Points.AddXY(N, FparaImit);
+            chartFr1.Series[0].Points.AddXY(N, Fr1Imit);
+            chartTr1.Series[0].Points.AddXY(N, Tr1Imit);
+            mainParamLabel.Text = "Tr2 = " + mainParamValue.ToString("F2") + " K";
+            FparaLabel.Text = "Fp = " + FparaImit.ToString("F2") + " м^3/год";
+            Fr1Label.Text = "Fr1 = " + Fr1Imit.ToString("F2") + " м^3/год";
+            Tr1Label.Text = "Tr1 = " + Tr1Imit.ToString("F2") + " K";
 
-            }
-            double mainParamValue = process.Tr2Fp(Fpara);
-            chartBoiler.Series[0].Points.AddXY(N, mainParamValue);
-            mainParamLabel.Text = "Tr2 = "+mainParamValue.ToString("F2")+" K";
-            controlParamLabel.Text = "Fp = " + Fpara.ToString("F2") + " м^3/с";
+
             ++N;
-            if (N <= 10)
+            if (N < 6)
             {
-                chartBoiler.ChartAreas[0].AxisX.Minimum = 0;
-                chartBoiler.ChartAreas[0].AxisX.Maximum = 10;
+                chartFpara.ChartAreas[0].AxisX.Minimum = 0;
+                chartFpara.ChartAreas[0].AxisX.Maximum = 6;
+                chartFr1.ChartAreas[0].AxisX.Minimum = 0;
+                chartFr1.ChartAreas[0].AxisX.Maximum = 6;
+                chartTr1.ChartAreas[0].AxisX.Minimum = 0;
+                chartTr1.ChartAreas[0].AxisX.Maximum = 6;
             }
             else
             {
-                chartBoiler.ChartAreas[0].AxisX.Minimum = N - 10;
-                chartBoiler.ChartAreas[0].AxisX.Maximum = N;
+                chartFpara.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartFpara.ChartAreas[0].AxisX.Maximum = N;
+                chartFr1.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartFr1.ChartAreas[0].AxisX.Maximum = N;
+                chartTr1.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartTr1.ChartAreas[0].AxisX.Maximum = N;
             }
+            if (N <= 10)
+            {
+                chartTr2.ChartAreas[0].AxisX.Minimum = 0;
+                chartTr2.ChartAreas[0].AxisX.Maximum = 10;
+            }
+            else
+            {
+                chartTr2.ChartAreas[0].AxisX.Minimum = N - 10;
+                chartTr2.ChartAreas[0].AxisX.Maximum = N;
+            }
+
 
 
         }
 
-  
+        private double getWorkMode(double currentPercent)
+        {
+            //Метод для вибору режиму роботи апарату (Мінімальне навантаження, робочий режим, максимальне навантаження)
+            double _percent = currentPercent;
+            if (radioButton1.Checked)
+            {
+                if (_percent >= 0.85)
+                {
+                    _percent -= 0.03;
+                }
+                else
+                {
+                    _percent = 0.85;
+                }
+            }
+            if (radioButton2.Checked)
+            {
+                if (_percent > 1.0)
+                {
+                    _percent -= 0.03;
+                }
+                if (_percent < 1.0)
+                {
+                    _percent += 0.03;
+                } 
+            }
+            if (radioButton3.Checked)
+            {
+                if (_percent <= 1.15)
+                {
+                    _percent += 0.03;
+                }
+                else
+                {
+                    _percent = 1.15;
+                }
+            }
+            return _percent;
+        }
+
 
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1155,8 +1225,8 @@ namespace RectificationProcess
         {
             showStatic();
             process.AddTabsForTabControl(tabControl1, tabsForBoiler);
-            process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFpara, "Fpara, m^3/c", "Trecur2, K");
-            process.printResult(labelX, "Fp, m^3/c", process.Fpara1);
+            process.DrawStaticFunction(chart1, process.Fpara1, staticTp2otFpara, "Fpara, m^3/год", "Trecur2, K");
+            process.printResult(labelX, "Fp, m^3/год", process.Fpara1);
             process.printResult(labelY, "Tr2, K", staticTp2otFpara);
             process.printResult(labelK, "", K7);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);

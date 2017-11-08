@@ -29,12 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -94,17 +106,22 @@
             this.processPicture = new System.Windows.Forms.PictureBox();
             this.ImitationTabs = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.FparaLabel = new System.Windows.Forms.Label();
+            this.mainParamLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chartBoiler = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartTr2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.mainParamLabel = new System.Windows.Forms.Label();
-            this.controlParamLabel = new System.Windows.Forms.Label();
+            this.chartFpara = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Fr1Label = new System.Windows.Forms.Label();
+            this.Tr1Label = new System.Windows.Forms.Label();
+            this.chartFr1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartTr1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -116,7 +133,10 @@
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartBoiler)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTr2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartFpara)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartFr1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTr1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -143,19 +163,19 @@
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(3, 3);
             this.chart1.Margin = new System.Windows.Forms.Padding(0);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.MarkerBorderWidth = 3;
-            series3.MarkerColor = System.Drawing.Color.Red;
-            series3.MarkerSize = 6;
-            series3.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.MarkerBorderWidth = 3;
+            series1.MarkerColor = System.Drawing.Color.Red;
+            series1.MarkerSize = 6;
+            series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(752, 443);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -180,7 +200,7 @@
             this.імітаціяToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1075, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1176, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -267,7 +287,7 @@
             this.labelX.Location = new System.Drawing.Point(784, 60);
             this.labelX.Name = "labelX";
             this.labelX.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.labelX.Size = new System.Drawing.Size(110, 254);
+            this.labelX.Size = new System.Drawing.Size(150, 254);
             this.labelX.TabIndex = 2;
             this.labelX.Text = "label1";
             // 
@@ -275,10 +295,10 @@
             // 
             this.labelY.BackColor = System.Drawing.SystemColors.Window;
             this.labelY.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelY.Location = new System.Drawing.Point(900, 60);
+            this.labelY.Location = new System.Drawing.Point(940, 60);
             this.labelY.Name = "labelY";
             this.labelY.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.labelY.Size = new System.Drawing.Size(110, 254);
+            this.labelY.Size = new System.Drawing.Size(150, 254);
             this.labelY.TabIndex = 2;
             this.labelY.Text = "label1";
             // 
@@ -289,7 +309,7 @@
             this.labelK.Location = new System.Drawing.Point(784, 326);
             this.labelK.Name = "labelK";
             this.labelK.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.labelK.Size = new System.Drawing.Size(226, 97);
+            this.labelK.Size = new System.Drawing.Size(306, 97);
             this.labelK.TabIndex = 2;
             this.labelK.Text = "label1";
             this.labelK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -309,9 +329,9 @@
             this.dynDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dynDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dynDataGridView.GridColor = System.Drawing.SystemColors.Control;
-            this.dynDataGridView.Location = new System.Drawing.Point(784, 60);
+            this.dynDataGridView.Location = new System.Drawing.Point(784, 59);
             this.dynDataGridView.Name = "dynDataGridView";
-            this.dynDataGridView.Size = new System.Drawing.Size(285, 450);
+            this.dynDataGridView.Size = new System.Drawing.Size(306, 450);
             this.dynDataGridView.TabIndex = 3;
             // 
             // label1
@@ -625,7 +645,7 @@
             this.processPanel.Controls.Add(this.TflegmyEdit);
             this.processPanel.Controls.Add(this.CflegmyEdit);
             this.processPanel.Controls.Add(this.processPicture);
-            this.processPanel.Location = new System.Drawing.Point(10, 27);
+            this.processPanel.Location = new System.Drawing.Point(12, 27);
             this.processPanel.Name = "processPanel";
             this.processPanel.Size = new System.Drawing.Size(1000, 630);
             this.processPanel.TabIndex = 7;
@@ -651,35 +671,58 @@
             this.ImitationTabs.Controls.Add(this.tabPage4);
             this.ImitationTabs.Controls.Add(this.tabPage5);
             this.ImitationTabs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ImitationTabs.Location = new System.Drawing.Point(10, 27);
+            this.ImitationTabs.Location = new System.Drawing.Point(12, 27);
             this.ImitationTabs.Name = "ImitationTabs";
             this.ImitationTabs.SelectedIndex = 0;
-            this.ImitationTabs.Size = new System.Drawing.Size(1053, 702);
+            this.ImitationTabs.Size = new System.Drawing.Size(1152, 702);
             this.ImitationTabs.TabIndex = 7;
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage3.Controls.Add(this.controlParamLabel);
+            this.tabPage3.Controls.Add(this.Tr1Label);
+            this.tabPage3.Controls.Add(this.Fr1Label);
+            this.tabPage3.Controls.Add(this.FparaLabel);
             this.tabPage3.Controls.Add(this.mainParamLabel);
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Controls.Add(this.pictureBox1);
-            this.tabPage3.Controls.Add(this.chartBoiler);
+            this.tabPage3.Controls.Add(this.chartTr1);
+            this.tabPage3.Controls.Add(this.chartFr1);
+            this.tabPage3.Controls.Add(this.chartFpara);
+            this.tabPage3.Controls.Add(this.chartTr2);
             this.tabPage3.Location = new System.Drawing.Point(4, 28);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1045, 670);
+            this.tabPage3.Size = new System.Drawing.Size(1144, 670);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Кип\'ятильник";
+            // 
+            // FparaLabel
+            // 
+            this.FparaLabel.AutoSize = true;
+            this.FparaLabel.Location = new System.Drawing.Point(876, 230);
+            this.FparaLabel.Name = "FparaLabel";
+            this.FparaLabel.Size = new System.Drawing.Size(24, 16);
+            this.FparaLabel.TabIndex = 5;
+            this.FparaLabel.Text = "Fp";
+            // 
+            // mainParamLabel
+            // 
+            this.mainParamLabel.AutoSize = true;
+            this.mainParamLabel.Location = new System.Drawing.Point(655, 128);
+            this.mainParamLabel.Name = "mainParamLabel";
+            this.mainParamLabel.Size = new System.Drawing.Size(28, 16);
+            this.mainParamLabel.TabIndex = 5;
+            this.mainParamLabel.Text = "Tr2";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Location = new System.Drawing.Point(584, 438);
+            this.groupBox1.Location = new System.Drawing.Point(584, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(455, 68);
+            this.groupBox1.Size = new System.Drawing.Size(455, 50);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Режим";
@@ -688,10 +731,10 @@
             // 
             this.radioButton1.BackColor = System.Drawing.Color.LawnGreen;
             this.radioButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.radioButton1.Location = new System.Drawing.Point(8, 21);
+            this.radioButton1.Location = new System.Drawing.Point(8, 18);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.radioButton1.Size = new System.Drawing.Size(140, 30);
+            this.radioButton1.Size = new System.Drawing.Size(140, 25);
             this.radioButton1.TabIndex = 2;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Мінімальний";
@@ -703,10 +746,10 @@
             this.radioButton3.BackColor = System.Drawing.Color.Red;
             this.radioButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.radioButton3.ForeColor = System.Drawing.Color.Black;
-            this.radioButton3.Location = new System.Drawing.Point(308, 21);
+            this.radioButton3.Location = new System.Drawing.Point(308, 18);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.radioButton3.Size = new System.Drawing.Size(140, 30);
+            this.radioButton3.Size = new System.Drawing.Size(140, 25);
             this.radioButton3.TabIndex = 3;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Максимальний";
@@ -717,10 +760,10 @@
             // 
             this.radioButton2.BackColor = System.Drawing.Color.DodgerBlue;
             this.radioButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.radioButton2.Location = new System.Drawing.Point(158, 21);
+            this.radioButton2.Location = new System.Drawing.Point(158, 18);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.radioButton2.Size = new System.Drawing.Size(140, 30);
+            this.radioButton2.Size = new System.Drawing.Size(140, 25);
             this.radioButton2.TabIndex = 3;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Робочий";
@@ -730,38 +773,38 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(584, 11);
+            this.pictureBox1.Location = new System.Drawing.Point(584, 66);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(455, 417);
+            this.pictureBox1.Size = new System.Drawing.Size(455, 369);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // chartBoiler
+            // chartTr2
             // 
-            chartArea4.AxisX.Title = "t, сек.";
-            chartArea4.AxisY.Title = "Tr2, K";
-            chartArea4.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
-            chartArea4.Name = "ChartArea1";
-            this.chartBoiler.ChartAreas.Add(chartArea4);
-            legend2.Name = "Legend1";
-            this.chartBoiler.Legends.Add(legend2);
-            this.chartBoiler.Location = new System.Drawing.Point(8, 11);
-            this.chartBoiler.Name = "chartBoiler";
-            series4.BorderWidth = 2;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.LegendText = "Tr2(t)";
-            series4.MarkerColor = System.Drawing.Color.Red;
-            series4.MarkerSize = 7;
-            series4.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series4.Name = "Series1";
-            series4.YValuesPerPoint = 2;
-            this.chartBoiler.Series.Add(series4);
-            this.chartBoiler.Size = new System.Drawing.Size(570, 417);
-            this.chartBoiler.TabIndex = 0;
-            this.chartBoiler.Text = "chart2";
+            chartArea5.AxisX.Title = "t, сек.";
+            chartArea5.AxisY.Title = "Tr2, K";
+            chartArea5.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea5.Name = "ChartArea1";
+            this.chartTr2.ChartAreas.Add(chartArea5);
+            legend4.Name = "Legend1";
+            this.chartTr2.Legends.Add(legend4);
+            this.chartTr2.Location = new System.Drawing.Point(8, 11);
+            this.chartTr2.Name = "chartTr2";
+            series5.BorderWidth = 2;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.LegendText = "Tr2(t)";
+            series5.MarkerColor = System.Drawing.Color.Red;
+            series5.MarkerSize = 7;
+            series5.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series5.Name = "Series1";
+            series5.YValuesPerPoint = 2;
+            this.chartTr2.Series.Add(series5);
+            this.chartTr2.Size = new System.Drawing.Size(565, 424);
+            this.chartTr2.TabIndex = 0;
+            this.chartTr2.Text = "chart2";
             // 
             // tabPage4
             // 
@@ -787,23 +830,107 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // mainParamLabel
+            // chartFpara
             // 
-            this.mainParamLabel.AutoSize = true;
-            this.mainParamLabel.Location = new System.Drawing.Point(687, 79);
-            this.mainParamLabel.Name = "mainParamLabel";
-            this.mainParamLabel.Size = new System.Drawing.Size(28, 16);
-            this.mainParamLabel.TabIndex = 5;
-            this.mainParamLabel.Text = "Tr2";
+            chartArea4.AxisX.Title = "t, сек.";
+            chartArea4.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea4.Name = "ChartArea1";
+            this.chartFpara.ChartAreas.Add(chartArea4);
+            legend3.Enabled = false;
+            legend3.Name = "Legend1";
+            this.chartFpara.Legends.Add(legend3);
+            this.chartFpara.Location = new System.Drawing.Point(8, 441);
+            this.chartFpara.Name = "chartFpara";
+            series4.BorderWidth = 2;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.MarkerColor = System.Drawing.Color.Red;
+            series4.MarkerSize = 7;
+            series4.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series4.Name = "Series1";
+            series4.YValuesPerPoint = 2;
+            this.chartFpara.Series.Add(series4);
+            this.chartFpara.Size = new System.Drawing.Size(335, 223);
+            this.chartFpara.TabIndex = 0;
+            this.chartFpara.Text = "chart2";
+            title3.Name = "Title1";
+            title3.Text = "Fpara м^3/год";
+            this.chartFpara.Titles.Add(title3);
             // 
-            // controlParamLabel
+            // Fr1Label
             // 
-            this.controlParamLabel.AutoSize = true;
-            this.controlParamLabel.Location = new System.Drawing.Point(914, 194);
-            this.controlParamLabel.Name = "controlParamLabel";
-            this.controlParamLabel.Size = new System.Drawing.Size(24, 16);
-            this.controlParamLabel.TabIndex = 5;
-            this.controlParamLabel.Text = "Fp";
+            this.Fr1Label.AutoSize = true;
+            this.Fr1Label.Location = new System.Drawing.Point(847, 379);
+            this.Fr1Label.Name = "Fr1Label";
+            this.Fr1Label.Size = new System.Drawing.Size(27, 16);
+            this.Fr1Label.TabIndex = 5;
+            this.Fr1Label.Text = "Fr1";
+            // 
+            // Tr1Label
+            // 
+            this.Tr1Label.AutoSize = true;
+            this.Tr1Label.Location = new System.Drawing.Point(847, 404);
+            this.Tr1Label.Name = "Tr1Label";
+            this.Tr1Label.Size = new System.Drawing.Size(28, 16);
+            this.Tr1Label.TabIndex = 5;
+            this.Tr1Label.Text = "Tr1";
+            // 
+            // chartFr1
+            // 
+            chartArea3.AxisX.Title = "t, сек.";
+            chartArea3.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea3.Name = "ChartArea1";
+            this.chartFr1.ChartAreas.Add(chartArea3);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            this.chartFr1.Legends.Add(legend2);
+            this.chartFr1.Location = new System.Drawing.Point(356, 441);
+            this.chartFr1.Name = "chartFr1";
+            series3.BorderWidth = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.MarkerColor = System.Drawing.Color.Red;
+            series3.MarkerSize = 7;
+            series3.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series3.Name = "Series1";
+            series3.YValuesPerPoint = 2;
+            this.chartFr1.Series.Add(series3);
+            this.chartFr1.Size = new System.Drawing.Size(335, 223);
+            this.chartFr1.TabIndex = 0;
+            this.chartFr1.Text = "chart2";
+            title2.Name = "Title1";
+            title2.Text = "Fr1 м^3/год";
+            this.chartFr1.Titles.Add(title2);
+            // 
+            // chartTr1
+            // 
+            chartArea2.AxisX.Title = "t, сек.";
+            chartArea2.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea2.Name = "ChartArea1";
+            this.chartTr1.ChartAreas.Add(chartArea2);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chartTr1.Legends.Add(legend1);
+            this.chartTr1.Location = new System.Drawing.Point(704, 441);
+            this.chartTr1.Name = "chartTr1";
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.MarkerColor = System.Drawing.Color.Red;
+            series2.MarkerSize = 7;
+            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series2.Name = "Series1";
+            series2.YValuesPerPoint = 2;
+            this.chartTr1.Series.Add(series2);
+            this.chartTr1.Size = new System.Drawing.Size(335, 223);
+            this.chartTr1.TabIndex = 0;
+            this.chartTr1.Text = "chart2";
+            title1.Name = "Title1";
+            title1.Text = "Tr1, K";
+            this.chartTr1.Titles.Add(title1);
             // 
             // Form1
             // 
@@ -811,11 +938,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1075, 741);
+            this.ClientSize = new System.Drawing.Size(1176, 741);
             this.Controls.Add(this.ImitationTabs);
             this.Controls.Add(this.processPanel);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dynDataGridView);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.timeEdit);
             this.Controls.Add(this.labelK);
             this.Controls.Add(this.labelY);
@@ -841,7 +968,10 @@
             this.tabPage3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartBoiler)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTr2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartFpara)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartFr1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTr1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -911,14 +1041,19 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartBoiler;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTr2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Label controlParamLabel;
+        private System.Windows.Forms.Label FparaLabel;
         private System.Windows.Forms.Label mainParamLabel;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartFpara;
+        private System.Windows.Forms.Label Fr1Label;
+        private System.Windows.Forms.Label Tr1Label;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTr1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartFr1;
     }
 }
 

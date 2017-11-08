@@ -1077,6 +1077,7 @@ namespace RectificationProcess
             chartTr1.ChartAreas[0].AxisY.Minimum = 320;
             chartTr1.ChartAreas[0].AxisY.Maximum = 400;
             radioButton2.Checked = true;
+            excelBtn.Enabled = true;
         }
         int N = -1;
         Random rnd = new Random();
@@ -1084,6 +1085,11 @@ namespace RectificationProcess
         double Fr1Imit = 0;
         double Tr1Imit = 0;
         double percent = 1;
+        double[] FparaData = new double[5000];
+        double[] Fr1Data = new double[5000];
+        double[] Tr1Data = new double[5000];
+        double[] Tr2Data = new double[5000];
+        string[] currTime = new string[5000];
         private void timer1_Tick(object sender, EventArgs e)
         {
             percent = getWorkMode(percent);
@@ -1129,6 +1135,17 @@ namespace RectificationProcess
             chartFpara.Series[0].Points.AddXY(N, FparaImit);
             chartFr1.Series[0].Points.AddXY(N, Fr1Imit);
             chartTr1.Series[0].Points.AddXY(N, Tr1Imit);
+
+            if (N >= 0)
+            {
+                currTime[N] = DateTime.Now.ToLongTimeString();
+                FparaData[N] = FparaImit;
+                Fr1Data[N] = Fr1Imit;
+                Tr1Data[N] = Tr1Imit;
+                Tr2Data[N] = mainParamValue;
+            }
+            
+
             mainParamLabel.Text = "Tr2 = " + mainParamValue.ToString("F2") + " K";
             FparaLabel.Text = "Fp = " + FparaImit.ToString("F2") + " м^3/год";
             Fr1Label.Text = "Fr1 = " + Fr1Imit.ToString("F2") + " м^3/год";
@@ -1209,6 +1226,83 @@ namespace RectificationProcess
             return _percent;
         }
 
+        private void excelBtn_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            //Write to Excel
+            Cursor.Current = Cursors.WaitCursor;
+            var XL = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook nwb = null;
+            Microsoft.Office.Interop.Excel._Worksheet nws = null;
+            XL.Visible = false;
+            nwb = XL.Workbooks.Add();
+            nws = (Microsoft.Office.Interop.Excel._Worksheet)nwb.ActiveSheet;
+            //Get a new workbook.
+            //double[] noEmptyData = new double[N];
+            nws.Cells[1, 1] = "Час";
+            nws.Cells[1, 2] = "Fpara, м^3/год";
+            nws.Cells[1, 3] = "Fr1, м^3/год";
+            nws.Cells[1, 4] = "Tr1, K";
+            nws.Cells[1, 5] = "Tr2, K";
+            for (int i = 0; i < N; i++)
+            {
+                nws.Cells[i + 2, 1] = currTime[i];
+                nws.Cells[i + 2, 2] = FparaData[i];
+                nws.Cells[i + 2, 3] = Fr1Data[i];
+                nws.Cells[i + 2, 4] = Tr1Data[i];
+                nws.Cells[i + 2, 5] = Tr2Data[i];
+                //noEmptyData[i] = Data[i];
+            }
+
+            //Add Chart
+            var charts = nws.ChartObjects() as Microsoft.Office.Interop.Excel.ChartObjects;
+            var chartObject = charts.Add(300, 30, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartFpara = chartObject.Chart;
+            var rangeFpara = nws.get_Range("B2", "B" + (N).ToString());
+            chartFpara.SetSourceData(rangeFpara);
+            chartFpara.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartFpara.ChartWizard(Source: rangeFpara,
+               Title: "Витрата пари",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Витрата пари, м.куб/год.");
+
+            var chartObjectFr1 = charts.Add(300, 240, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartFr1 = chartObjectFr1.Chart;
+            var rangeFr1 = nws.get_Range("C2", "C" + (N).ToString());
+            chartFr1.SetSourceData(rangeFr1);
+            chartFr1.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartFr1.ChartWizard(Source: rangeFr1,
+               Title: "Витрата рециркуляту 1",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Витрата рециркуляту, м.куб/год.");
+
+            var chartObjectTr1 = charts.Add(300, 450, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartTr1 = chartObjectTr1.Chart;
+            var rangeTr1 = nws.get_Range("D2", "D" + (N).ToString());
+            chartTr1.SetSourceData(rangeTr1);
+            chartTr1.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartTr1.ChartWizard(Source: rangeTr1,
+               Title: "Температура рециркуляту 1",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Температура рециркуляту, K");
+
+            var chartObjectTr2 = charts.Add(620, 30, 500, 400) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartTr2 = chartObjectTr2.Chart;
+            var rangeTr2 = nws.get_Range("E2", "E" + (N).ToString());
+            chartTr2.SetSourceData(rangeTr2);
+            chartTr2.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartTr2.ChartWizard(Source: rangeTr2,
+               Title: "Температура рециркуляту 2",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Температура рециркуляту, K");
+
+            nws.SaveAs("D:\\BoilerData.xlsx");
+            nwb.Close(false);
+            XL.Quit();
+            Cursor.Current = Cursors.Default;
+            MessageBox.Show("Дані записано у файл D:\\BoilerData.xlsx", "Експорт даних до Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //Write to Excel
+        }
 
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {

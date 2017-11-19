@@ -20,7 +20,7 @@ namespace RectificationProcess
         string[] tabsForRectifCol = { "Tr1(Fdist)", "Tr1(Tdist)", "Tr1(Tr2)", "Tr1(Ffleg)", "Tr1(Fb)", "Tr1(Tb)" };
         string[] tabsForDynamicDeflegmator = { "Tb2(Tb1)", "Tb2(Fb1)", "Tb2(Fv)" };
         string[] tabsForDynamicBoiler = { "Tr2(Tr1)", "Tr2(Fr1)", "Tr2(Fp)" };
-        string[] tabsForRectifColumn = { "Ffleg(Tr1)", "Fb1(Tr1)", "Tb1(Tr1)" };
+        string[] tabsForRectifColumn = { "Tr1(Ffleg)", "Tr1(Fb1)", "Tr1(Tb1)" };
         double[] staticT2otTbinar1 = new double[9];
         double[] staticT2otFbinar1 = new double[9];
         double[] staticT2otFvod = new double[9];
@@ -42,7 +42,7 @@ namespace RectificationProcess
         bool staticFuncs = false;
         bool dynamicFuncs = false;
         bool timeChanged = false;
-
+        string progPath = Environment.CurrentDirectory;
 
         RectificationProcess process = new RectificationProcess();
 
@@ -50,7 +50,21 @@ namespace RectificationProcess
         {
 
             InitializeComponent();
-            string progPath = Environment.CurrentDirectory;
+
+            processPicture.Controls.Add(pictureBoxBoiler);
+            pictureBoxBoiler.BackColor = Color.Transparent;
+            pictureBoxBoiler.Size = new Size(90, 147);
+            pictureBoxBoiler.Location = new Point(656, 367);
+
+            processPicture.Controls.Add(pictureBoxDefleg);
+            pictureBoxDefleg.BackColor = Color.Transparent;
+            pictureBoxDefleg.Size = new Size(90, 147);
+            pictureBoxDefleg.Location = new Point(660, 85);
+
+            processPicture.Controls.Add(pictureBoxColumn);
+            pictureBoxColumn.BackColor = Color.Transparent;
+            pictureBoxColumn.Size = new Size(120, 340);
+            pictureBoxColumn.Location = new Point(242, 103);
 
             for (int i = 0; i < 9; i++)
             {
@@ -227,6 +241,22 @@ namespace RectificationProcess
                 double B = -Fr1 * Crecur1 + k1 * s1 - k1 * s1 * (k1 * s1 / (k1 * s1 - Fp * Ppara * Ckondpara));
                 Tr2 = A / B;
                 return Tr2;
+            }
+            public double Tb2Fv(double Fv, double Tb1, double Fb1)
+            {
+                double Tb2 = 0;
+                double A = Fb1 * Tb1 * Cbinar1 + k * s * ((Fv * Tvoda * Cvoda) / (Fv * Cvoda + k * s)) - 0.2 * (Fb1 * Tb1 * Cbinar1 * q + Fb1 * Tb1 * Cbinar1) + Fb1 * Tb1 * Cbinar1 * q;
+                double B = Fb1 * Cbinar1 + k * s - k * s * ((k * s) / (Fv * Cvoda + k * s));
+                Tb2 = A / B;
+                return Tb2;
+            }
+            public double TcubFf(double Ff, double Td, double Fd)
+            {
+                double Tcub = 0;
+                double A = Fd * Cdist * Td + 0.8 * Frecur1 * Trecur2 * Crecur1 - (Fd * Cdist * Td + Frecur1 * Trecur2 * Crecur1) * q2 + k2 * s2 * (Fbinar1 * Tbinar1 * Cbinar1 / (Ff * Cflegmy - k2 * s2));
+                double B = Fcub * Ccub + k2 * s2 - k2 * s2 * ((-k2 * s2) / (Ff * Cflegmy - k2 * s2));
+                Tcub = A / B;
+                return Tcub;
             }
             #region Формули для розрахунку статичних характеристик дефлегматора
             public Tuple<double[], double> StaticT2otTbinar1()
@@ -909,7 +939,7 @@ namespace RectificationProcess
                     break;
 
                 //rectification column tabs
-                case "Ffleg(Tr1)":
+                case "Tr1(Ffleg)":
                     double W7(double s)
                     {
                         return 0.634 / (24.27 * s * s * s + 21.33 * s * s + 1 * s);
@@ -925,7 +955,7 @@ namespace RectificationProcess
                     chart1.ChartAreas[0].RecalculateAxesScale();
                     timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
                     break;
-                case "Fb1(Tr1)":
+                case "Tr1(Fb1)":
                     double W8(double s)
                     {
                         return -0.695 / (24.27 * s * s * s + 21.33 * s * s + 1 * s);
@@ -941,7 +971,7 @@ namespace RectificationProcess
                     chart1.ChartAreas[0].RecalculateAxesScale();
                     timeEdit.Text = chart1.ChartAreas[0].AxisX.Maximum.ToString("F0");
                     break;
-                case "Tb1(Tr1)":
+                case "Tr1(Tb1)":
                     double W9(double s)
                     {
                         return -1.097 / (24.27 * s * s * s + 21.33 * s * s + 1 * s);
@@ -1076,81 +1106,175 @@ namespace RectificationProcess
             chartFr1.ChartAreas[0].AxisY.Maximum = 980;
             chartTr1.ChartAreas[0].AxisY.Minimum = 320;
             chartTr1.ChartAreas[0].AxisY.Maximum = 400;
+
+            chartTb2.ChartAreas[0].AxisY.Minimum = 305;
+            chartTb2.ChartAreas[0].AxisY.Maximum = 320;
+            chartFv.ChartAreas[0].AxisY.Minimum = 560;
+            chartFv.ChartAreas[0].AxisY.Maximum = 750;
+            chartFb1.ChartAreas[0].AxisY.Minimum = 490;
+            chartFb1.ChartAreas[0].AxisY.Maximum = 600;
+            chartTb1.ChartAreas[0].AxisY.Minimum = 320;
+            chartTb1.ChartAreas[0].AxisY.Maximum = 360;
+
+            chartTcub.ChartAreas[0].AxisY.Minimum = 270;
+            chartTcub.ChartAreas[0].AxisY.Maximum = 440;
+            chartFf.ChartAreas[0].AxisY.Minimum = 250;
+            chartFf.ChartAreas[0].AxisY.Maximum = 370;
+            chartTd.ChartAreas[0].AxisY.Minimum = 280;
+            chartTd.ChartAreas[0].AxisY.Maximum = 310;
+            chartFd.ChartAreas[0].AxisY.Minimum = 1450;
+            chartFd.ChartAreas[0].AxisY.Maximum = 1600;
+
             radioButton2.Checked = true;
-            excelBtn.Enabled = true;
+            radioButton6.Checked = true;
+            radioButton9.Checked = true;
+            excelBtnBoliler.Enabled = true;
+            excelBtnDefleg.Enabled = true;
+            excelBtnColumn.Enabled = true;
         }
         int N = -1;
         Random rnd = new Random();
+        double Tr2Imit = 0;
         double FparaImit = 0;
         double Fr1Imit = 0;
         double Tr1Imit = 0;
-        double percent = 1;
-        double[] FparaData = new double[5000];
-        double[] Fr1Data = new double[5000];
-        double[] Tr1Data = new double[5000];
-        double[] Tr2Data = new double[5000];
-        string[] currTime = new string[5000];
+        double percentBoiler = 1;
+        double[] FparaData = new double[1800];
+        double[] Fr1Data = new double[1800];
+        double[] Tr1Data = new double[1800];
+        double[] Tr2Data = new double[1800];
+        string[] currTime = new string[1800];
+
+        double Tb2Imit = 0;
+        double FvImit = 0;
+        double Tb1Imit = 0;
+        double Fb1Imit = 0;
+        double percentDefleg = 1;
+        double[] FvData = new double[1800];
+        double[] Tb2Data = new double[1800];
+        double[] Tb1Data = new double[1800];
+        double[] Fb1Data = new double[1800];
+
+        double TcubImit = 0;
+        double FfImit = 0;
+        double TdImit = 0;
+        double FdImit = 0;
+        double percentColumn = 1;
+        double[] FfData = new double[1800];
+        double[] TcubData = new double[1800];
+        double[] TdData = new double[1800];
+        double[] FdData = new double[1800];
+
+        string mode = "work";
         private void timer1_Tick(object sender, EventArgs e)
         {
-            percent = getWorkMode(percent);
-            switch(rnd.Next(0, 3))
+            if (ImitationTabs.SelectedTab.Text == "Кип\'ятильник")
             {
-                case 0:
-                    FparaImit = process.Fpara1 * percent + process.Fpara1 * percent * (rnd.Next(-2, 2) / 100.0);
-                    Fr1Imit = process.Frecur11;
-                    Tr1Imit = process.Trecur11;
-                    FparaLabel.BackColor = Color.LightCoral;
-                    Fr1Label.BackColor = Color.Transparent;
-                    Tr1Label.BackColor = Color.Transparent;
-                    break;
-                case 1:
-                    FparaImit = process.Fpara1 * percent;
-                    Fr1Imit = process.Frecur11 + process.Frecur11 * (rnd.Next(-1, 1) / 200.0);
-                    Tr1Imit = process.Trecur11;
-                    FparaLabel.BackColor = Color.Transparent;
-                    Fr1Label.BackColor = Color.LightCoral;
-                    Tr1Label.BackColor = Color.Transparent;
-                    break;
-                case 2:
-                    FparaImit = process.Fpara1 * percent;
-                    Fr1Imit = process.Frecur11;
-                    Tr1Imit = process.Trecur11 + process.Trecur11 * (rnd.Next(-2, 2) / 100.0);
-                    FparaLabel.BackColor = Color.Transparent;
-                    Fr1Label.BackColor = Color.Transparent;
-                    Tr1Label.BackColor = Color.LightCoral;
-                    break;
-                default:
-                    FparaImit = process.Fpara1 * percent + process.Fpara1 * percent * (rnd.Next(-2, 2) / 100.0);
-                    Fr1Imit = process.Frecur11;
-                    Tr1Imit = process.Trecur11;
-                    FparaLabel.BackColor = Color.LightCoral;
-                    Fr1Label.BackColor = Color.Transparent;
-                    Tr1Label.BackColor = Color.Transparent;
-                    break;
+                if (radioButton1.Checked)
+                {
+                    mode = "min";
+                }
+                else if (radioButton2.Checked)
+                {
+                    mode = "work";
+                }
+                else
+                {
+                    mode = "max";
+                }
+                percentBoiler = getWorkMode(percentBoiler, mode, 0.85, 1.15);
+                
             }
             
-            
-            double mainParamValue = process.Tr2Fp(FparaImit, Fr1Imit, Tr1Imit);
-            chartTr2.Series[0].Points.AddXY(N, mainParamValue);
+            if (ImitationTabs.SelectedTab.Text == "Дефлегматор")
+            {
+                if (radioButton4.Checked)
+                {
+                    mode = "min";
+                }
+                else if (radioButton6.Checked)
+                {
+                    mode = "work";
+                }
+                else
+                {
+                    mode = "max";
+                }
+                percentDefleg = getWorkMode(percentDefleg, mode, 0.95, 1.05);
+            }
+
+            if (ImitationTabs.SelectedTab.Text == "Ректифікаційна колона")
+            {
+                if (radioButton7.Checked)
+                {
+                    mode = "min";
+                }
+                else if (radioButton9.Checked)
+                {
+                    mode = "work";
+                }
+                else
+                {
+                    mode = "max";
+                }
+                percentColumn = getWorkMode(percentColumn, mode, 0.9, 1.1);
+            }
+
+            RandomBoilerParameter();
+            RandomDeflegParameter();
+            RandomColumnParameter();
+
+            Tr2Imit = process.Tr2Fp(FparaImit, Fr1Imit, Tr1Imit);
+            chartTr2.Series[0].Points.AddXY(N, Tr2Imit);
             chartFpara.Series[0].Points.AddXY(N, FparaImit);
             chartFr1.Series[0].Points.AddXY(N, Fr1Imit);
             chartTr1.Series[0].Points.AddXY(N, Tr1Imit);
 
+            Tb2Imit = process.Tb2Fv(FvImit, Tb1Imit, Fb1Imit);
+            chartTb2.Series[0].Points.AddXY(N, Tb2Imit);
+            chartFv.Series[0].Points.AddXY(N, FvImit);
+            chartTb1.Series[0].Points.AddXY(N, Tb1Imit);
+            chartFb1.Series[0].Points.AddXY(N, Fb1Imit);
+
+            TcubImit = process.TcubFf(FfImit, TdImit, FdImit);
+            chartTcub.Series[0].Points.AddXY(N, TcubImit);
+            chartFf.Series[0].Points.AddXY(N, FfImit);
+            chartTd.Series[0].Points.AddXY(N, TdImit);
+            chartFd.Series[0].Points.AddXY(N, FdImit);
             if (N >= 0)
             {
                 currTime[N] = DateTime.Now.ToLongTimeString();
                 FparaData[N] = FparaImit;
                 Fr1Data[N] = Fr1Imit;
                 Tr1Data[N] = Tr1Imit;
-                Tr2Data[N] = mainParamValue;
-            }
-            
+                Tr2Data[N] = Tr2Imit;
 
-            mainParamLabel.Text = "Tr2 = " + mainParamValue.ToString("F2") + " K";
+                FvData[N] = FvImit;
+                Tb2Data[N] = Tb2Imit;
+                Fb1Data[N] = Fb1Imit;
+                Tb1Data[N] = Tb1Imit;
+
+                FfData[N] = FfImit;
+                TcubData[N] = TcubImit;
+                FdData[N] = FdImit;
+                TdData[N] = TdImit;
+            }
+
+
+            mainParamLabel.Text = "Tr2 = " + Tr2Imit.ToString("F2") + " K";
             FparaLabel.Text = "Fp = " + FparaImit.ToString("F2") + " м^3/год";
             Fr1Label.Text = "Fr1 = " + Fr1Imit.ToString("F2") + " м^3/год";
             Tr1Label.Text = "Tr1 = " + Tr1Imit.ToString("F2") + " K";
 
+            Tb2Label.Text = "Tf = " + Tb2Imit.ToString("F2") + " K";
+            FvLabel.Text = "Fv = " + FvImit.ToString("F2") + " м^3/год";
+            Tb1Label.Text = "Tb1 = " + Tb1Imit.ToString("F2") + " K";
+            Fb1Label.Text = "Fb1 = " + Fb1Imit.ToString("F2") + " м^3/год";
+
+            TcubLabel.Text = "Tкуб = " + TcubImit.ToString("F2") + " K";
+            FfLabel.Text = "Fф = " + FfImit.ToString("F2") + " м^3/год";
+            TdLabel.Text = "Tд = " + TdImit.ToString("F2") + " K";
+            FdLabel.Text = "Fд = " + FdImit.ToString("F2") + " м^3/год";
 
             ++N;
             if (N < 6)
@@ -1161,6 +1285,20 @@ namespace RectificationProcess
                 chartFr1.ChartAreas[0].AxisX.Maximum = 6;
                 chartTr1.ChartAreas[0].AxisX.Minimum = 0;
                 chartTr1.ChartAreas[0].AxisX.Maximum = 6;
+
+                chartFv.ChartAreas[0].AxisX.Minimum = 0;
+                chartFv.ChartAreas[0].AxisX.Maximum = 6;
+                chartTb1.ChartAreas[0].AxisX.Minimum = 0;
+                chartTb1.ChartAreas[0].AxisX.Maximum = 6;
+                chartFb1.ChartAreas[0].AxisX.Minimum = 0;
+                chartFb1.ChartAreas[0].AxisX.Maximum = 6;
+
+                chartFf.ChartAreas[0].AxisX.Minimum = 0;
+                chartFf.ChartAreas[0].AxisX.Maximum = 6;
+                chartTd.ChartAreas[0].AxisX.Minimum = 0;
+                chartTd.ChartAreas[0].AxisX.Maximum = 6;
+                chartFd.ChartAreas[0].AxisX.Minimum = 0;
+                chartFd.ChartAreas[0].AxisX.Maximum = 6;
             }
             else
             {
@@ -1170,57 +1308,175 @@ namespace RectificationProcess
                 chartFr1.ChartAreas[0].AxisX.Maximum = N;
                 chartTr1.ChartAreas[0].AxisX.Minimum = N - 6;
                 chartTr1.ChartAreas[0].AxisX.Maximum = N;
+
+                chartFv.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartFv.ChartAreas[0].AxisX.Maximum = N;
+                chartFb1.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartFb1.ChartAreas[0].AxisX.Maximum = N;
+                chartTb1.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartTb1.ChartAreas[0].AxisX.Maximum = N;
+
+                chartFf.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartFf.ChartAreas[0].AxisX.Maximum = N;
+                chartFd.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartFd.ChartAreas[0].AxisX.Maximum = N;
+                chartTd.ChartAreas[0].AxisX.Minimum = N - 6;
+                chartTd.ChartAreas[0].AxisX.Maximum = N;
             }
             if (N <= 10)
             {
                 chartTr2.ChartAreas[0].AxisX.Minimum = 0;
                 chartTr2.ChartAreas[0].AxisX.Maximum = 10;
+
+                chartTb2.ChartAreas[0].AxisX.Minimum = 0;
+                chartTb2.ChartAreas[0].AxisX.Maximum = 10;
+
+                chartTcub.ChartAreas[0].AxisX.Minimum = 0;
+                chartTcub.ChartAreas[0].AxisX.Maximum = 10;
             }
             else
             {
                 chartTr2.ChartAreas[0].AxisX.Minimum = N - 10;
                 chartTr2.ChartAreas[0].AxisX.Maximum = N;
+
+                chartTb2.ChartAreas[0].AxisX.Minimum = N - 10;
+                chartTb2.ChartAreas[0].AxisX.Maximum = N;
+
+                chartTcub.ChartAreas[0].AxisX.Minimum = N - 10;
+                chartTcub.ChartAreas[0].AxisX.Maximum = N;
             }
-
-
-
+            
+        }
+        private void RandomColumnParameter()
+        {
+            switch (rnd.Next(0, 3))
+            {
+                case 0:
+                    FfImit = process.Fflegmy1 * percentColumn + process.Fflegmy1 * percentColumn * (rnd.Next(-1, 1) / 100.0);
+                    FdImit = process.Fdist1;
+                    TdImit = process.Tdist1;
+                    FfLabel.BackColor = Color.LightCoral;
+                    FdLabel.BackColor = Color.Transparent;
+                    TdLabel.BackColor = Color.Transparent;
+                    break;
+                case 1:
+                    FfImit = process.Fflegmy1 * percentColumn;
+                    FdImit = process.Fdist1 + process.Fdist1 * (rnd.Next(-1, 1) / 100.0);
+                    TdImit = process.Tdist1;
+                    FfLabel.BackColor = Color.Transparent;
+                    FdLabel.BackColor = Color.LightCoral;
+                    TdLabel.BackColor = Color.Transparent;
+                    break;
+                case 2:
+                    FfImit = process.Fflegmy1 * percentColumn;
+                    FdImit = process.Fdist1;
+                    TdImit = process.Tdist1 + process.Tdist1 * (rnd.Next(-1, 1) / 100.0);
+                    FfLabel.BackColor = Color.Transparent;
+                    FdLabel.BackColor = Color.LightCoral;
+                    TdLabel.BackColor = Color.Transparent;
+                    break;
+            }
+        }
+        private void RandomDeflegParameter()
+        {
+            switch (rnd.Next(0, 3))
+            {
+                case 0:
+                    FvImit = process.Fvoda1 * percentDefleg + process.Fvoda1 * percentDefleg * (rnd.Next(-1, 1) / 100.0);
+                    Fb1Imit = process.Fbinar11;
+                    Tb1Imit = process.Tbinar11;
+                    FvLabel.BackColor = Color.LightCoral;
+                    Fb1Label.BackColor = Color.Transparent;
+                    Tb1Label.BackColor = Color.Transparent;
+                    break;
+                case 1:
+                    FvImit = process.Fvoda1 * percentDefleg;
+                    Fb1Imit = process.Fbinar11 + process.Fbinar11 * (rnd.Next(-1, 1) / 100.0);
+                    Tb1Imit = process.Tbinar11;
+                    FvLabel.BackColor = Color.Transparent;
+                    Fb1Label.BackColor = Color.LightCoral;
+                    Tb1Label.BackColor = Color.Transparent;
+                    break;
+                case 2:
+                    FvImit = process.Fvoda1 * percentDefleg;
+                    Fb1Imit = process.Fbinar11;
+                    Tb1Imit = process.Tbinar11 + process.Tbinar11 * (rnd.Next(-1, 1) / 100.0);
+                    FvLabel.BackColor = Color.Transparent;
+                    Fb1Label.BackColor = Color.LightCoral;
+                    Tb1Label.BackColor = Color.Transparent;
+                    break;
+            }
+        }
+        private void RandomBoilerParameter()
+        {
+            switch (rnd.Next(0, 3))
+            {
+                case 0:
+                    FparaImit = process.Fpara1 * percentBoiler + process.Fpara1 * percentBoiler * (rnd.Next(-2, 2) / 100.0);
+                    Fr1Imit = process.Frecur11;
+                    Tr1Imit = process.Trecur11;
+                    FparaLabel.BackColor = Color.LightCoral;
+                    Fr1Label.BackColor = Color.Transparent;
+                    Tr1Label.BackColor = Color.Transparent;
+                    break;
+                case 1:
+                    FparaImit = process.Fpara1 * percentBoiler;
+                    Fr1Imit = process.Frecur11 + process.Frecur11 * (rnd.Next(-1, 1) / 200.0);
+                    Tr1Imit = process.Trecur11;
+                    FparaLabel.BackColor = Color.Transparent;
+                    Fr1Label.BackColor = Color.LightCoral;
+                    Tr1Label.BackColor = Color.Transparent;
+                    break;
+                case 2:
+                    FparaImit = process.Fpara1 * percentBoiler;
+                    Fr1Imit = process.Frecur11;
+                    Tr1Imit = process.Trecur11 + process.Trecur11 * (rnd.Next(-2, 2) / 100.0);
+                    FparaLabel.BackColor = Color.Transparent;
+                    Fr1Label.BackColor = Color.Transparent;
+                    Tr1Label.BackColor = Color.LightCoral;
+                    break;
+            }
         }
 
-        private double getWorkMode(double currentPercent)
+        private double getWorkMode(double currentPercent, string workMode, double min, double max)
         {
+            double step = (max - min) / 10;
             //Метод для вибору режиму роботи апарату (Мінімальне навантаження, робочий режим, максимальне навантаження)
             double _percent = currentPercent;
-            if (radioButton1.Checked)
+            //Режим мінімального навантаження
+            if (workMode == "min")
             {
-                if (_percent >= 0.85)
+                if (_percent >= min)
                 {
-                    _percent -= 0.03;
+                    _percent -= step;
                 }
                 else
                 {
-                    _percent = 0.85;
+                    _percent = min;
                 }
             }
-            if (radioButton2.Checked)
+            //Робочий режим
+            if (workMode == "work")
             {
                 if (_percent > 1.0)
                 {
-                    _percent -= 0.03;
+                    _percent -= step;
                 }
                 if (_percent < 1.0)
                 {
-                    _percent += 0.03;
+                    _percent += step;
                 } 
             }
-            if (radioButton3.Checked)
+            //Режим максимального навантаження
+            if (workMode == "max")
             {
-                if (_percent <= 1.15)
+                if (_percent <= max)
                 {
-                    _percent += 0.03;
+                    _percent += step;
                 }
                 else
                 {
-                    _percent = 1.15;
+                    _percent = max;
                 }
             }
             return _percent;
@@ -1296,12 +1552,199 @@ namespace RectificationProcess
                CategoryTitle: "Час, сек",
                ValueTitle: "Температура рециркуляту, K");
 
-            nws.SaveAs("D:\\BoilerData.xlsx");
+            nws.SaveAs(progPath + "\\BoilerData.xlsx");
             nwb.Close(false);
             XL.Quit();
             Cursor.Current = Cursors.Default;
-            MessageBox.Show("Дані записано у файл D:\\BoilerData.xlsx", "Експорт даних до Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Дані записано у файл "+ progPath + "\\BoilerData.xlsx", "Експорт даних до Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //Write to Excel
+        }
+
+        private void excelBtnDefleg_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            //Write to Excel
+            Cursor.Current = Cursors.WaitCursor;
+            var XL = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook nwb = null;
+            Microsoft.Office.Interop.Excel._Worksheet nws = null;
+            XL.Visible = false;
+            nwb = XL.Workbooks.Add();
+            nws = (Microsoft.Office.Interop.Excel._Worksheet)nwb.ActiveSheet;
+            //Get a new workbook.
+            //double[] noEmptyData = new double[N];
+            nws.Cells[1, 1] = "Час";
+            nws.Cells[1, 2] = "Fv, м^3/год";
+            nws.Cells[1, 3] = "Fb1, м^3/год";
+            nws.Cells[1, 4] = "Tb1, K";
+            nws.Cells[1, 5] = "Tb2, K";
+            for (int i = 0; i < N; i++)
+            {
+                nws.Cells[i + 2, 1] = currTime[i];
+                nws.Cells[i + 2, 2] = FvData[i];
+                nws.Cells[i + 2, 3] = Fb1Data[i];
+                nws.Cells[i + 2, 4] = Tb1Data[i];
+                nws.Cells[i + 2, 5] = Tb2Data[i];
+            }
+
+            //Add Chart
+            var charts = nws.ChartObjects() as Microsoft.Office.Interop.Excel.ChartObjects;
+            var chartObject = charts.Add(300, 30, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartFv = chartObject.Chart;
+            var rangeFvoda = nws.get_Range("B2", "B" + (N).ToString());
+            chartFv.SetSourceData(rangeFvoda);
+            chartFv.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartFv.ChartWizard(Source: rangeFvoda,
+               Title: "Витрата води",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Витрата води, м.куб/год.");
+
+            var chartObjectFb1 = charts.Add(300, 240, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartFb1 = chartObjectFb1.Chart;
+            var rangeFb1 = nws.get_Range("C2", "C" + (N).ToString());
+            chartFb1.SetSourceData(rangeFb1);
+            chartFb1.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartFb1.ChartWizard(Source: rangeFb1,
+               Title: "Витрата бінарної суміші 1",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Витрата бінарної суміші, м.куб/год.");
+
+            var chartObjectTb1 = charts.Add(300, 450, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartTb1 = chartObjectTb1.Chart;
+            var rangeTb1 = nws.get_Range("D2", "D" + (N).ToString());
+            chartTb1.SetSourceData(rangeTb1);
+            chartTb1.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartTb1.ChartWizard(Source: rangeTb1,
+               Title: "Температура бінарної суміші 1",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Температура бінарної суміші, K");
+
+            var chartObjectTb2 = charts.Add(620, 30, 500, 400) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartTb2 = chartObjectTb2.Chart;
+            var rangeTb2 = nws.get_Range("E2", "E" + (N).ToString());
+            chartTb2.SetSourceData(rangeTb2);
+            chartTb2.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartTb2.ChartWizard(Source: rangeTb2,
+               Title: "Температура бінарної суміші 2",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Температура бінарної суміші, K");
+
+            nws.SaveAs(progPath + "\\DeflegmatorData.xlsx");
+            nwb.Close(false);
+            XL.Quit();
+            Cursor.Current = Cursors.Default;
+            MessageBox.Show("Дані записано у файл " + progPath + "\\DeflegmatorData.xlsx", "Експорт даних до Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //Write to Excel
+        }
+
+        private void excelBtnColumn_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            //Write to Excel
+            Cursor.Current = Cursors.WaitCursor;
+            var XL = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel._Workbook nwb = null;
+            Microsoft.Office.Interop.Excel._Worksheet nws = null;
+            XL.Visible = false;
+            nwb = XL.Workbooks.Add();
+            nws = (Microsoft.Office.Interop.Excel._Worksheet)nwb.ActiveSheet;
+            //Get a new workbook.
+            //double[] noEmptyData = new double[N];
+            nws.Cells[1, 1] = "Час";
+            nws.Cells[1, 2] = "Fф, м^3/год";
+            nws.Cells[1, 3] = "Fд, м^3/год";
+            nws.Cells[1, 4] = "Tд, K";
+            nws.Cells[1, 5] = "Tкуб, K";
+            for (int i = 0; i < N; i++)
+            {
+                nws.Cells[i + 2, 1] = currTime[i];
+                nws.Cells[i + 2, 2] = FfData[i];
+                nws.Cells[i + 2, 3] = FdData[i];
+                nws.Cells[i + 2, 4] = TdData[i];
+                nws.Cells[i + 2, 5] = TcubData[i];
+            }
+
+            //Add Chart
+            var charts = nws.ChartObjects() as Microsoft.Office.Interop.Excel.ChartObjects;
+            var chartObject = charts.Add(300, 30, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartFf = chartObject.Chart;
+            var rangeFf = nws.get_Range("B2", "B" + (N).ToString());
+            chartFf.SetSourceData(rangeFf);
+            chartFf.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartFf.ChartWizard(Source: rangeFf,
+               Title: "Витрата флегми",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Витрата флегми, м.куб/год.");
+
+            var chartObjectFd = charts.Add(300, 240, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartFd = chartObjectFd.Chart;
+            var rangeFd = nws.get_Range("C2", "C" + (N).ToString());
+            chartFd.SetSourceData(rangeFd);
+            chartFd.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartFd.ChartWizard(Source: rangeFd,
+               Title: "Витрата дистиляту",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Витрата дистиляту, м.куб/год.");
+
+            var chartObjectTd = charts.Add(300, 450, 300, 200) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartTd = chartObjectTd.Chart;
+            var rangeTd = nws.get_Range("D2", "D" + (N).ToString());
+            chartTd.SetSourceData(rangeTd);
+            chartTd.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartTd.ChartWizard(Source: rangeTd,
+               Title: "Температура дистиляту",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Температура дистиляту, K");
+
+            var chartObjectTcub = charts.Add(620, 30, 500, 400) as Microsoft.Office.Interop.Excel.ChartObject;
+            var chartTcub = chartObjectTcub.Chart;
+            var rangeTcub = nws.get_Range("E2", "E" + (N).ToString());
+            chartTcub.SetSourceData(rangeTcub);
+            chartTcub.ChartType = Microsoft.Office.Interop.Excel.XlChartType.xlLineMarkers;
+            chartTcub.ChartWizard(Source: rangeTcub,
+               Title: "Температура кубового залишку",
+               CategoryTitle: "Час, сек",
+               ValueTitle: "Температура кубового залишку, K");
+
+            nws.SaveAs(progPath + "\\ColumnData.xlsx");
+            nwb.Close(false);
+            XL.Quit();
+            Cursor.Current = Cursors.Default;
+            MessageBox.Show("Дані записано у файл " + progPath + "\\ColumnData.xlsx", "Експорт даних до Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //Write to Excel
+        }
+
+        private void pictureBoxBoiler_MouseMove(object sender, MouseEventArgs e)
+        {
+            pictureBoxBoiler.Image = Properties.Resources.boilerInner;
+            
+            
+
+        }
+
+        private void pictureBoxBoiler_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBoxBoiler.Image = null;
+        }
+
+        private void pictureBoxDefleg_MouseMove(object sender, MouseEventArgs e)
+        {
+            pictureBoxDefleg.Image = Properties.Resources.deflegInner;
+        }
+
+        private void pictureBoxDefleg_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBoxDefleg.Image = null;
+        }
+
+        private void pictureBoxColumn_MouseMove(object sender, MouseEventArgs e)
+        {
+            pictureBoxColumn.Image = Properties.Resources.columnInner;
+        }
+
+        private void pictureBoxColumn_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBoxColumn.Image = null;
         }
 
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1314,7 +1757,6 @@ namespace RectificationProcess
             process.printResult(labelK, "", K4);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
-
         private void кипятильникToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showStatic();
@@ -1325,7 +1767,6 @@ namespace RectificationProcess
             process.printResult(labelK, "", K7);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
-
         private void ректифікаційнаКолонаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showStatic();
@@ -1379,7 +1820,6 @@ namespace RectificationProcess
         {
             showProcess();
         }
-
         private void showImitation()
         {
             timeEdit.Visible = false;

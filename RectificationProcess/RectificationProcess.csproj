@@ -85,9 +85,6 @@
     <None Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Process.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\boiler.png" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +115,27 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deflegmator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\column.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boilerInner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deflegInner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\columnInner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Process.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -73,6 +73,16 @@ namespace RectificationProcess.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap boiler_control {
+            get {
+                object obj = ResourceManager.GetObject("boiler_control", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap boilerInner {
             get {
                 object obj = ResourceManager.GetObject("boilerInner", resourceCulture);
@@ -126,6 +136,16 @@ namespace RectificationProcess.Properties {
         internal static System.Drawing.Bitmap excel {
             get {
                 object obj = ResourceManager.GetObject("excel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MIK_25 {
+            get {
+                object obj = ResourceManager.GetObject("MIK_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

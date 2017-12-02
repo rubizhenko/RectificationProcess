@@ -117,6 +117,7 @@ namespace ComportMath
             }
 
         }
+
         public static void drawStepResponse(FunctionDelegate W, object chart, object table)
         {
             var plot = chart as System.Windows.Forms.DataVisualization.Charting.Chart;
@@ -157,5 +158,6 @@ namespace ComportMath
                 
             } while (steps <= time * 1.15);
         }
+    
     }
 }

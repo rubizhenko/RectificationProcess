@@ -234,6 +234,7 @@ namespace RectificationProcess
             public double Tkondpara1 { get => Tkondpara; set => Tkondpara = value; }
             public double Ckondpara1 { get => Ckondpara; set => Ckondpara = value; }
 
+ 
             public double Tr2Fp(double Fp, double Fr1, double Tr1)
             {
                 double Tr2 = 0;
@@ -812,11 +813,10 @@ namespace RectificationProcess
         private void preventTextInput(object input)
         {
             var textInput = input as System.Windows.Forms.TextBox;
-            if (Regex.IsMatch(textInput.Text, @"[^0-9.,]"))
+            if (Regex.IsMatch(textInput.Text, @"[^\d,]"))
             {
-                textInput.Text = textInput.Text.Replace(".", ",");
-                MessageBox.Show("Тільки цифри і десятковий дільник кома чи крапка!");
-                textInput.Text = Regex.Replace(textInput.Text, @"[^0-9,]", String.Empty);
+                MessageBox.Show("Тільки цифри і десятковий дільник кома!");
+                textInput.Text = Regex.Replace(textInput.Text, @"[^\d,]", String.Empty);
             }
         }
 
@@ -1747,6 +1747,89 @@ namespace RectificationProcess
             pictureBoxColumn.Image = null;
         }
 
+
+        double Kreg = 0.43;
+        double Ti = 1.6;
+        double Tr2zavd = 383;
+        double Tr2prev = 383;
+        double delta = 0;
+        double Wzam(double s)
+        {
+            double Wob = 3.024 / (0.413 * s * s + 1.153 * s + 1);
+            double WregPI = (Kreg * s + Ti) / s;
+            double Wroz = Wob * WregPI;
+
+            return delta*(Wroz / (1 + Wroz)) / s;
+        }
+        double Wker(double s)
+        {
+            double Wob = 3.024 / (0.413 * s * s + 1.153 * s + 1);
+            double WregPI = (Kreg * s + Ti) / s;
+            double Wroz = Wob * WregPI;
+
+            return delta*(WregPI / (1 + Wroz)) / s;
+        }
+        int timer2Time = 0;
+        double responseTime = 0;
+        double Ht = 0;
+        double Htker = 0;
+        private void регулюванняToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer2.Enabled = true;
+            showControl();
+            chart2.ChartAreas[0].AxisX.Interval = 1;
+            chart2.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
+            chart2.ChartAreas[0].AxisY.Minimum = Double.NaN;
+            chart2.ChartAreas[0].AxisY.Maximum = Double.NaN;
+
+            chart3.ChartAreas[0].AxisX.Interval = 1;
+            chart3.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
+            trackBar1.Minimum = (int)(process.Trecur21 * 0.85);
+            trackBar1.Maximum = (int)(process.Trecur21 * 1.15);
+            trackBar1.Value = (int)process.Trecur21;
+            textBoxKreg.Text = Kreg.ToString();
+            textBoxTi.Text = Ti.ToString();
+            label2.Text = Tr2zavd.ToString();
+            label6.Text = Htker.ToString();
+        }
+        
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            double interval = timer2Time * timer2.Interval/1000.0;
+            if (interval <= 10)
+            {
+                chart2.ChartAreas[0].AxisX.Minimum = 0;
+                chart2.ChartAreas[0].AxisX.Maximum = 10;
+                chart3.ChartAreas[0].AxisX.Minimum = 0;
+                chart3.ChartAreas[0].AxisX.Maximum = 10;
+            }
+            else
+            {
+                chart2.ChartAreas[0].AxisX.Minimum = timer2Time / 10.0-10;
+                chart2.ChartAreas[0].AxisX.Maximum = timer2Time / 10.0;
+                chart3.ChartAreas[0].AxisX.Minimum = timer2Time / 10.0 - 10;
+                chart3.ChartAreas[0].AxisX.Maximum = timer2Time / 10.0;
+            }
+            double invCalc = 0;
+            double invCalcker = 0;
+            invCalc = Laplace.InverseTransform(Wzam, responseTime + 0.0001);
+            invCalcker = Laplace.InverseTransform(Wker, responseTime + 0.0001);
+            Ht = invCalc + Tr2zavd;
+            Htker = invCalcker;
+            chart2.Series[0].Points.AddXY(interval - 0.1, Ht);
+            chart3.Series[0].Points.AddXY(interval - 0.1, Htker);
+            label3.Text = Ht.ToString("N1");
+            label6.Text = Htker.ToString("N1");
+            if (interval % 1 == 0)
+            {
+                dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;
+                dataGridView1.Rows.Add((timer2Time/10.0).ToString("N0"), Ht.ToString("N2"), Htker.ToString("N2"));
+            }
+            
+            timer2Time++;
+            responseTime += 0.1;
+        }
+        
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showStatic();
@@ -1757,6 +1840,41 @@ namespace RectificationProcess
             process.printResult(labelK, "", K4);
             tabControl1.TabPages[tabControl1.SelectedIndex].Controls.Add(chart1);
         }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            delta = trackBar1.Value - Tr2prev;
+            responseTime = 0.000001;
+            Tr2prev = trackBar1.Value;
+            Tr2zavd = Ht;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            label2.Text = trackBar1.Value.ToString();
+            
+        }
+
+        private void textBoxKreg_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(textBoxKreg);
+            if (textBoxKreg.Text.Length != 0)
+            {
+                Kreg = Convert.ToDouble(textBoxKreg.Text);
+            }
+        }
+
+        private void textBoxTi_TextChanged(object sender, EventArgs e)
+        {
+            preventTextInput(textBoxTi);
+            if (textBoxTi.Text.Length != 0)
+            {
+                Ti = Convert.ToDouble(textBoxTi.Text);
+            }
+        }
+
+ 
+
         private void кипятильникToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showStatic();
@@ -1820,8 +1938,24 @@ namespace RectificationProcess
         {
             showProcess();
         }
+        private void showControl()
+        {
+            controllerPanel.Visible = true;
+            timeEdit.Visible = false;
+            dynDataGridView.Visible = false;
+            label1.Visible = false;
+            tabControl1.Visible = false;
+            labelK.Visible = false;
+            labelX.Visible = false;
+            labelY.Visible = false;
+            processPanel.Visible = false;
+            ImitationTabs.Visible = false;
+            timer1.Enabled = false;
+        }
         private void showImitation()
         {
+            timer2.Enabled = false;
+            controllerPanel.Visible = false;
             timeEdit.Visible = false;
             dynDataGridView.Visible = false;
             label1.Visible = false;
@@ -1835,6 +1969,8 @@ namespace RectificationProcess
         }
         private void showStatic()
         {
+            timer2.Enabled = false;
+            controllerPanel.Visible = false;
             staticFuncs = true;
             dynamicFuncs = false;
             timeEdit.Visible = false;
@@ -1844,11 +1980,15 @@ namespace RectificationProcess
             labelK.Visible = true;
             labelX.Visible = true;
             labelY.Visible = true;
+            labelX.TextAlign = ContentAlignment.TopCenter;
+            labelY.TextAlign = ContentAlignment.TopCenter;
             processPanel.Visible = false;
             ImitationTabs.Visible = false;
         }
         private void showDynamic()
         {
+            timer2.Enabled = false;
+            controllerPanel.Visible = false;
             staticFuncs = false;
             dynamicFuncs = true;
             timeEdit.Visible = true;
@@ -1864,6 +2004,8 @@ namespace RectificationProcess
         }
         private void showProcess()
         {
+            timer2.Enabled = false;
+            controllerPanel.Visible = false;
             dynDataGridView.Visible = false;
             label1.Visible = false;
             timeEdit.Visible = false;
@@ -1882,8 +2024,5 @@ namespace RectificationProcess
             dynDataGridView.Columns[0].Name = "t, сек.";
 
         }
-
-
-
     }
 }

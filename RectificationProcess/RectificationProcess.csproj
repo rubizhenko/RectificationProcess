@@ -137,5 +137,11 @@
   <ItemGroup>
     <None Include="Resources\Process.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MIK-25.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boiler-control.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

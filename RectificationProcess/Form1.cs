@@ -1784,13 +1784,29 @@ namespace RectificationProcess
 
             chart3.ChartAreas[0].AxisX.Interval = 1;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
-            trackBar1.Minimum = (int)(process.Trecur21 * 0.85);
-            trackBar1.Maximum = (int)(process.Trecur21 * 1.15);
+
+            //мінімільне та максимальне значення вихідного сигналу регулятра для бойлера
+            int boilerMinRegOutput = (int)(process.Trecur21 * 0.85);
+            int boilerMaxRegOutput = (int)(process.Trecur21 * 1.15);
+
+            trackBar1.Minimum = boilerMinRegOutput;
+            trackBar1.Maximum = boilerMaxRegOutput;
+
+            trackBar2.Minimum = (int)process.Fpara1 - 100;
+            trackBar2.Maximum = (int)process.Fpara1 + 100;
+
+            trackBar2.Value = (int)process.Fpara1;
+
             trackBar1.Value = (int)process.Trecur21;
             textBoxKreg.Text = Kreg.ToString();
             textBoxTi.Text = Ti.ToString();
             label2.Text = Tr2zavd.ToString();
-            label6.Text = Htker.ToString();
+
+            double boilerRegOut = (trackBar1.Value - boilerMinRegOutput) / (double)(boilerMaxRegOutput - boilerMinRegOutput) * 16.0 + 4.0;
+            label6.Text = boilerRegOut.ToString("N1");
+
+            label8.Text = "Tr2 = " + Tr2zavd.ToString("N2") + " K";
+            label9.Text = "Fp = " + process.Fpara1.ToString("N2") + " м.куб/год";
         }
         
         private void timer2_Tick(object sender, EventArgs e)
@@ -1819,11 +1835,32 @@ namespace RectificationProcess
             chart2.Series[0].Points.AddXY(interval - 0.1, Ht);
             chart3.Series[0].Points.AddXY(interval - 0.1, Htker);
             label3.Text = Ht.ToString("N1");
-            label6.Text = Htker.ToString("N1");
+
+            double boilerMikOut = (Ht - trackBar1.Minimum) / (double)(trackBar1.Maximum - trackBar1.Minimum) * 16.0 + 4.0;
+            if (boilerMikOut<4)
+            {
+                boilerMikOut = 4;
+
+            }
+            if (boilerMikOut > 20)
+            {
+                boilerMikOut = 20;
+            }
+            label6.Text = boilerMikOut.ToString("N1");
+
+            double FparaKer = process.Fpara1 + Htker;
+            
             if (interval % 1 == 0)
             {
                 dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;
                 dataGridView1.Rows.Add((timer2Time/10.0).ToString("N0"), Ht.ToString("N2"), Htker.ToString("N2"));
+                label8.Text = "Tr2 = " + Ht.ToString("N2") + " K";
+                label9.Text = "Fp = " + FparaKer.ToString("N2") + " м.куб/год";
+                if (FparaKer>trackBar2.Minimum && FparaKer< trackBar2.Maximum)
+                {
+                    trackBar2.Value = (int)FparaKer;
+                }
+               
             }
             
             timer2Time++;

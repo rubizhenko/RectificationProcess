@@ -143,6 +143,16 @@ namespace RectificationProcess.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MIK_21 {
+            get {
+                object obj = ResourceManager.GetObject("MIK_21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MIK_25 {
             get {
                 object obj = ResourceManager.GetObject("MIK_25", resourceCulture);

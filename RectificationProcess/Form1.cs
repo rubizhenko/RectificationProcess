@@ -1785,17 +1785,15 @@ namespace RectificationProcess
             chart3.ChartAreas[0].AxisX.Interval = 1;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
 
+            chart4.ChartAreas[0].AxisX.Interval = 1;
+            chart4.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
+
             //мінімільне та максимальне значення вихідного сигналу регулятра для бойлера
             int boilerMinRegOutput = (int)(process.Trecur21 * 0.85);
             int boilerMaxRegOutput = (int)(process.Trecur21 * 1.15);
 
             trackBar1.Minimum = boilerMinRegOutput;
             trackBar1.Maximum = boilerMaxRegOutput;
-
-            trackBar2.Minimum = (int)process.Fpara1 - 100;
-            trackBar2.Maximum = (int)process.Fpara1 + 100;
-
-            trackBar2.Value = (int)process.Fpara1;
 
             trackBar1.Value = (int)process.Trecur21;
             textBoxKreg.Text = Kreg.ToString();
@@ -1818,6 +1816,8 @@ namespace RectificationProcess
                 chart2.ChartAreas[0].AxisX.Maximum = 10;
                 chart3.ChartAreas[0].AxisX.Minimum = 0;
                 chart3.ChartAreas[0].AxisX.Maximum = 10;
+                chart4.ChartAreas[0].AxisX.Minimum = 0;
+                chart4.ChartAreas[0].AxisX.Maximum = 10;
             }
             else
             {
@@ -1825,6 +1825,8 @@ namespace RectificationProcess
                 chart2.ChartAreas[0].AxisX.Maximum = timer2Time / 10.0;
                 chart3.ChartAreas[0].AxisX.Minimum = timer2Time / 10.0 - 10;
                 chart3.ChartAreas[0].AxisX.Maximum = timer2Time / 10.0;
+                chart4.ChartAreas[0].AxisX.Minimum = timer2Time / 10.0 - 10;
+                chart4.ChartAreas[0].AxisX.Maximum = timer2Time / 10.0;
             }
             double invCalc = 0;
             double invCalcker = 0;
@@ -1832,20 +1834,14 @@ namespace RectificationProcess
             invCalcker = Laplace.InverseTransform(Wker, responseTime + 0.0001);
             Ht = invCalc + Tr2zavd;
             Htker = invCalcker;
+
+            double boilerMikOut = Htker * 8 / 110 + 12;
+
             chart2.Series[0].Points.AddXY(interval - 0.1, Ht);
-            chart3.Series[0].Points.AddXY(interval - 0.1, Htker);
+            chart3.Series[0].Points.AddXY(interval - 0.1, boilerMikOut);
+            chart4.Series[0].Points.AddXY(interval - 0.1, Htker+141);
             label3.Text = Ht.ToString("N1");
 
-            double boilerMikOut = (Ht - trackBar1.Minimum) / (double)(trackBar1.Maximum - trackBar1.Minimum) * 16.0 + 4.0;
-            if (boilerMikOut<4)
-            {
-                boilerMikOut = 4;
-
-            }
-            if (boilerMikOut > 20)
-            {
-                boilerMikOut = 20;
-            }
             label6.Text = boilerMikOut.ToString("N1");
 
             double FparaKer = process.Fpara1 + Htker;
@@ -1853,14 +1849,9 @@ namespace RectificationProcess
             if (interval % 1 == 0)
             {
                 dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;
-                dataGridView1.Rows.Add((timer2Time/10.0).ToString("N0"), Ht.ToString("N2"), Htker.ToString("N2"));
+                dataGridView1.Rows.Add((timer2Time/10.0).ToString("N0"), Ht.ToString("N2"), (Htker+141).ToString("N2"), boilerMikOut.ToString("N2"));
                 label8.Text = "Tr2 = " + Ht.ToString("N2") + " K";
                 label9.Text = "Fp = " + FparaKer.ToString("N2") + " м.куб/год";
-                if (FparaKer>trackBar2.Minimum && FparaKer< trackBar2.Maximum)
-                {
-                    trackBar2.Value = (int)FparaKer;
-                }
-               
             }
             
             timer2Time++;

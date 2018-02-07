@@ -1773,6 +1773,10 @@ namespace RectificationProcess
         double responseTime = 0;
         double Ht = 0;
         double Htker = 0;
+        double[] controlArray = new double[100];
+        bool isDetecting = false;
+        bool isDetectingDone = false;
+        int controlArrayCounter = 0;
         private void регулюванняToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer2.Enabled = true;
@@ -1809,6 +1813,7 @@ namespace RectificationProcess
         
         private void timer2_Tick(object sender, EventArgs e)
         {
+            
             double interval = timer2Time * timer2.Interval/1000.0;
             if (interval <= 10)
             {
@@ -1853,8 +1858,25 @@ namespace RectificationProcess
                 label8.Text = "Tr2 = " + Ht.ToString("N2") + " K";
                 label9.Text = "Fp = " + FparaKer.ToString("N2") + " м.куб/год";
             }
-            
+
+            if (isDetecting && controlArrayCounter<100) {
+                controlArray[controlArrayCounter] = Ht;
+                controlArrayCounter++;
+            } else if(controlArrayCounter>=100 && !isDetectingDone)
+            {
+                double sigma = Math.Abs(controlArray.Max() - trackBar1.Value) / trackBar1.Value;
+                double integral = 0;
+                for (int i = 0; i < controlArrayCounter; i++)
+                {
+                    integral += Math.Pow(trackBar1.Value - controlArray[i], 2);
+                }
+                dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.RowCount - 1;
+                dataGridView2.Rows.Add("Kreg="+Kreg.ToString("N2")+"; Ti="+Ti.ToString("N2"), (sigma*100).ToString("N2") + "%", integral.ToString("N2"));
+                isDetectingDone = true;
+            }
+
             timer2Time++;
+            
             responseTime += 0.1;
         }
         
@@ -1875,6 +1897,9 @@ namespace RectificationProcess
             responseTime = 0.000001;
             Tr2prev = trackBar1.Value;
             Tr2zavd = Ht;
+            isDetecting = true;
+            controlArrayCounter = 0;
+            isDetectingDone = false;
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -1901,7 +1926,15 @@ namespace RectificationProcess
             }
         }
 
- 
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+            isDetecting = false;
+        }
+
+        private void chart3_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void кипятильникToolStripMenuItem_Click(object sender, EventArgs e)
         {

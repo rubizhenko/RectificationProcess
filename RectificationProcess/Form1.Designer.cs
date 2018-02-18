@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
@@ -81,7 +82,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title10 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea15 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -90,6 +91,18 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend15 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title12 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea17 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend16 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title13 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea18 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend17 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title14 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend18 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title15 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -114,6 +127,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.t = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.KrTi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -204,19 +222,31 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.t = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.controllerPanel = new System.Windows.Forms.Panel();
+            this.btnDeflegmator = new System.Windows.Forms.Button();
+            this.btnBoiler = new System.Windows.Forms.Button();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.chart7 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label14 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -227,16 +257,21 @@
             this.textBoxKreg = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.chart6 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart5 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dynDataGridView)).BeginInit();
             this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.processPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processPicture)).BeginInit();
@@ -266,14 +301,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartTcub)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.controllerPanel.SuspendLayout();
+            this.tabControl3.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.tabPage9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
@@ -502,6 +545,53 @@
             this.tabPage6.TabIndex = 0;
             this.tabPage6.Text = "Параметри";
             this.toolTip1.SetToolTip(this.tabPage6, "Параметри якості регулювання\r\n");
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.t,
+            this.h,
+            this.Column1,
+            this.Column2});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(457, 123);
+            this.dataGridView1.TabIndex = 8;
+            // 
+            // t
+            // 
+            this.t.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.t.HeaderText = "t, сек";
+            this.t.Name = "t";
+            this.t.Width = 59;
+            // 
+            // h
+            // 
+            this.h.HeaderText = "Tr2, К";
+            this.h.Name = "h";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Fp, м.куб/год";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "МІК AO, mA";
+            this.Column2.Name = "Column2";
             // 
             // dataGridView2
             // 
@@ -840,7 +930,7 @@
             // 
             // processPicture
             // 
-            this.processPicture.Image = global::RectificationProcess.Properties.Resources.Process;
+            this.processPicture.Image = ((System.Drawing.Image)(resources.GetObject("processPicture.Image")));
             this.processPicture.Location = new System.Drawing.Point(9, 7);
             this.processPicture.Margin = new System.Windows.Forms.Padding(10);
             this.processPicture.Name = "processPicture";
@@ -1355,7 +1445,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::RectificationProcess.Properties.Resources.deflegmator;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(582, 61);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(455, 369);
@@ -1687,61 +1777,20 @@
             title10.Text = "Температура рециркуляту Tr2";
             this.chart2.Titles.Add(title10);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.t,
-            this.h,
-            this.Column1,
-            this.Column2});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(457, 123);
-            this.dataGridView1.TabIndex = 8;
-            // 
-            // t
-            // 
-            this.t.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.t.HeaderText = "t, сек";
-            this.t.Name = "t";
-            this.t.Width = 59;
-            // 
-            // h
-            // 
-            this.h.HeaderText = "Tr2, К";
-            this.h.Name = "h";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Fp, м.куб/год";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "МІК AO, mA";
-            this.Column2.Name = "Column2";
-            // 
             // controllerPanel
             // 
+            this.controllerPanel.Controls.Add(this.btnDeflegmator);
+            this.controllerPanel.Controls.Add(this.btnBoiler);
+            this.controllerPanel.Controls.Add(this.tabControl3);
             this.controllerPanel.Controls.Add(this.tabControl2);
             this.controllerPanel.Controls.Add(this.label12);
             this.controllerPanel.Controls.Add(this.label11);
             this.controllerPanel.Controls.Add(this.label10);
+            this.controllerPanel.Controls.Add(this.chart7);
             this.controllerPanel.Controls.Add(this.chart4);
+            this.controllerPanel.Controls.Add(this.label14);
             this.controllerPanel.Controls.Add(this.label9);
+            this.controllerPanel.Controls.Add(this.label13);
             this.controllerPanel.Controls.Add(this.label8);
             this.controllerPanel.Controls.Add(this.label7);
             this.controllerPanel.Controls.Add(this.label2);
@@ -1752,14 +1801,154 @@
             this.controllerPanel.Controls.Add(this.textBoxKreg);
             this.controllerPanel.Controls.Add(this.label5);
             this.controllerPanel.Controls.Add(this.label4);
+            this.controllerPanel.Controls.Add(this.trackBar2);
             this.controllerPanel.Controls.Add(this.trackBar1);
+            this.controllerPanel.Controls.Add(this.chart6);
             this.controllerPanel.Controls.Add(this.chart3);
+            this.controllerPanel.Controls.Add(this.chart5);
             this.controllerPanel.Controls.Add(this.chart2);
             this.controllerPanel.Controls.Add(this.pictureBox5);
             this.controllerPanel.Location = new System.Drawing.Point(5, 27);
             this.controllerPanel.Name = "controllerPanel";
             this.controllerPanel.Size = new System.Drawing.Size(1152, 702);
             this.controllerPanel.TabIndex = 9;
+            // 
+            // btnDeflegmator
+            // 
+            this.btnDeflegmator.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnDeflegmator.Location = new System.Drawing.Point(644, 0);
+            this.btnDeflegmator.Name = "btnDeflegmator";
+            this.btnDeflegmator.Size = new System.Drawing.Size(89, 23);
+            this.btnDeflegmator.TabIndex = 25;
+            this.btnDeflegmator.Text = "Дефлегматор";
+            this.btnDeflegmator.UseVisualStyleBackColor = false;
+            this.btnDeflegmator.Click += new System.EventHandler(this.btnDeflegmator_Click);
+            // 
+            // btnBoiler
+            // 
+            this.btnBoiler.BackColor = System.Drawing.Color.GreenYellow;
+            this.btnBoiler.Enabled = false;
+            this.btnBoiler.Location = new System.Drawing.Point(549, 0);
+            this.btnBoiler.Name = "btnBoiler";
+            this.btnBoiler.Size = new System.Drawing.Size(89, 23);
+            this.btnBoiler.TabIndex = 25;
+            this.btnBoiler.Text = "Кип\'ятильник";
+            this.btnBoiler.UseVisualStyleBackColor = false;
+            this.btnBoiler.Click += new System.EventHandler(this.btnBoiler_Click);
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControl3.Controls.Add(this.tabPage8);
+            this.tabControl3.Controls.Add(this.tabPage9);
+            this.tabControl3.ItemSize = new System.Drawing.Size(100, 20);
+            this.tabControl3.Location = new System.Drawing.Point(16, 562);
+            this.tabControl3.Multiline = true;
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(511, 137);
+            this.tabControl3.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControl3.TabIndex = 24;
+            this.tabControl3.Visible = false;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.BackColor = System.Drawing.Color.LightGreen;
+            this.tabPage8.Controls.Add(this.dataGridView3);
+            this.tabPage8.Location = new System.Drawing.Point(44, 4);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(463, 129);
+            this.tabPage8.TabIndex = 0;
+            this.tabPage8.Text = "Параметри";
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView3.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView3.Name = "dataGridView3";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView3.RowHeadersVisible = false;
+            this.dataGridView3.Size = new System.Drawing.Size(457, 123);
+            this.dataGridView3.TabIndex = 8;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn1.HeaderText = "t, сек";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 59;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tf, К";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Fv, м.куб/год";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "МІК AO, mA";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.tabPage9.Controls.Add(this.dataGridView4);
+            this.tabPage9.Location = new System.Drawing.Point(44, 4);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(463, 129);
+            this.tabPage9.TabIndex = 1;
+            this.tabPage9.Text = "Оцінка якості";
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            this.dataGridView4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView4.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.RowHeadersVisible = false;
+            this.dataGridView4.Size = new System.Drawing.Size(457, 123);
+            this.dataGridView4.TabIndex = 23;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Kr, Ti";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Перерегулювання";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Інтегральний показник";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // tabControl2
             // 
@@ -1816,21 +2005,21 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "-15%";
             // 
-            // chart4
+            // chart7
             // 
             chartArea15.AxisX.LineWidth = 2;
             chartArea15.AxisX.Title = "t, сек.";
             chartArea15.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
             chartArea15.AxisY.LineWidth = 2;
-            chartArea15.AxisY.Title = "Fp, м^3/год";
+            chartArea15.AxisY.Title = "Fv, м^3/год";
             chartArea15.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
             chartArea15.BorderWidth = 2;
             chartArea15.Name = "ChartArea1";
-            this.chart4.ChartAreas.Add(chartArea15);
+            this.chart7.ChartAreas.Add(chartArea15);
             legend14.Name = "Legend1";
-            this.chart4.Legends.Add(legend14);
-            this.chart4.Location = new System.Drawing.Point(15, 373);
-            this.chart4.Name = "chart4";
+            this.chart7.Legends.Add(legend14);
+            this.chart7.Location = new System.Drawing.Point(15, 373);
+            this.chart7.Name = "chart7";
             series15.BorderWidth = 3;
             series15.ChartArea = "ChartArea1";
             series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -1838,14 +2027,57 @@
             series15.IsVisibleInLegend = false;
             series15.Legend = "Legend1";
             series15.Name = "Series1";
-            this.chart4.Series.Add(series15);
+            this.chart7.Series.Add(series15);
+            this.chart7.Size = new System.Drawing.Size(510, 188);
+            this.chart7.TabIndex = 21;
+            this.chart7.Text = "chart4";
+            title11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title11.Name = "Title1";
+            title11.Text = "Витрата холодної води Fv";
+            this.chart7.Titles.Add(title11);
+            this.chart7.Visible = false;
+            // 
+            // chart4
+            // 
+            chartArea16.AxisX.LineWidth = 2;
+            chartArea16.AxisX.Title = "t, сек.";
+            chartArea16.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea16.AxisY.LineWidth = 2;
+            chartArea16.AxisY.Title = "Fp, м^3/год";
+            chartArea16.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea16.BorderWidth = 2;
+            chartArea16.Name = "ChartArea1";
+            this.chart4.ChartAreas.Add(chartArea16);
+            legend15.Name = "Legend1";
+            this.chart4.Legends.Add(legend15);
+            this.chart4.Location = new System.Drawing.Point(15, 373);
+            this.chart4.Name = "chart4";
+            series16.BorderWidth = 3;
+            series16.ChartArea = "ChartArea1";
+            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series16.Color = System.Drawing.Color.Red;
+            series16.IsVisibleInLegend = false;
+            series16.Legend = "Legend1";
+            series16.Name = "Series1";
+            this.chart4.Series.Add(series16);
             this.chart4.Size = new System.Drawing.Size(510, 188);
             this.chart4.TabIndex = 21;
             this.chart4.Text = "chart4";
-            title11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            title11.Name = "Title1";
-            title11.Text = "Витрата пари Fp";
-            this.chart4.Titles.Add(title11);
+            title12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title12.Name = "Title1";
+            title12.Text = "Витрата пари Fp";
+            this.chart4.Titles.Add(title12);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(934, 309);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(45, 16);
+            this.label14.TabIndex = 20;
+            this.label14.Text = "label8";
+            this.label14.Visible = false;
             // 
             // label9
             // 
@@ -1856,6 +2088,17 @@
             this.label9.Size = new System.Drawing.Size(45, 16);
             this.label9.TabIndex = 20;
             this.label9.Text = "label8";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(889, 402);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(45, 16);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "label8";
+            this.label13.Visible = false;
             // 
             // label8
             // 
@@ -1959,6 +2202,17 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Коефіцієнт підсилення Kreg";
             // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(829, 552);
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(307, 45);
+            this.trackBar2.TabIndex = 9;
+            this.trackBar2.Visible = false;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackBar2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar2_MouseDown);
+            this.trackBar2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar2_MouseUp);
+            // 
             // trackBar1
             // 
             this.trackBar1.Location = new System.Drawing.Point(829, 552);
@@ -1969,35 +2223,96 @@
             this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
             this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
             // 
+            // chart6
+            // 
+            chartArea17.AxisX.LineWidth = 2;
+            chartArea17.AxisX.Title = "t, сек.";
+            chartArea17.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea17.AxisY.LineWidth = 2;
+            chartArea17.AxisY.Title = "I, mA";
+            chartArea17.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea17.Name = "ChartArea1";
+            this.chart6.ChartAreas.Add(chartArea17);
+            legend16.Name = "Legend1";
+            this.chart6.Legends.Add(legend16);
+            this.chart6.Location = new System.Drawing.Point(15, 187);
+            this.chart6.Name = "chart6";
+            series17.BorderWidth = 3;
+            series17.ChartArea = "ChartArea1";
+            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series17.IsVisibleInLegend = false;
+            series17.Legend = "Legend1";
+            series17.Name = "Series1";
+            this.chart6.Series.Add(series17);
+            this.chart6.Size = new System.Drawing.Size(510, 190);
+            this.chart6.TabIndex = 7;
+            this.chart6.Text = "chart2";
+            title13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title13.Name = "Title1";
+            title13.Text = "Сигнал керування з МІК-21";
+            this.chart6.Titles.Add(title13);
+            this.chart6.Visible = false;
+            // 
             // chart3
             // 
-            chartArea16.AxisX.LineWidth = 2;
-            chartArea16.AxisX.Title = "t, сек.";
-            chartArea16.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
-            chartArea16.AxisY.LineWidth = 2;
-            chartArea16.AxisY.Title = "I, mA";
-            chartArea16.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
-            chartArea16.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea16);
-            legend15.Name = "Legend1";
-            this.chart3.Legends.Add(legend15);
+            chartArea18.AxisX.LineWidth = 2;
+            chartArea18.AxisX.Title = "t, сек.";
+            chartArea18.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea18.AxisY.LineWidth = 2;
+            chartArea18.AxisY.Title = "I, mA";
+            chartArea18.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea18.Name = "ChartArea1";
+            this.chart3.ChartAreas.Add(chartArea18);
+            legend17.Name = "Legend1";
+            this.chart3.Legends.Add(legend17);
             this.chart3.Location = new System.Drawing.Point(15, 187);
             this.chart3.Name = "chart3";
-            series16.BorderWidth = 3;
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series16.IsVisibleInLegend = false;
-            series16.Legend = "Legend1";
-            series16.Name = "Series1";
-            this.chart3.Series.Add(series16);
+            series18.BorderWidth = 3;
+            series18.ChartArea = "ChartArea1";
+            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series18.IsVisibleInLegend = false;
+            series18.Legend = "Legend1";
+            series18.Name = "Series1";
+            this.chart3.Series.Add(series18);
             this.chart3.Size = new System.Drawing.Size(510, 190);
             this.chart3.TabIndex = 7;
             this.chart3.Text = "chart2";
-            title12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            title12.Name = "Title1";
-            title12.Text = "Сигнал керування з МІК-21";
-            this.chart3.Titles.Add(title12);
-            this.chart3.Click += new System.EventHandler(this.chart3_Click);
+            title14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title14.Name = "Title1";
+            title14.Text = "Сигнал керування з МІК-21";
+            this.chart3.Titles.Add(title14);
+            // 
+            // chart5
+            // 
+            chartArea19.AxisX.LineWidth = 2;
+            chartArea19.AxisX.Title = "t, сек.";
+            chartArea19.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea19.AxisY.LineWidth = 2;
+            chartArea19.AxisY.Title = "Tf, K";
+            chartArea19.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea19.BorderWidth = 2;
+            chartArea19.Name = "ChartArea1";
+            this.chart5.ChartAreas.Add(chartArea19);
+            legend18.Name = "Legend1";
+            this.chart5.Legends.Add(legend18);
+            this.chart5.Location = new System.Drawing.Point(15, 0);
+            this.chart5.Name = "chart5";
+            series19.BorderWidth = 3;
+            series19.ChartArea = "ChartArea1";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series19.Color = System.Drawing.Color.Coral;
+            series19.IsVisibleInLegend = false;
+            series19.Legend = "Legend1";
+            series19.Name = "Series1";
+            this.chart5.Series.Add(series19);
+            this.chart5.Size = new System.Drawing.Size(510, 193);
+            this.chart5.TabIndex = 7;
+            this.chart5.Text = "chart2";
+            title15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title15.Name = "Title1";
+            title15.Text = "Температура флегми Tf";
+            this.chart5.Titles.Add(title15);
+            this.chart5.Visible = false;
             // 
             // pictureBox5
             // 
@@ -2011,6 +2326,10 @@
             // timer2
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // timer3
+            // 
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // Form1
             // 
@@ -2042,6 +2361,7 @@
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dynDataGridView)).EndInit();
             this.tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.processPanel.ResumeLayout(false);
             this.processPanel.PerformLayout();
@@ -2075,15 +2395,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartTcub)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.controllerPanel.ResumeLayout(false);
             this.controllerPanel.PerformLayout();
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.tabPage9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabControl2.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2233,6 +2561,27 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn S;
         private System.Windows.Forms.DataGridViewTextBoxColumn I;
         private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Button btnDeflegmator;
+        private System.Windows.Forms.Button btnBoiler;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart7;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart6;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart5;
+        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 

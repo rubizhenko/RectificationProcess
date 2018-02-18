@@ -1717,9 +1717,6 @@ namespace RectificationProcess
         private void pictureBoxBoiler_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBoxBoiler.Image = Properties.Resources.boilerInner;
-            
-            
-
         }
 
         private void pictureBoxBoiler_MouseLeave(object sender, EventArgs e)
@@ -1750,9 +1747,15 @@ namespace RectificationProcess
 
         double Kreg = 0.43;
         double Ti = 1.6;
+
         double Tr2zavd = 383;
         double Tr2prev = 383;
+
+        double Tfzavd = 312;
+        double Tfprev = 312;
+
         double delta = 0;
+        double deltaDefleg = 0;
         double Wzam(double s)
         {
             double Wob = 3.024 / (0.413 * s * s + 1.153 * s + 1);
@@ -1760,6 +1763,14 @@ namespace RectificationProcess
             double Wroz = Wob * WregPI;
 
             return delta*(Wroz / (1 + Wroz)) / s;
+        }
+        double WzamDefleg(double s)
+        {
+            double Wob = 6 / (0.413 * s * s + 1.153 * s + 1);
+            double WregPI = (Kreg * s + Ti) / s;
+            double Wroz = Wob * WregPI;
+
+            return deltaDefleg * (Wroz / (1 + Wroz)) / s;
         }
         double Wker(double s)
         {
@@ -1769,51 +1780,99 @@ namespace RectificationProcess
 
             return delta*(WregPI / (1 + Wroz)) / s;
         }
+        double WkerDefleg(double s)
+        {
+            double Wob = 6 / (0.413 * s * s + 1.153 * s + 1);
+            double WregPI = (Kreg * s + Ti) / s;
+            double Wroz = Wob * WregPI;
+
+            return deltaDefleg * (WregPI / (1 + Wroz)) / s;
+        }
         int timer2Time = 0;
+        int timer2TimeDefleg = 0;
         double responseTime = 0;
+        double responseTimeDefleg = 0;
         double Ht = 0;
         double Htker = 0;
+        double HtDefleg = 0;
+        double HtkerDefleg = 0;
         double[] controlArray = new double[100];
+        double[] controlArrayDefleg = new double[100];
         bool isDetecting = false;
         bool isDetectingDone = false;
+        bool isDetectingDefleg = false;
+        bool isDetectingDoneDefleg = false;
         int controlArrayCounter = 0;
+        int controlArrayCounterDefleg = 0;
         private void регулюванняToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            timer2.Enabled = true;
+            if (!btnBoiler.Enabled)
+            {
+                timer2.Enabled = true;
+            }
+            if (!btnDeflegmator.Enabled)
+            {
+                timer3.Enabled = true;
+            }
+            
             showControl();
             chart2.ChartAreas[0].AxisX.Interval = 1;
             chart2.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
             chart2.ChartAreas[0].AxisY.Minimum = Double.NaN;
             chart2.ChartAreas[0].AxisY.Maximum = Double.NaN;
 
+            chart5.ChartAreas[0].AxisX.Interval = 1;
+            chart5.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
+            chart5.ChartAreas[0].AxisY.Minimum = Double.NaN;
+            chart5.ChartAreas[0].AxisY.Maximum = Double.NaN;
+
             chart3.ChartAreas[0].AxisX.Interval = 1;
             chart3.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
 
+            chart6.ChartAreas[0].AxisX.Interval = 1;
+            chart6.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
+
             chart4.ChartAreas[0].AxisX.Interval = 1;
             chart4.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
+
+            chart7.ChartAreas[0].AxisX.Interval = 1;
+            chart7.ChartAreas[0].AxisX.LabelStyle.Format = "N0";
 
             //мінімільне та максимальне значення вихідного сигналу регулятра для бойлера
             int boilerMinRegOutput = (int)(process.Trecur21 * 0.85);
             int boilerMaxRegOutput = (int)(process.Trecur21 * 1.15);
 
+            //мінімільне та максимальне значення вихідного сигналу регулятра для дефлегматора
+            int deflegMinRegOutput = (int)(process.Tflegmy1 * 0.85);
+            int deflegMaxRegOutput = (int)(process.Tflegmy1 * 1.15);
+
             trackBar1.Minimum = boilerMinRegOutput;
             trackBar1.Maximum = boilerMaxRegOutput;
 
+            trackBar2.Minimum = deflegMinRegOutput;
+            trackBar2.Maximum = deflegMaxRegOutput;
+
             trackBar1.Value = (int)process.Trecur21;
+            trackBar2.Value = (int)process.Tflegmy1;
+
             textBoxKreg.Text = Kreg.ToString();
             textBoxTi.Text = Ti.ToString();
             label2.Text = Tr2zavd.ToString();
 
             double boilerRegOut = (trackBar1.Value - boilerMinRegOutput) / (double)(boilerMaxRegOutput - boilerMinRegOutput) * 16.0 + 4.0;
+            double deflegRegOut = (trackBar2.Value - deflegMinRegOutput) / (double)(deflegMaxRegOutput - deflegMinRegOutput) * 16.0 + 4.0;
+
             label6.Text = boilerRegOut.ToString("N1");
 
             label8.Text = "Tr2 = " + Tr2zavd.ToString("N2") + " K";
             label9.Text = "Fp = " + process.Fpara1.ToString("N2") + " м.куб/год";
+
+            label13.Text = "Tf = " + Tfzavd.ToString("N2") + " K";
+            label14.Text = "Fv = " + process.Fvoda1.ToString("N2") + " м.куб/год";
         }
         
         private void timer2_Tick(object sender, EventArgs e)
         {
-            
             double interval = timer2Time * timer2.Interval/1000.0;
             if (interval <= 10)
             {
@@ -1879,7 +1938,75 @@ namespace RectificationProcess
             
             responseTime += 0.1;
         }
-        
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            double interval = timer2TimeDefleg * timer3.Interval / 1000.0;
+            if (interval <= 10)
+            {
+                chart5.ChartAreas[0].AxisX.Minimum = 0;
+                chart5.ChartAreas[0].AxisX.Maximum = 10;
+                chart6.ChartAreas[0].AxisX.Minimum = 0;
+                chart6.ChartAreas[0].AxisX.Maximum = 10;
+                chart7.ChartAreas[0].AxisX.Minimum = 0;
+                chart7.ChartAreas[0].AxisX.Maximum = 10;
+            }
+            else
+            {
+                chart5.ChartAreas[0].AxisX.Minimum = timer2TimeDefleg / 10.0 - 10;
+                chart5.ChartAreas[0].AxisX.Maximum = timer2TimeDefleg / 10.0;
+                chart6.ChartAreas[0].AxisX.Minimum = timer2TimeDefleg / 10.0 - 10;
+                chart6.ChartAreas[0].AxisX.Maximum = timer2TimeDefleg / 10.0;
+                chart7.ChartAreas[0].AxisX.Minimum = timer2TimeDefleg / 10.0 - 10;
+                chart7.ChartAreas[0].AxisX.Maximum = timer2TimeDefleg / 10.0;
+            }
+            double invCalc2 = 0;
+            double invCalcker2 = 0;
+            invCalc2 = Laplace.InverseTransform(WzamDefleg, responseTimeDefleg + 0.0001);
+            invCalcker2 = Laplace.InverseTransform(WkerDefleg, responseTimeDefleg + 0.0001);
+            HtDefleg = invCalc2 + Tfzavd;
+            HtkerDefleg = invCalcker2;
+
+            double deflegMikOut = HtkerDefleg * 8 / 95 + 12;
+
+            chart5.Series[0].Points.AddXY(interval - 0.1, HtDefleg);
+            chart6.Series[0].Points.AddXY(interval - 0.1, deflegMikOut);
+            chart7.Series[0].Points.AddXY(interval - 0.1, HtkerDefleg + process.Fvoda1);
+            label3.Text = HtDefleg.ToString("N1");
+
+            label6.Text = deflegMikOut.ToString("N1");
+
+            double FvodaKer = process.Fvoda1 + HtkerDefleg;
+
+            if (interval % 1 == 0)
+            {
+                dataGridView3.FirstDisplayedScrollingRowIndex = dataGridView3.RowCount - 1;
+                dataGridView3.Rows.Add((timer2TimeDefleg / 10.0).ToString("N0"), HtDefleg.ToString("N2"), (HtkerDefleg + process.Fvoda1).ToString("N2"), deflegMikOut.ToString("N2"));
+                label13.Text = "Tf = " + HtDefleg.ToString("N2") + " K";
+                label14.Text = "Fv = " + FvodaKer.ToString("N2") + " м.куб/год";
+            }
+
+            if (isDetectingDefleg && controlArrayCounterDefleg < 100)
+            {
+                controlArrayDefleg[controlArrayCounterDefleg] = HtDefleg;
+                controlArrayCounterDefleg++;
+            }
+            else if (controlArrayCounterDefleg >= 100 && !isDetectingDoneDefleg)
+            {
+                double sigma = Math.Abs(controlArrayDefleg.Max() - trackBar2.Value) / trackBar2.Value;
+                double integral = 0;
+                for (int i = 0; i < controlArrayCounterDefleg; i++)
+                {
+                    integral += Math.Pow(trackBar2.Value - controlArrayDefleg[i], 2);
+                }
+                dataGridView4.FirstDisplayedScrollingRowIndex = dataGridView4.RowCount - 1;
+                dataGridView4.Rows.Add("Kreg=" + Kreg.ToString("N2") + "; Ti=" + Ti.ToString("N2"), (sigma * 100).ToString("N2") + "%", integral.ToString("N2"));
+                isDetectingDoneDefleg = true;
+            }
+
+            timer2TimeDefleg++;
+
+            responseTimeDefleg += 0.1;
+        }
         private void дефлегматорToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showStatic();
@@ -1930,10 +2057,101 @@ namespace RectificationProcess
         {
             isDetecting = false;
         }
+         
 
-        private void chart3_Click(object sender, EventArgs e)
+        private void btnBoiler_Click(object sender, EventArgs e)
         {
+            btnBoiler.BackColor = Color.GreenYellow;
+            btnDeflegmator.BackColor = Color.Gainsboro;
+            //Event when Boiler choosed in control visualization
+            btnDeflegmator.Enabled = true;
+            btnBoiler.Enabled = false;
 
+            pictureBox5.Image = Properties.Resources.boiler_control;
+
+            chart2.Visible = true;
+            chart3.Visible = true;
+            chart4.Visible = true;
+            chart5.Visible = false;
+            chart6.Visible = false;
+            chart7.Visible = false;
+
+            
+            tabControl2.Visible = true;
+            tabControl3.Visible = false;
+
+            label7.Text = "Завдання температури рециркуляру:";
+
+            trackBar2.Visible = false;
+            trackBar1.Visible = true;
+            //labels for parameters indication (located near process unit)
+            label8.Visible = true;
+            label9.Visible = true;
+            label13.Visible = false;
+            label14.Visible = false;
+
+            timer2.Enabled = true;
+            timer3.Enabled = false;
+
+            //Set label for MIK
+            label2.Text = trackBar1.Value.ToString();
+        }
+
+        private void btnDeflegmator_Click(object sender, EventArgs e)
+        {
+            btnDeflegmator.BackColor = Color.GreenYellow;
+            btnBoiler.BackColor = Color.Gainsboro;
+            //Event when Deflegmator choosed in control visualization
+            btnDeflegmator.Enabled = false;
+            btnBoiler.Enabled = true;
+
+            pictureBox5.Image = Properties.Resources.defleg_control;
+
+            chart5.Visible = true;
+            chart6.Visible = true;
+            chart7.Visible = true;
+            chart2.Visible = false;
+            chart3.Visible = false;
+            chart4.Visible = false;
+
+            tabControl2.Visible = false;
+            tabControl3.Visible = true;
+
+            label7.Text = "Завдання температури флегми:";
+
+            trackBar1.Visible = false;
+            trackBar2.Visible = true;
+            //labels for parameters indication (located near process unit)
+            label8.Visible = false;
+            label9.Visible = false;
+            label13.Visible = true;
+            label14.Visible = true;
+
+            timer3.Enabled = true;
+            timer2.Enabled = false;
+            //Set label for MIK
+            label2.Text = trackBar2.Value.ToString();
+        }
+
+        private void trackBar2_MouseDown(object sender, MouseEventArgs e)
+        {
+            isDetectingDefleg = false;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            label2.Text = trackBar2.Value.ToString();
+        }
+
+        private void trackBar2_MouseUp(object sender, MouseEventArgs e)
+        {
+            deltaDefleg = trackBar2.Value - Tfprev;
+            responseTimeDefleg = 0.000001;
+            Tfprev = trackBar2.Value;
+            Tfzavd = HtDefleg;
+            isDetectingDefleg = true;
+            controlArrayCounterDefleg = 0;
+            isDetectingDoneDefleg = false;
         }
 
         private void кипятильникToolStripMenuItem_Click(object sender, EventArgs e)
